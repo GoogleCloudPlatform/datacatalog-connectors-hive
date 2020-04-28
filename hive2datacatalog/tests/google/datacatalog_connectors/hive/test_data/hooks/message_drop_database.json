@@ -1,0 +1,11 @@
+{
+    "database": {
+        "name": "HR",
+        "description": null,
+        "locationUri": "hdfs://namenode:8020/user/hive/warehouse/hr.db",
+        "parameters": {},
+        "ownerName": "root"
+    },
+    "event": "DROP_DATABASE",
+    "hostName": "localhost"
+}

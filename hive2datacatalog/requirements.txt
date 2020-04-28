@@ -1,0 +1,4 @@
+flask
+google-cloud-logging
+pytest
+pytest-cov

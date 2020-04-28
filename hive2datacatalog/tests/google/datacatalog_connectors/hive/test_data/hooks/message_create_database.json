@@ -1,0 +1,11 @@
+{
+    "database": {
+        "name": "HR",
+        "description": null,
+        "locationUri": "hdfs://namenode:8020/user/hive/warehouse/hr.db",
+        "parameters": null,
+        "ownerName": "root"
+    },
+    "event": "CREATE_DATABASE",
+    "hostName": "localhost"
+}

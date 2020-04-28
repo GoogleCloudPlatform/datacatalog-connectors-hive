@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "name": "default",
+        "desc": "Default Hive database",
+        "uri": "hdfs://namenode:8020/user/hive/warehouse",
+        "tables": []
+    }
+]

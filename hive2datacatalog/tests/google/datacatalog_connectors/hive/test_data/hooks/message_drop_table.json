@@ -1,0 +1,42 @@
+{
+    "table": {
+        "tableName": "company_funds",
+        "dbName": "default",
+        "owner": "root",
+        "createTime": 1575043266,
+        "lastAccessTime": 0,
+        "retention": 0,
+        "sd": {
+            "cols": [
+                {
+                    "name": "code",
+                    "type": "int",
+                    "comment": null
+                },
+                {
+                    "name": "desc",
+                    "type": "string",
+                    "comment": null
+                },
+                {
+                    "name": "addr",
+                    "type": "string",
+                    "comment": "a new addr column"
+                }
+            ],
+            "location": "hdfs://namenode:8020/user/hive/warehouse/company_funds"
+        },
+        "parameters": {
+            "last_modified_time": "1575043287",
+            "totalSize": "0",
+            "rawDataSize": "0",
+            "numRows": "0",
+            "COLUMN_STATS_ACCURATE": "{\"BASIC_STATS\":\"true\"}",
+            "numFiles": "0",
+            "transient_lastDdlTime": "1575043287",
+            "last_modified_by": "root"
+        }
+    },
+    "event": "DROP_TABLE",
+    "hostName": "localhost"
+}
