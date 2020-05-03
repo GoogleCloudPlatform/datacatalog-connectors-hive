@@ -1,0 +1,15 @@
+# Add 'repo' label to any root file changes
+repo:
+  - ./*
+  
+hive2datacatalog:
+  - hive2datacatalog/*
+  - looker2datacatalog/**/*
+
+hive-metastore-listener:
+  - hive-metastore-listener/*
+  - hive-metastore-listener/**/*
+
+# Add 'test' label to any change to test.py files
+test:
+  - ./**/*.test.py
