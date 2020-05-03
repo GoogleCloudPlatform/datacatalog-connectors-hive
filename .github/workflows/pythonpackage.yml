@@ -32,7 +32,6 @@ jobs:
         pip install flake8 yapf
         # [TODO] Remove this once we publish do PYPI.
         pip install ./lib/datacatalog_connectors_commons-1.0.0-py2.py3-none-any.whl
-        pip install ./lib/rdbms2datacatalog-1.0.0-py2.py3-none-any.whl
     - name: Formatting rules with yapf
       run: |
         # stop the build if formatting is different from yapf
