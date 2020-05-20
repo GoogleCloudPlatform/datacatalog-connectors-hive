@@ -5,6 +5,36 @@ support: Create/Alter Tables Events, for each Metastore Event the agent sends a 
 
 **Disclaimer: This is not an officially supported Google product.**
 
+<!--
+  ⚠️ DO NOT UPDATE THE TABLE OF CONTENTS MANUALLY ️️⚠️
+  run `npx markdown-toc -i README.md`.
+
+  Please stick to 80-character line wraps as much as you can.
+-->
+
+## Table of Contents
+
+<!-- toc -->
+
+- [1. Environment setup](#1-environment-setup)
+  * [1.1. Get the code](#11-get-the-code)
+  * [1.2. Auth credentials](#12-auth-credentials)
+      - [1.2.1. Create a service account and grant it below roles](#121-create-a-service-account-and-grant-it-below-roles)
+      - [1.2.2. Download a JSON key and save it as](#122-download-a-json-key-and-save-it-as)
+  * [1.3. Environment](#13-environment)
+      - [1.3.1. Install Java 8](#131-install-java-8)
+      - [1.3.2. Install maven](#132-install-maven)
+      - [1.3.3. Test your dependencies](#133-test-your-dependencies)
+  * [1.4. Build a jar file with all the dependencies](#14-build-a-jar-file-with-all-the-dependencies)
+  * [1.5. Send the jar file and the service account to your hive metastore machine.](#15-send-the-jar-file-and-the-service-account-to-your-hive-metastore-machine)
+  * [1.6. Add Environment variables and add the jar file to your Hive Metastore classpath](#16-add-environment-variables-and-add-the-jar-file-to-your-hive-metastore-classpath)
+  * [1.7. Linux environment:](#17-linux-environment)
+  * [1.8. Restart your Hive Metastore](#18-restart-your-hive-metastore)
+
+<!-- tocstop -->
+
+-----
+
 ## 1. Environment setup
 
 ### 1.1. Get the code
