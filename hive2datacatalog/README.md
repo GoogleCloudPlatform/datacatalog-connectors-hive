@@ -33,12 +33,12 @@ backed by a PostgreSQL database.
 - [2. Sample application entry point](#2-sample-application-entry-point)
   * [2.1. Run main.py to connect to your Hive Metastore](#21-run-mainpy-to-connect-to-your-hive-metastore)
 - [3. Deploy Message Event Consumer on Cloud Run (Optional)](#3-deploy-message-event-consumer-on-cloud-run-optional)
-      - [3.1. Set environment variables to deploy to Cloud Run](#31-set-environment-variables-to-deploy-to-cloud-run)
-      - [3.2. Execute the deploy script](#32-execute-the-deploy-script)
-      - [3.3. Create your Pub/Sub topic and subscription](#33-create-your-pubsub-topic-and-subscription)
-      - [3.3.1 Set additional environment variables](#331-set-additional-environment-variables)
-      - [3.3.2 Execute pubsub config script](#332-execute-pubsub-config-script)
-      - [3.3.4 Send a message to your Pub/Sub topic to test](#334-send-a-message-to-your-pubsub-topic-to-test)
+  * [3.1. Set environment variables to deploy to Cloud Run](#31-set-environment-variables-to-deploy-to-cloud-run)
+  * [3.2. Execute the deploy script](#32-execute-the-deploy-script)
+  * [3.3. Create your Pub/Sub topic and subscription](#33-create-your-pubsub-topic-and-subscription)
+    + [3.3.1 Set additional environment variables](#331-set-additional-environment-variables)
+    + [3.3.2 Execute pubsub config script](#332-execute-pubsub-config-script)
+    + [3.3.4 Send a message to your Pub/Sub topic to test](#334-send-a-message-to-your-pubsub-topic-to-test)
 - [4. Tools (Optional)](#4-tools-optional)
   * [4.1. Clean up all entries on DataCatalog from the hive entrygroup](#41-clean-up-all-entries-on-datacatalog-from-the-hive-entrygroup)
   * [4.2. Sample of Hive2Datacatalog Library usage](#42-sample-of-hive2datacatalog-library-usage)
@@ -135,7 +135,7 @@ docker run --network="host" --rm --tty -v data:/data hive2datacatalog --datacata
 
 ## 3. Deploy Message Event Consumer on Cloud Run (Optional)
 
-##### 3.1. Set environment variables to deploy to Cloud Run
+### 3.1. Set environment variables to deploy to Cloud Run
 Replace below values according to your environment:
 
 ```bash
@@ -145,7 +145,7 @@ export HIVE2DC_DATACATALOG_PROJECT_ID=google_cloud_project_id
 export HIVE2DC_DATACATALOG_LOCATION_ID=us-google_cloud_location_id
 
 ```
-##### 3.2. Execute the deploy script
+### 3.2. Execute the deploy script
 ```bash
 source deploy.sh
 ```
@@ -155,9 +155,9 @@ https://hive-sync-example-uc.a.run.app
 
 Save the endpoint which will be needed for the next step.
 
-##### 3.3. Create your Pub/Sub topic and subscription
+### 3.3. Create your Pub/Sub topic and subscription
 
-##### 3.3.1 Set additional environment variables
+#### 3.3.1 Set additional environment variables
 
 Replace with your Cloud Run endpoint:
 ```bash
@@ -165,12 +165,12 @@ export HIVE2DC_DATACATALOG_TOPIC_ID=google_cloud_topic_id
 export HIVE2DC_DATACATALOG_APP_ENDPOINT=https://hive-sync-example-uc.a.run.app
 ```
 
-##### 3.3.2 Execute pubsub config script
+#### 3.3.2 Execute pubsub config script
 ```bash
 source tools/create_pub_sub_run_invoker.sh
 ```
 
-##### 3.3.4 Send a message to your Pub/Sub topic to test
+#### 3.3.4 Send a message to your Pub/Sub topic to test
 You can look at valid message events examples on: tools/resources/*.json
 
 ## 4. Tools (Optional)
