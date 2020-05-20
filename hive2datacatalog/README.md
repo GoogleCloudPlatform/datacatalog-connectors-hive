@@ -8,6 +8,52 @@ backed by a PostgreSQL database.
  
  **Disclaimer: This is not an officially supported Google product.**
 
+<!--
+  ⚠️ DO NOT UPDATE THE TABLE OF CONTENTS MANUALLY ️️⚠️
+  run `npx markdown-toc -i README.md`.
+
+  Please stick to 80-character line wraps as much as you can.
+-->
+
+## Table of Contents
+
+<!-- toc -->
+
+- [1. Environment setup](#1-environment-setup)
+  * [1.1. Get the code](#11-get-the-code)
+  * [1.2. Auth credentials](#12-auth-credentials)
+      - [1.2.1. Create a service account and grant it below roles](#121-create-a-service-account-and-grant-it-below-roles)
+      - [1.2.2. Download a JSON key and save it as](#122-download-a-json-key-and-save-it-as)
+  * [1.3. Virtualenv](#13-virtualenv)
+      - [1.3.1. Install Python 3.6+](#131-install-python-36)
+      - [1.3.2. Create and activate a *virtualenv*](#132-create-and-activate-a-virtualenv)
+      - [1.3.3. Install the dependencies](#133-install-the-dependencies)
+      - [1.3.4. Set environment variables to connect to your Hive Metastore](#134-set-environment-variables-to-connect-to-your-hive-metastore)
+  * [1.4. Docker](#14-docker)
+- [2. Sample application entry point](#2-sample-application-entry-point)
+  * [2.1. Run main.py to connect to your Hive Metastore](#21-run-mainpy-to-connect-to-your-hive-metastore)
+- [3. Deploy Message Event Consumer on Cloud Run (Optional)](#3-deploy-message-event-consumer-on-cloud-run-optional)
+      - [3.1. Set environment variables to deploy to Cloud Run](#31-set-environment-variables-to-deploy-to-cloud-run)
+      - [3.2. Execute the deploy script](#32-execute-the-deploy-script)
+      - [3.3. Create your Pub/Sub topic and subscription](#33-create-your-pubsub-topic-and-subscription)
+      - [3.3.1 Set additional environment variables](#331-set-additional-environment-variables)
+      - [3.3.2 Execute pubsub config script](#332-execute-pubsub-config-script)
+      - [3.3.4 Send a message to your Pub/Sub topic to test](#334-send-a-message-to-your-pubsub-topic-to-test)
+- [4. Tools (Optional)](#4-tools-optional)
+  * [4.1. Clean up all entries on DataCatalog from the hive entrygroup](#41-clean-up-all-entries-on-datacatalog-from-the-hive-entrygroup)
+  * [4.2. Sample of Hive2Datacatalog Library usage](#42-sample-of-hive2datacatalog-library-usage)
+- [5. Developer environment](#5-developer-environment)
+  * [5.1. Install and run Yapf formatter](#51-install-and-run-yapf-formatter)
+  * [5.2. Install and run Flake8 linter](#52-install-and-run-flake8-linter)
+  * [5.3. Run Tests](#53-run-tests)
+- [6. Metrics](#6-metrics)
+- [7. Connector Architecture](#7-connector-architecture)
+- [8. Troubleshooting](#8-troubleshooting)
+
+<!-- tocstop -->
+
+-----
+
 ## 1. Environment setup
 
 ### 1.1. Get the code
