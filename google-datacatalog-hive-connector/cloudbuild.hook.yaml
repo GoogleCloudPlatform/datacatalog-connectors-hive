@@ -20,7 +20,7 @@ steps:
   entrypoint: /bin/sh
   args:
   - -c
-  - 'tar -xvf ./lib/datacatalog-python.tar.gz -C ./lib && pip install ./lib/tmp/artman/3923f78f-df98-4123-a92b-28f0755c6320/googleapis/artman-genfiles/python/datacatalog-v1beta1 && pip install ./lib/datacatalog_connectors_commons-1.4.0-py2.py3-none-any.whl && pip install . && python setup.py test'
+  - 'pip install . && python setup.py test'
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}:${TAG_NAME}', '-f', 'Dockerfile.app', '.']
   # push the container image to Container Registry
