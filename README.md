@@ -6,6 +6,9 @@ This repository contains sample code with integration between Data Catalog and H
 
 ![Python package](https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive/workflows/Python%20package/badge.svg?branch=master)
 
+**Note:**
+The package names were renamed, if you are still using the older version use the branch: [release-v0.0.0](https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive/tree/release-v0.0.0)
+
 ## Project structure
 
 Each subfolder contains a Python package. Please check components' README files for
@@ -15,5 +18,5 @@ The following components are available in this repo:
 
 | Component | Description | Folder | Language | 
 |-----------|-------------|--------|----------|
-| hive2datacatalog | Sample code for Hive data source. | [./hive2datacatalog](https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive/tree/master/hive2datacatalog) | Python |
-| hive-metastore-listener | Sample code enabling Hive Metastore and Data Catalog live sync. | [./hive-metastore-listener](https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive/tree/master/hive-metastore-listener) | Java |
+| google-datacatalog-hive-connector | Sample code for Hive data source. | [google-datacatalog-hive-connector](https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive/tree/master/google-datacatalog-hive-connector) | Python |
+| hive-metastore-listener | Sample code enabling Hive Metastore and Data Catalog live sync. | [hive-metastore-listener](https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive/tree/master/hive-metastore-listener) | Java |
