@@ -6,6 +6,8 @@ You are able to directly connect to your Hive Metastore or Consume message event
 This connector is prepared to work with the Hive Metastore 2.3.0 version,
 backed by a PostgreSQL database.
  
+![Python package](2)[![PyPi][3]][4] [![License][5]][5] [![Issues][6]][7]
+
  **Disclaimer: This is not an officially supported Google product.**
 
 <!--
@@ -257,3 +259,9 @@ debug_error_string =
 For more info about Data Catalog quota, go to: [Data Catalog quota docs](https://cloud.google.com/data-catalog/docs/resources/quotas).
 
 [1]: https://virtualenv.pypa.io/en/latest/
+[2]: https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive/workflows/Python%20package/badge.svg?branch=master
+[3]: https://img.shields.io/pypi/v/google-datacatalog-hive-connector.svg
+[4]: https://pypi.org/project/google-datacatalog-hive-connector/
+[5]: https://img.shields.io/github/license/GoogleCloudPlatform/datacatalog-connectors-hive.svg
+[6]: https://img.shields.io/github/issues/GoogleCloudPlatform/datacatalog-connectors-hive.svg
+[7]: https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive/issues

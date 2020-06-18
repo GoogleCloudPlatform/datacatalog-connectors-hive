@@ -45,7 +45,7 @@ setuptools.setup(
     setup_requires=('pytest-runner',),
     tests_require=('pytest-cov', 'google-datacatalog-connectors-commons-test'),
     classifiers=(
-        release_status='Development Status :: 4 - Beta'
+        release_status,
         'Programming Language :: Python :: 3.7',
     ),
     long_description=readme,
