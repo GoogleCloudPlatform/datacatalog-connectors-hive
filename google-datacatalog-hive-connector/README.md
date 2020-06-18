@@ -6,7 +6,7 @@ You are able to directly connect to your Hive Metastore or Consume message event
 This connector is prepared to work with the Hive Metastore 2.3.0 version,
 backed by a PostgreSQL database.
  
-![Python package](2)[![PyPi][3]][4] [![License][5]][5] [![Issues][6]][7]
+[![Python package][2]][2] [![PyPi][3]][4] [![License][5]][5] [![Issues][6]][7]
 
  **Disclaimer: This is not an officially supported Google product.**
 
