@@ -30,7 +30,7 @@ steps:
   entrypoint: '/bin/bash'
   args: ['-c',
          'tar -zxvf /workspace/hive-0.0.2.tar.gz']
-- name: 'gcr.io/cloudshell-images/cloudshell:latest'
+- name: 'gcr.io/cloud-builders/gsutil'
   id: 'PREPARE_SERVICE_ACCOUNT'
   args: ['cp',
          'gs://connectors_build_env/hive2dc-credentials.json',
