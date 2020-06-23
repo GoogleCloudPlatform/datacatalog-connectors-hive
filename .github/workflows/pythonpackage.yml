@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        build-dir: ['./google-datacatalog-hive-connector']
+        build-dir: ['./google-datacatalog-hive-connector', './google-datacatalog-apache-atlas-connector']
         python-version: [3.6, 3.7]
     defaults:
       run:
