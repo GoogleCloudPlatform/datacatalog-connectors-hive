@@ -56,6 +56,16 @@ steps:
   args: ['-c',
          'cd /workspace/hive && ./run-demo.sh']
   # Tag image with the custom tag
+- name: 'docker.io/library/python:3.7'
+  id: 'ASSERT_RESULTS'
+  entrypoint: 'bash'
+  env:
+  - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/hive/infrastructure/hive2dc-credentials.json'
+  - 'HIVE2DC_DATACATALOG_PROJECT_ID=${PROJECT_ID}'
+  args:
+  - -c
+  - 'pip install google-cloud-datacatalog &&
+     /workspace/google-datacatalog-hive-connector/system_tests/assert.sh'  
 - name: 'gcr.io/cloud-builders/docker'
   id: 'TAG_IMAGE'
   entrypoint: '/bin/bash'
