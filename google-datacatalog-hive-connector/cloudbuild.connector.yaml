@@ -28,5 +28,5 @@ steps:
   id: 'CREATE_ENV'
   entrypoint: '/bin/bash'
   args: ['-c',
-         'cd /workspace/hive && run-demo.sh']
+         'cd /workspace/hive && ./run-demo.sh']
 timeout: 30m
