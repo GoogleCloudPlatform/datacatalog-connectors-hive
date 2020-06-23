@@ -20,6 +20,13 @@ steps:
          '-t',
          'gcr.io/$PROJECT_ID/hive2datacatalog:$COMMIT_SHA',
          '/workspace/google-datacatalog-hive-connector/.']
+- name: 'alpine'
+  id: 'SETUP_TAG'
+  args: ['sh',
+         '-c',
+         "echo `echo $BRANCH_NAME |
+          sed 's,/,-,g' |
+          awk '{print tolower($0)}'`_$(date -u +%Y%m%dT%H%M)_$SHORT_SHA > _TAG; echo $(cat _TAG)"]         
 - name: 'gcr.io/cloudshell-images/cloudshell:latest'
   id: 'GET_PACKAGE'
   entrypoint: '/bin/bash'
@@ -48,9 +55,16 @@ steps:
   - 'CONNECTOR_TAG_NAME=${COMMIT_SHA}'
   args: ['-c',
          'cd /workspace/hive && ./run-demo.sh']
+  # Tag image with the custom tag
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'TAG_IMAGE'
+  entrypoint: '/bin/bash'
+  args: ['-c',
+         "docker tag gcr.io/$PROJECT_ID/hive2datacatalog:$COMMIT_SHA gcr.io/$PROJECT_ID/hive2datacatalog:$(cat _TAG)"]         
 - name: 'gcr.io/cloudshell-images/cloudshell:latest'
   id: 'DELETE_ENV'
   entrypoint: '/bin/bash'
   args: ['-c',
-         'cd /workspace/hive && ./delete-demo.sh']         
+         'cd /workspace/hive && ./delete-demo.sh']   
+images: ['gcr.io/$PROJECT_ID/hive2datacatalog']
 timeout: 30m
