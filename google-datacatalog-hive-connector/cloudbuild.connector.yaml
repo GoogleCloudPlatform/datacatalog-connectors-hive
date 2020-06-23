@@ -19,13 +19,14 @@ steps:
   entrypoint: '/bin/bash'
   args: ['-c',
          'gsutil cp gs://datacatalog-connector-tools/hive-0.0.1.tar.gz .']
-  # Create custom image tag and write to file /workspace/_TAG
 - name: 'gcr.io/cloudshell-images/cloudshell:latest'
-  id: 'UNTAR'
+  id: 'EXTRACT'
+  entrypoint: '/bin/bash'
   args: ['-c',
          'tar -zxvf /workspace/hive-0.0.1.tar.gz']
 - name: 'gcr.io/cloudshell-images/cloudshell:latest'
-  id: 'RUN'
+  id: 'CREATE_ENV'
+  entrypoint: '/bin/bash'
   args: ['-c',
          '/workspace/hive/run-demo.sh']
-timeout: 15m
+timeout: 30m
