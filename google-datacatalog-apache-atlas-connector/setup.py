@@ -16,9 +16,14 @@
 
 import setuptools
 
+release_status='Development Status :: 4 - Beta'
+
+with open('README.md') as readme_file:
+    readme = readme_file.read()
+
 setuptools.setup(
     name='google-datacatalog-apache-atlas-connector',
-    version='1.0.0',
+    version='0.5.0',
     author='Google LLC',
     description='Package for ingesting Apache Atlas metadata'
     ' into Google Cloud Data Catalog',
@@ -32,13 +37,17 @@ setuptools.setup(
         ],
     },
     include_package_data=True,
-    install_requires=('atlasclient', 'kafka-python'),
+    install_requires=(
+        'atlasclient',
+        'kafka-python',
+        'google-datacatalog-connectors-commons'
+    ),
     setup_requires=('pytest-runner',),
-    tests_require=('pytest-cov',),
-    classifiers=[
-        'Development Status :: 3 - Alpha',
-        'Natural Language :: English',
-        'Programming Language :: Python',
+    tests_require=('pytest-cov', 'google-datacatalog-connectors-commons-test'),
+    classifiers=(
+        release_status,
         'Programming Language :: Python :: 3.7',
-    ],
+    ),
+    long_description=readme,
+    long_description_content_type='text/markdown',
 )
