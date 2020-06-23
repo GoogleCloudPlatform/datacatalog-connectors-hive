@@ -14,32 +14,67 @@
 # limitations under the License.
 
 steps:
-# This step runs builds the docker container which runs flake8, yapf and unit tests
 - name: 'gcr.io/cloud-builders/docker'
   id: 'BUILD'
   args: ['build',
          '-t',
          'gcr.io/$PROJECT_ID/hive2datacatalog:$COMMIT_SHA',
-         '.']
-  # Create custom image tag and write to file /workspace/_TAG
+         '/workspace/google-datacatalog-hive-connector/.']
 - name: 'alpine'
   id: 'SETUP_TAG'
   args: ['sh',
          '-c',
          "echo `echo $BRANCH_NAME |
           sed 's,/,-,g' |
-          awk '{print tolower($0)}'`_$(date -u +%Y%m%dT%H%M)_$SHORT_SHA > _TAG; echo $(cat _TAG)"]
-  # Tag image with custom tag
+          awk '{print tolower($0)}'`_$(date -u +%Y%m%dT%H%M)_$SHORT_SHA > _TAG; echo $(cat _TAG)"]         
+- name: 'gcr.io/cloudshell-images/cloudshell:latest'
+  id: 'GET_PACKAGE'
+  entrypoint: '/bin/bash'
+  args: ['-c',
+         'gsutil cp gs://datacatalog-connector-tools/hive-0.0.2.tar.gz .']
+- name: 'gcr.io/cloudshell-images/cloudshell:latest'
+  id: 'EXTRACT'
+  entrypoint: '/bin/bash'
+  args: ['-c',
+         'tar -zxvf /workspace/hive-0.0.2.tar.gz']
+- name: 'gcr.io/cloud-builders/gsutil'
+  id: 'PREPARE_SERVICE_ACCOUNT'
+  args: ['cp',
+         'gs://connectors_build_env/hive2dc-credentials.json',
+         '/workspace/hive/infrastructure/.']         
+- name: 'gcr.io/cloudshell-images/cloudshell:latest'
+  id: 'PREPARE_ENV'
+  entrypoint: '/bin/bash'
+  args: ['-c',
+         'cd /workspace/hive && ./cleanup-datacatalog.sh']            
+- name: 'gcr.io/cloudshell-images/cloudshell:latest'
+  id: 'RUN'
+  entrypoint: '/bin/bash'
+  env:
+  - 'PROJECT_ID=${PROJECT_ID}'
+  - 'CONNECTOR_TAG_NAME=${COMMIT_SHA}'
+  args: ['-c',
+         'cd /workspace/hive && ./run-demo.sh']
+  # Tag image with the custom tag
+- name: 'docker.io/library/python:3.7'
+  id: 'ASSERT_RESULTS'
+  entrypoint: 'bash'
+  env:
+  - 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/hive/infrastructure/hive2dc-credentials.json'
+  - 'HIVE2DC_DATACATALOG_PROJECT_ID=${PROJECT_ID}'
+  args:
+  - -c
+  - 'pip install google-cloud-datacatalog &&
+     /workspace/google-datacatalog-hive-connector/system_tests/assert.sh'  
 - name: 'gcr.io/cloud-builders/docker'
   id: 'TAG_IMAGE'
   entrypoint: '/bin/bash'
   args: ['-c',
-         "docker tag gcr.io/$PROJECT_ID/hive2datacatalog:$COMMIT_SHA gcr.io/$PROJECT_ID/hive2datacatalog:$(cat _TAG)"]
- # ADD Validation step before tagging stable
-- name: 'gcr.io/cloud-builders/docker'
-  id: 'TAG_STABLE'
+         "docker tag gcr.io/$PROJECT_ID/hive2datacatalog:$COMMIT_SHA gcr.io/$PROJECT_ID/hive2datacatalog:$(cat _TAG)"]         
+- name: 'gcr.io/cloudshell-images/cloudshell:latest'
+  id: 'DELETE_ENV'
   entrypoint: '/bin/bash'
   args: ['-c',
-         "docker tag gcr.io/$PROJECT_ID/hive2datacatalog:$COMMIT_SHA gcr.io/$PROJECT_ID/hive2datacatalog:stable"]
+         'cd /workspace/hive && ./delete-demo.sh']   
 images: ['gcr.io/$PROJECT_ID/hive2datacatalog']
-timeout: 15m
+timeout: 30m
