@@ -18,15 +18,20 @@ steps:
   id: 'GET_PACKAGE'
   entrypoint: '/bin/bash'
   args: ['-c',
-         'gsutil cp gs://datacatalog-connector-tools/hive-0.0.1.tar.gz .']
+         'gsutil cp gs://datacatalog-connector-tools/hive-0.0.2.tar.gz .']
 - name: 'gcr.io/cloudshell-images/cloudshell:latest'
   id: 'EXTRACT'
   entrypoint: '/bin/bash'
   args: ['-c',
-         'tar -zxvf /workspace/hive-0.0.1.tar.gz']
+         'tar -zxvf /workspace/hive-0.0.2.tar.gz']
 - name: 'gcr.io/cloudshell-images/cloudshell:latest'
   id: 'CREATE_ENV'
   entrypoint: '/bin/bash'
   args: ['-c',
          'cd /workspace/hive && ./run-demo.sh']
+- name: 'gcr.io/cloudshell-images/cloudshell:latest'
+  id: 'DELETE_ENV'
+  entrypoint: '/bin/bash'
+  args: ['-c',
+         'cd /workspace/hive && ./delete-demo.sh']         
 timeout: 30m
