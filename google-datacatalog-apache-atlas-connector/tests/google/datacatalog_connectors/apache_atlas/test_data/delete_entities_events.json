@@ -1,0 +1,68 @@
+[
+    {
+        "type": "ENTITY_NOTIFICATION_V2",
+        "entity": {
+            "typeName": "Table",
+            "attributes": {
+                "owner": "John Doe",
+                "createTime": 1589983847369,
+                "qualifiedName": "personal_info50bfc1d7",
+                "name": "personal_info50bfc1d7",
+                "description": "personal_info50bfc1d7"
+            },
+            "guid": "15539516-c6de-46bd-8b0f-2ac68b811789",
+            "status": "DELETED",
+            "displayText": "personal_info50bfc1d7"
+        },
+        "operationType": "ENTITY_DELETE"
+    },
+    {
+        "type": "ENTITY_NOTIFICATION_V2",
+        "entity": {
+            "typeName": "Column",
+            "attributes": {
+                "name": "school65cccace"
+            },
+            "guid": "41f87c3f-b1a5-44f5-b93d-a811a6a8be9a",
+            "status": "DELETED",
+            "displayText": "school65cccace"
+        },
+        "operationType": "ENTITY_DELETE"
+    },
+    {
+        "type": "ENTITY_NOTIFICATION_V2",
+        "entity": {
+            "typeName": "Column",
+            "attributes": {
+                "name": "food2cb3d541"
+            },
+            "guid": "bd3eb9ef-d72f-4407-a432-bd216f334e72",
+            "status": "DELETED",
+            "displayText": "food2cb3d541"
+        },
+        "operationType": "ENTITY_DELETE"
+    },
+    {
+        "type": "ENTITY_NOTIFICATION_V2",
+        "entity": {
+            "typeName": "Column",
+            "attributes": {
+                "name": "houseff60bf1d"
+            },
+            "guid": "967c59a2-c2d3-4272-af1f-1f8f2263b632",
+            "status": "DELETED",
+            "displayText": "houseff60bf1d"
+        },
+        "operationType": "ENTITY_DELETE"
+    },
+    {
+        "type": "ENTITY_NOTIFICATION_V2",
+        "entity": {
+            "typeName": "StorageDesc",
+            "attributes": {},
+            "guid": "10db96e7-f73f-4e2b-943e-2107ce24acc7",
+            "status": "DELETED"
+        },
+        "operationType": "ENTITY_DELETE"
+    }
+]

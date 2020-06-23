@@ -1,0 +1,165 @@
+[
+    {
+        "guid": "d1eb900a-3227-4b4f-9cde-daa301a9439e",
+        "data": {
+            "typeName": "Table",
+            "attributes": {
+                "owner": "Joe",
+                "createTime": 1589983835754,
+                "qualifiedName": "sales_fact",
+                "name": "sales_fact",
+                "description": "sales fact table"
+            },
+            "guid": "2286a6bd-4b06-4f7c-a666-920d774b040e",
+            "status": "ACTIVE",
+            "displayText": "sales_fact",
+            "classificationNames": [
+                "Fact"
+            ]
+        }
+    },
+    {
+        "guid": "d1eb900a-3227-4b4f-9cde-daa301a9439e",
+        "data": {
+            "typeName": "Table",
+            "attributes": {
+                "owner": "Tim ETL",
+                "createTime": 1589983847754,
+                "qualifiedName": "log_fact_daily_mv",
+                "name": "log_fact_daily_mv",
+                "description": "log fact daily materialized view"
+            },
+            "guid": "30cfc9fc-aec4-4017-b649-f1f92351a727",
+            "status": "ACTIVE",
+            "displayText": "log_fact_daily_mv",
+            "classificationNames": [
+                "Log Data"
+            ]
+        }
+    },
+    {
+        "guid": "d1eb900a-3227-4b4f-9cde-daa301a9439e",
+        "data": {
+            "typeName": "Table",
+            "attributes": {
+                "owner": "John Doe",
+                "createTime": 1589983847365,
+                "qualifiedName": "time_dim",
+                "name": "time_dim",
+                "description": "time dimension table"
+            },
+            "guid": "6fd39817-35d0-4f9a-a24b-80fe9f4d56ad",
+            "status": "ACTIVE",
+            "displayText": "time_dim",
+            "classificationNames": [
+                "Dimension"
+            ]
+        }
+    },
+    {
+        "guid": "d1eb900a-3227-4b4f-9cde-daa301a9439e",
+        "data": {
+            "typeName": "Table",
+            "attributes": {
+                "owner": "John Doe",
+                "createTime": 1589983846319,
+                "qualifiedName": "product_dim",
+                "name": "product_dim",
+                "description": "product dimension table"
+            },
+            "guid": "67e607d0-1470-43a5-8cc6-4fa810991cdb",
+            "status": "ACTIVE",
+            "displayText": "product_dim",
+            "classificationNames": [
+                "Dimension"
+            ]
+        }
+    },
+    {
+        "guid": "d1eb900a-3227-4b4f-9cde-daa301a9439e",
+        "data": {
+            "typeName": "Table",
+            "attributes": {
+                "owner": "fetl",
+                "createTime": 1589983846967,
+                "qualifiedName": "customer_dim",
+                "name": "customer_dim",
+                "description": "customer dimension table"
+            },
+            "guid": "22fc6dcd-ff53-41ae-878e-526e41d6035f",
+            "status": "ACTIVE",
+            "displayText": "customer_dim",
+            "classificationNames": [
+                "Dimension",
+                "Confidentiality"
+            ]
+        }
+    },
+    {
+        "guid": "d1eb900a-3227-4b4f-9cde-daa301a9439e",
+        "data": {
+            "typeName": "Table",
+            "attributes": {
+                "owner": "Joe BI",
+                "createTime": 1589983848760,
+                "qualifiedName": "sales_fact_daily_mv",
+                "name": "sales_fact_daily_mv",
+                "description": "sales fact daily materialized view"
+            },
+            "guid": "e0a39f9c-b8b7-4d6a-9be2-ec3f553c6325",
+            "status": "ACTIVE",
+            "displayText": "sales_fact_daily_mv",
+            "classificationNames": [
+                "Fact",
+                "ETL",
+                "Dimension",
+                "Metric"
+            ]
+        }
+    },
+    {
+        "guid": "d1eb900a-3227-4b4f-9cde-daa301a9439e",
+        "data": {
+            "typeName": "Table",
+            "attributes": {
+                "owner": "Tim ETL",
+                "createTime": 1589983848291,
+                "qualifiedName": "logging_fact_monthly_mv",
+                "name": "logging_fact_monthly_mv",
+                "description": "logging fact monthly materialized view"
+            },
+            "guid": "15f5bf50-5a39-4994-9cba-6c01d016f52f",
+            "status": "ACTIVE",
+            "displayText": "logging_fact_monthly_mv",
+            "classificationNames": [
+                "Log Data",
+                "ETL",
+                "Log Data"
+            ]
+        }
+    },
+    {
+        "guid": "d1eb900a-3227-4b4f-9cde-daa301a9439e",
+        "data": {
+            "typeName": "Table",
+            "attributes": {
+                "owner": "Jane BI",
+                "createTime": 1589983849238,
+                "qualifiedName": "sales_fact_monthly_mv",
+                "name": "sales_fact_monthly_mv",
+                "description": "sales fact monthly materialized view"
+            },
+            "guid": "d220129f-a777-4bdc-9f55-19424a8c452d",
+            "status": "ACTIVE",
+            "displayText": "sales_fact_monthly_mv",
+            "classificationNames": [
+                "Fact",
+                "ETL",
+                "Metric",
+                "ETL",
+                "Dimension",
+                "Metric"
+            ]
+        }
+    }
+]

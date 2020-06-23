@@ -1,6 +1,6 @@
 # datacatalog-connectors-hive
 
-This repository contains sample code with integration between Data Catalog and Hive data source.
+This repository contains sample code with integration between Data Catalog and Hive and related data source.
 
 **Disclaimer: This is not an officially supported Google product.**
 
@@ -19,4 +19,5 @@ The following components are available in this repo:
 | Component | Description | Folder | Language | 
 |-----------|-------------|--------|----------|
 | google-datacatalog-hive-connector | Sample code for Hive data source. | [google-datacatalog-hive-connector](https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive/tree/master/google-datacatalog-hive-connector) | Python |
+| google-datacatalog-apache-atlas-connector | Sample code for Apache Atlas data source. | [google-datacatalog-apache-atlas-connector](https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive/tree/master/google-datacatalog-apache-atlas-connector) | Python |
 | hive-metastore-listener | Sample code enabling Hive Metastore and Data Catalog live sync. | [hive-metastore-listener](https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive/tree/master/hive-metastore-listener) | Java |

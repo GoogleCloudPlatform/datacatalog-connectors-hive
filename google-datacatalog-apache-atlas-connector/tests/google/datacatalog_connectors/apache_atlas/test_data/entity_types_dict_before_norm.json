@@ -1,0 +1,466 @@
+{
+    "Column": {
+        "name": "Column",
+        "data": {
+            "category": "ENTITY",
+            "guid": "4f903d41-3cf6-41bd-bc8c-0a78aee39b17",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806198,
+            "updateTime": 1589983806198,
+            "version": 1,
+            "name": "Column",
+            "description": "Column",
+            "typeVersion": "1.0",
+            "options": {
+                "schemaAttributes": "[\"name\", \"description\", \"owner\", \"type\", \"comment\", \"position\"]"
+            },
+            "attributeDefs": [
+                {
+                    "name": "name",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "dataType",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "comment",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "table",
+                    "typeName": "Table",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false,
+                    "constraints": [
+                        {
+                            "type": "inverseRef",
+                            "params": {
+                                "attribute": "columns"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "superTypes": []
+        },
+        "superTypes": [],
+        "entities": {
+            "a6624bef-5691-4448-a979-b7a2f1265438": {
+                "guid": "a6624bef-5691-4448-a979-b7a2f1265438",
+                "data": {
+                    "typeName": "Column",
+                    "attributes": {
+                        "dataType": "int",
+                        "name": "dayOfYear",
+                        "comment": "day Of Year",
+                        "table": null
+                    },
+                    "guid": "a6624bef-5691-4448-a979-b7a2f1265438",
+                    "status": "ACTIVE",
+                    "createdBy": "admin",
+                    "updatedBy": "admin",
+                    "createTime": 1589983834061,
+                    "updateTime": 1589983834061,
+                    "version": 0
+                }
+            },
+            "cb44a958-026c-48d9-b4f3-4a6e2eab7234": {
+                "guid": "cb44a958-026c-48d9-b4f3-4a6e2eab7234",
+                "data": {
+                    "typeName": "Column",
+                    "attributes": {
+                        "dataType": "int",
+                        "name": "time_id",
+                        "comment": "time id",
+                        "table": null
+                    },
+                    "guid": "cb44a958-026c-48d9-b4f3-4a6e2eab7234",
+                    "status": "ACTIVE",
+                    "createdBy": "admin",
+                    "updatedBy": "admin",
+                    "createTime": 1589983833857,
+                    "updateTime": 1589983833857,
+                    "version": 0
+                }
+            },
+            "d1eb900a-3227-4b4f-9cde-daa301a9439e": {
+                "guid": "d1eb900a-3227-4b4f-9cde-daa301a9439e",
+                "data": {
+                    "typeName": "Column",
+                    "attributes": {
+                        "dataType": "int",
+                        "name": "weekDay",
+                        "comment": "week Day",
+                        "table": null
+                    },
+                    "guid": "d1eb900a-3227-4b4f-9cde-daa301a9439e",
+                    "status": "ACTIVE",
+                    "createdBy": "admin",
+                    "updatedBy": "admin",
+                    "createTime": 1589983834231,
+                    "updateTime": 1589983834231,
+                    "version": 0
+                }
+            }
+        }
+    },
+    "Table": {
+        "name": "Table",
+        "data": {
+            "category": "ENTITY",
+            "guid": "112baf95-2c81-4d95-b758-e9c38a7b78c7",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806224,
+            "updateTime": 1589983806224,
+            "version": 1,
+            "name": "Table",
+            "description": "Table",
+            "typeVersion": "1.0",
+            "options": {
+                "schemaElementsAttribute": "columns"
+            },
+            "attributeDefs": [
+                {
+                    "name": "db",
+                    "typeName": "DB",
+                    "isOptional": false,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 1,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "sd",
+                    "typeName": "StorageDesc",
+                    "isOptional": false,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 1,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": false,
+                    "constraints": [
+                        {
+                            "type": "ownedRef"
+                        }
+                    ]
+                },
+                {
+                    "name": "owner",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "createTime",
+                    "typeName": "long",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "lastAccessTime",
+                    "typeName": "long",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "retention",
+                    "typeName": "long",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "viewOriginalText",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "viewExpandedText",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "tableType",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "temporary",
+                    "typeName": "boolean",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "columns",
+                    "typeName": "array<Column>",
+                    "isOptional": false,
+                    "cardinality": "LIST",
+                    "valuesMinCount": 1,
+                    "valuesMaxCount": 2147483647,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": false,
+                    "constraints": [
+                        {
+                            "type": "ownedRef"
+                        }
+                    ]
+                }
+            ],
+            "superTypes": [
+                "DataSet"
+            ]
+        },
+        "superTypes": [
+            "DataSet"
+        ],
+        "entities": {
+            "6fd39817-35d0-4f9a-a24b-80fe9f4d56ad": {
+                "guid": "6fd39817-35d0-4f9a-a24b-80fe9f4d56ad",
+                "data": {
+                    "typeName": "Table",
+                    "attributes": {
+                        "owner": "John Doe",
+                        "temporary": false,
+                        "lastAccessTime": 1589983847365,
+                        "qualifiedName": "time_dim",
+                        "columns": [
+                            {
+                                "guid": "cb44a958-026c-48d9-b4f3-4a6e2eab7234",
+                                "typeName": "Column"
+                            },
+                            {
+                                "guid": "a6624bef-5691-4448-a979-b7a2f1265438",
+                                "typeName": "Column"
+                            },
+                            {
+                                "guid": "d1eb900a-3227-4b4f-9cde-daa301a9439e",
+                                "typeName": "Column"
+                            }
+                        ],
+                        "description": "time dimension table",
+                        "viewExpandedText": null,
+                        "sd": {
+                            "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                            "typeName": "StorageDesc"
+                        },
+                        "tableType": "External",
+                        "createTime": 1589983847365,
+                        "name": "time_dim",
+                        "db": {
+                            "guid": "c0ebcb5e-21f8-424d-bf11-f39bb943ae2c",
+                            "typeName": "DB"
+                        },
+                        "retention": 1589983847365,
+                        "viewOriginalText": null
+                    },
+                    "guid": "6fd39817-35d0-4f9a-a24b-80fe9f4d56ad",
+                    "status": "ACTIVE",
+                    "createdBy": "admin",
+                    "updatedBy": "admin",
+                    "createTime": 1589983847367,
+                    "updateTime": 1589983850688,
+                    "version": 0,
+                    "relationshipAttributes": {
+                        "schema": [],
+                        "inputToProcesses": [
+                            {
+                                "guid": "2aa15a65-ae8e-4e48-9b77-2ecb049f82b4",
+                                "typeName": "LoadProcess",
+                                "displayText": "loadSalesDaily",
+                                "relationshipGuid": "62315226-2362-48b1-8a3d-f11c8944b60d",
+                                "relationshipStatus": "ACTIVE",
+                                "relationshipAttributes": {
+                                    "typeName": "dataset_process_inputs"
+                                }
+                            }
+                        ],
+                        "relatedFromObjectAnnotations": [],
+                        "resourceListAnchors": [],
+                        "relatedToObjectAnnotations": null,
+                        "supportingResources": [],
+                        "meanings": [],
+                        "outputFromProcesses": []
+                    }
+                },
+                "classifications": [
+                    {
+                        "typeName": "Dimension",
+                        "entityGuid": "6fd39817-35d0-4f9a-a24b-80fe9f4d56ad",
+                        "propagate": true
+                    }
+                ]
+            }
+        }
+    },
+    "DB": {
+        "name": "DB",
+        "data": {
+            "category": "ENTITY",
+            "guid": "b11e24ca-c0f4-4754-92f7-d3a5febd2d2c",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806140,
+            "updateTime": 1589983806140,
+            "version": 1,
+            "name": "DB",
+            "description": "DB",
+            "typeVersion": "1.0",
+            "attributeDefs": [
+                {
+                    "name": "name",
+                    "typeName": "string",
+                    "isOptional": false,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 1,
+                    "valuesMaxCount": 1,
+                    "isUnique": true,
+                    "isIndexable": true,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "description",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "locationUri",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "owner",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "createTime",
+                    "typeName": "long",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                }
+            ],
+            "superTypes": []
+        },
+        "superTypes": [],
+        "entities": {
+            "c0ebcb5e-21f8-424d-bf11-f39bb943ae2c": {
+                "guid": "c0ebcb5e-21f8-424d-bf11-f39bb943ae2c",
+                "data": {
+                    "typeName": "DB",
+                    "attributes": {
+                        "owner": "John ETL",
+                        "createTime": 1589983828059,
+                        "name": "Sales",
+                        "description": "sales database",
+                        "locationUri": null
+                    },
+                    "guid": "c0ebcb5e-21f8-424d-bf11-f39bb943ae2c",
+                    "status": "ACTIVE",
+                    "createdBy": "admin",
+                    "updatedBy": "admin",
+                    "createTime": 1589983828109,
+                    "updateTime": 1589983847367,
+                    "version": 0
+                }
+            }
+        }
+    }
+}

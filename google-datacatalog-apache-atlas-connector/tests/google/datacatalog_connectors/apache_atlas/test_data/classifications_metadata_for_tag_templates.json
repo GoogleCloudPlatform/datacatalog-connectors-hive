@@ -1,0 +1,399 @@
+{
+    "JdbcAccess": {
+        "name": "JdbcAccess",
+        "guid": "38134539-3c44-4b54-87eb-058b0360ad4c",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "38134539-3c44-4b54-87eb-058b0360ad4c",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806129,
+            "updateTime": 1589983806129,
+            "version": 1,
+            "name": "JdbcAccess",
+            "description": "JdbcAccess Classification",
+            "typeVersion": "1.0",
+            "attributeDefs": [],
+            "superTypes": []
+        }
+    },
+    "SpineAttribute": {
+        "name": "SpineAttribute",
+        "guid": "35742ad3-b9d5-4f19-ab76-402f8b5be997",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "35742ad3-b9d5-4f19-ab76-402f8b5be997",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1516313040008,
+            "updateTime": 1561996788779,
+            "version": 1,
+            "name": "SpineAttribute",
+            "description": "Identifies a glossary term that describes an attribute of a spine object.",
+            "typeVersion": "1.0",
+            "attributeDefs": [],
+            "superTypes": []
+        }
+    },
+    "Dimension": {
+        "name": "Dimension",
+        "guid": "68832ec3-706a-4b39-bbf9-e0be84f49ba5",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "68832ec3-706a-4b39-bbf9-e0be84f49ba5",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806096,
+            "updateTime": 1589983806096,
+            "version": 1,
+            "name": "Dimension",
+            "description": "Dimension Classification",
+            "typeVersion": "1.0",
+            "attributeDefs": [],
+            "superTypes": []
+        }
+    },
+    "governance_template_test": {
+        "name": "governance_template_test",
+        "guid": "71452c35-969a-440d-81aa-a62c5277e80e",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "71452c35-969a-440d-81aa-a62c5277e80e",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1590789034041,
+            "updateTime": 1590789034041,
+            "version": 1,
+            "name": "governance_template_test",
+            "description": "governance_template_test",
+            "typeVersion": "1.0",
+            "attributeDefs": [
+                {
+                    "name": "governance_classification_status",
+                    "typeName": "GovernanceClassificationStatus",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                }
+            ],
+            "superTypes": []
+        }
+    },
+    "Fact": {
+        "name": "Fact",
+        "guid": "78d76379-a987-4818-a398-2692be7057db",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "78d76379-a987-4818-a398-2692be7057db",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806102,
+            "updateTime": 1589983806102,
+            "version": 1,
+            "name": "Fact",
+            "description": "Fact Classification",
+            "typeVersion": "1.0",
+            "attributeDefs": [],
+            "superTypes": []
+        }
+    },
+    "Business Glossary": {
+        "name": "Business Glossary",
+        "guid": "19ce69a6-4540-452b-833b-41e993b36daf",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "19ce69a6-4540-452b-833b-41e993b36daf",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1590692294172,
+            "updateTime": 1590692294172,
+            "version": 1,
+            "name": "Business Glossary",
+            "description": "Business Glossary info",
+            "typeVersion": "1.0",
+            "attributeDefs": [
+                {
+                    "name": "status",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "level",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "confidence",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "classification",
+                    "typeName": "GovernanceClassificationStatus",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                }
+            ],
+            "superTypes": []
+        }
+    },
+    "PII": {
+        "name": "PII",
+        "guid": "7a4ab69a-e3eb-4c5c-aea5-a21b49a32b8f",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "7a4ab69a-e3eb-4c5c-aea5-a21b49a32b8f",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806111,
+            "updateTime": 1589983806111,
+            "version": 1,
+            "name": "PII",
+            "description": "PII Classification",
+            "typeVersion": "1.0",
+            "attributeDefs": [],
+            "superTypes": []
+        }
+    },
+    "Confidentiality": {
+        "name": "Confidentiality",
+        "guid": "a3f9f820-876c-4669-bf5e-01b25becd9ad",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "a3f9f820-876c-4669-bf5e-01b25becd9ad",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1516313040008,
+            "updateTime": 1561996789356,
+            "version": 1,
+            "name": "Confidentiality",
+            "description": "Defines the level of confidentiality of related data items.",
+            "typeVersion": "1.0",
+            "attributeDefs": [
+                {
+                    "name": "status",
+                    "typeName": "GovernanceClassificationStatus",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": true,
+                    "description": "Status of this classification."
+                },
+                {
+                    "name": "confidence",
+                    "typeName": "int",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": true,
+                    "description": "Level of confidence in the classification (0=none -> "
+                },
+                {
+                    "name": "steward",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": true,
+                    "description": "Person responsible for maintaining this classification."
+                },
+                {
+                    "name": "source",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": true,
+                    "description": "Source of the classification."
+                },
+                {
+                    "name": "notes",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": true,
+                    "description": "Information relating to the classification."
+                },
+                {
+                    "name": "level",
+                    "typeName": "int",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": true,
+                    "description": "Level of confidentiality."
+                }
+            ],
+            "superTypes": []
+        }
+    },
+    "SubjectArea": {
+        "name": "SubjectArea",
+        "guid": "1ba5b31e-c347-463f-b7d7-0d92b36b9beb",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "1ba5b31e-c347-463f-b7d7-0d92b36b9beb",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1516313040008,
+            "updateTime": 1561996785899,
+            "version": 1,
+            "name": "SubjectArea",
+            "description": "Identifies a glossary category as a subject area.",
+            "typeVersion": "1.0",
+            "attributeDefs": [
+                {
+                    "name": "name",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": true,
+                    "description": "Name of the subject area."
+                }
+            ],
+            "superTypes": []
+        }
+    },
+    "Log Data": {
+        "name": "Log Data",
+        "guid": "950f8d84-6502-4d62-8e45-ffe9e6fa19f9",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "950f8d84-6502-4d62-8e45-ffe9e6fa19f9",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806135,
+            "updateTime": 1589983806135,
+            "version": 1,
+            "name": "Log Data",
+            "description": "LogData Classification",
+            "typeVersion": "1.0",
+            "attributeDefs": [],
+            "superTypes": []
+        }
+    },
+    "SpineObject": {
+        "name": "SpineObject",
+        "guid": "1a7da624-7164-4009-b935-a1153393dc2b",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "1a7da624-7164-4009-b935-a1153393dc2b",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1516313040008,
+            "updateTime": 1561996788450,
+            "version": 1,
+            "name": "SpineObject",
+            "description": "Identifies a glossary term that describes a type of spine object.",
+            "typeVersion": "1.0",
+            "attributeDefs": [],
+            "superTypes": []
+        }
+    },
+    "Metric": {
+        "name": "Metric",
+        "guid": "f71b2d91-eb59-4cc6-99c3-e6671f9b8e55",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "f71b2d91-eb59-4cc6-99c3-e6671f9b8e55",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806121,
+            "updateTime": 1589983806121,
+            "version": 1,
+            "name": "Metric",
+            "description": "Metric Classification",
+            "typeVersion": "1.0",
+            "attributeDefs": [],
+            "superTypes": []
+        }
+    },
+    "Business Rule": {
+        "name": "Business Rule",
+        "guid": "8e1a9472-bd46-4622-9ca3-8c9649547f91",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "8e1a9472-bd46-4622-9ca3-8c9649547f91",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1590692163331,
+            "updateTime": 1590692163331,
+            "version": 1,
+            "name": "Business Rule",
+            "description": "Business Rule Classification",
+            "typeVersion": "1.0",
+            "attributeDefs": [],
+            "superTypes": [
+                "Confidentiality"
+            ]
+        }
+    },
+    "ETL": {
+        "name": "ETL",
+        "guid": "ad21ad41-c154-414d-84ff-278980cfbc5e",
+        "data": {
+            "category": "CLASSIFICATION",
+            "guid": "ad21ad41-c154-414d-84ff-278980cfbc5e",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806125,
+            "updateTime": 1589983806125,
+            "version": 1,
+            "name": "ETL",
+            "description": "ETL Classification",
+            "typeVersion": "1.0",
+            "attributeDefs": [],
+            "superTypes": []
+        }
+    }
+}
