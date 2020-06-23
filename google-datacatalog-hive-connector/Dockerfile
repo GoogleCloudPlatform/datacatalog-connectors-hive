@@ -22,8 +22,8 @@ RUN flake8 src tests
 
 RUN python setup.py test
 
-# Install hive2datacatalog package from source files.
+# Install google-datacatalog-hive-connector package from source files.
 RUN pip install .
 
-ENTRYPOINT ["hive2datacatalog"]
+ENTRYPOINT ["google-datacatalog-hive-connector"]
 
