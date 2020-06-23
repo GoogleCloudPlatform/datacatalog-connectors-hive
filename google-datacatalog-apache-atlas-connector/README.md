@@ -51,7 +51,8 @@ consider updating this if things change.
   * [5.2. Install and run Flake8 linter](#52-install-and-run-flake8-linter)
   * [5.3. Run Tests](#53-run-tests)
 - [6. Metrics](#6-metrics)
-- [7. Troubleshooting](#7-troubleshooting)
+- [7. Assumptions](#7-assumptions)
+- [8. Troubleshooting](#8-troubleshooting)
 
 <!-- tocstop -->
 
@@ -228,7 +229,13 @@ python setup.py test
 
 [Metrics README.md](docs/README.md)
 
-## 7. Troubleshooting
+## 7. Assumptions
+
+The connector uses simple authentication with user/pass provided credentials. And to provide live sync, the connector has an option to connect to the Apache Atlas backed Kafka instance, and listen to metadata event changes. It connects directly to Kafka's topic, so make sure it is executed in a secure network.
+
+For stronger security, consider using Kerberos for authentication and Apache Ranger for authorization: [apache-atlas-security](https://atlas.apache.org/0.8.1/Authentication-Authorization.html). If you have this kind of usage, please open a feature request. 
+
+## 8. Troubleshooting
 
 In the case a connector execution hits Data Catalog quota limit, an error will
 be raised and logged with the following detailment, depending on the performed
