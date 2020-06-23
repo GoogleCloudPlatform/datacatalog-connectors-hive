@@ -29,150 +29,171 @@ consider updating this if things change.
 
 <!-- toc -->
 
-- [1. Environment setup](#1-environment-setup)
-  * [1.1. Get the code](#11-get-the-code)
-  * [1.2. Auth credentials](#12-auth-credentials)
-      - [1.2.1. Create a GCP Service Account and grant it below roles](#121-create-a-gcp-service-account-and-grant-it-below-roles)
-      - [1.2.2. Download a JSON key and save it as](#122-download-a-json-key-and-save-it-as)
-  * [1.3. Virtualenv](#13-virtualenv)
-      - [1.3.1. Install Python 3.7+](#131-install-python-37)
-      - [1.3.2. Create and activate a *virtualenv*](#132-create-and-activate-a-virtualenv)
-      - [1.3.3. Install the dependencies](#133-install-the-dependencies)
-      - [1.3.4. Set environment variables](#134-set-environment-variables)
-  * [1.4. Docker](#14-docker)
-- [2. Sample application entry point](#2-sample-application-entry-point)
-  * [2.1. Run the apache-atlas2datacatalog script](#21-run-the-apache-atlas2datacatalog-script)
-- [3. Developer environment](#3-developer-environment)
-  * [3.1. Install and run Yapf formatter](#31-install-and-run-yapf-formatter)
-  * [3.2. Install and run Flake8 linter](#32-install-and-run-flake8-linter)
-  * [3.3. Run Tests](#33-run-tests)
-- [4. Metrics](#4-metrics)
-- [5. Troubleshooting](#5-troubleshooting)
+- [1. Installation](#1-installation)
+  * [1.1. Mac/Linux](#11-maclinux)
+  * [1.2. Windows](#12-windows)
+  * [1.3. Install from source](#13-install-from-source)
+    + [1.3.1. Get the code](#131-get-the-code)
+    + [1.3.2. Create and activate a *virtualenv*](#132-create-and-activate-a-virtualenv)
+- [2. Environment setup](#2-environment-setup)
+  * [2.1. Auth credentials](#21-auth-credentials)
+    + [2.1.1. Create a service account and grant it below roles](#211-create-a-service-account-and-grant-it-below-roles)
+    + [2.1.2. Download a JSON key and save it as](#212-download-a-json-key-and-save-it-as)
+  * [2.2. Set environment variables](#22-set-environment-variables)
+- [3. Sample Sync application entry point](#3-sample-sync-application-entry-point)
+  * [3.1. Run the google-datacatalog-apache-atlas-connector script](#31-run-the-google-datacatalog-apache-atlas-connector-script)
+  * [3.2. Run Docker entry point](#32-run-docker-entry-point)
+- [4. Sample Sync Hook application entry point](#4-sample-sync-hook-application-entry-point)
+  * [4.1. Run the google-datacatalog-apache-atlas-connector script](#41-run-the-google-datacatalog-apache-atlas-connector-script)
+  * [4.2. Run Docker entry point](#42-run-docker-entry-point)
+- [5. Developer environment](#5-developer-environment)
+  * [5.1. Install and run Yapf formatter](#51-install-and-run-yapf-formatter)
+  * [5.2. Install and run Flake8 linter](#52-install-and-run-flake8-linter)
+  * [5.3. Run Tests](#53-run-tests)
+- [6. Metrics](#6-metrics)
+- [7. Troubleshooting](#7-troubleshooting)
 
 <!-- tocstop -->
 
 -----
 
-## 1. Environment setup
 
-### 1.1. Get the code
+## 1. Installation
+
+Install this library in a [virtualenv][1] using pip. [virtualenv][1] is a tool to
+create isolated Python environments. The basic problem it addresses is one of
+dependencies and versions, and indirectly permissions.
+
+With [virtualenv][1], it's possible to install this library without needing system
+install permissions, and without clashing with the installed system
+dependencies. Make sure you use Python 3.7+.
+
+
+### 1.1. Mac/Linux
+
+```bash
+pip3 install virtualenv
+virtualenv --python python3.7 <your-env>
+source <your-env>/bin/activate
+<your-env>/bin/pip install google-datacatalog-apache-atlas-connector
+```
+
+### 1.2. Windows
+
+```bash
+pip3 install virtualenv
+virtualenv --python python3.7 <your-env>
+<your-env>\Scripts\activate
+<your-env>\Scripts\pip.exe install google-datacatalog-apache-atlas-connector
+```
+
+### 1.3. Install from source
+
+#### 1.3.1. Get the code
 
 ````bash
 git clone https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive.git
-cd datacatalog-connectors-hive/apache-atlas2datacatalog
+cd datacatalog-connectors-hive/google-datacatalog-apache-atlas-connector
 ````
 
-### 1.2. Auth credentials
+#### 1.3.2. Create and activate a *virtualenv*
 
-##### 1.2.1. Create a GCP Service Account and grant it below roles
+```bash
+pip3 install virtualenv
+virtualenv --python python3.7 <your-env> 
+source <your-env>/bin/activate
+```
+
+## 2. Environment setup
+
+### 2.1. Auth credentials
+
+#### 2.1.1. Create a service account and grant it below roles
 
 - Data Catalog Admin
 
-##### 1.2.2. Download a JSON key and save it as
+#### 2.1.2. Download a JSON key and save it as
 - `<YOUR-CREDENTIALS_FILES_FOLDER>/apache-atlas2dc-credentials.json`
 
-### 1.3. Virtualenv
-
-Using *virtualenv* is optional, but strongly recommended unless you use Docker
-or a PEX file.
-
-##### 1.3.1. Install Python 3.7+
-
-##### 1.3.2. Create and activate a *virtualenv*
-
-```bash
-pip install --upgrade virtualenv
-python3 -m virtualenv --python python3 env
-source ./env/bin/activate
-```
-
-##### 1.3.3. Install the dependencies
-
-```bash
-pip install ./lib/datacatalog_connectors_commons-1.0.1-py2.py3-none-any.whl
-pip install --editable .
-```
-
-##### 1.3.4. Set environment variables
+### 2.2. Set environment variables
 
 ```bash
 export GOOGLE_APPLICATION_CREDENTIALS=datacatalog_credentials_file
+
+export APACHE_ATLAS2DC_DATACATALOG_PROJECT_ID=google_cloud_project_id
+export APACHE_ATLAS2DC_HOST=localhost
+export APACHE_ATLAS2DC_PORT=21000
+export APACHE_ATLAS2DC_USER=my-user
+export APACHE_ATLAS2DC_PASS=my-pass
 ```
 
-> Replace above values according to your environment. The Data Catalog
-> credentials file was saved in step 1.2.2.
-
-### 1.4. Docker
-
-See instructions below.
-
-## 2. Sample Sync application entry point
-
-### 2.1. Run the google-datacatalog-apache-atlas-connector script
-
-- Virtualenv
-
-```bash
-google-datacatalog-apache-atlas-connector sync \
-  --datacatalog-project-id <YOUR-DATACATALOG-PROJECT-ID> \
-  --atlas-host localhost \
-  --atlas-port 21000 \
-  --atlas-user my-user \
-  --atlas-pass my-pass \
-  --atlas-entity-types DB,View,Table,hbase_table,hive_db (Optional)
-```
-
-- Or using Docker
-
-```bash
-docker build --rm --tag apache-atlas2datacatalog .
-docker run --rm --tty -v <YOUR-CREDENTIALS_FILES_FOLDER>:/data \
-  apache-atlas2datacatalog sync \ 
-  --datacatalog-project-id <YOUR-DATACATALOG-PROJECT-ID> \
-  --atlas-host localhost \
-  --atlas-port 21000 \
-  --atlas-user my-user \
-  --atlas-pass my-pass \
-  --atlas-entity-types DB,View,Table,hbase_table,hive_db (Optional)
-```
-
-## 3. Sample Sync Hook application entry point
+## 3. Sample Sync application entry point
 
 ### 3.1. Run the google-datacatalog-apache-atlas-connector script
 
 - Virtualenv
 
 ```bash
+google-datacatalog-apache-atlas-connector sync \
+  --datacatalog-project-id=$APACHE_ATLAS2DC_DATACATALOG_PROJECT_ID \
+  --atlas-host=$APACHE_ATLAS2DC_HOST \
+  --atlas-port=$APACHE_ATLAS2DC_PORT \
+  --atlas-user $APACHE_ATLAS2DC_USER \
+  --atlas-pass $APACHE_ATLAS2DC_PASS \
+  --atlas-entity-types DB,View,Table,hbase_table,hive_db (Optional)
+```
+
+### 3.2. Run Docker entry point
+
+```bash
+docker build --rm --tag apache-atlas2datacatalog .
+docker run --rm --tty -v <YOUR-CREDENTIALS_FILES_FOLDER>:/data \
+  apache-atlas2datacatalog sync \ 
+  --datacatalog-project-id=$APACHE_ATLAS2DC_DATACATALOG_PROJECT_ID \
+  --atlas-host=$APACHE_ATLAS2DC_HOST \
+  --atlas-port=$APACHE_ATLAS2DC_PORT \
+  --atlas-user $APACHE_ATLAS2DC_USER \
+  --atlas-pass $APACHE_ATLAS2DC_PASS \
+  --atlas-entity-types DB,View,Table,hbase_table,hive_db (Optional)
+```
+
+## 4. Sample Sync Hook application entry point
+
+### 4.1. Run the google-datacatalog-apache-atlas-connector script
+
+- Virtualenv
+
+```bash
 google-datacatalog-apache-atlas-connector sync-event-hook \
-  --datacatalog-project-id <YOUR-DATACATALOG-PROJECT-ID> \
-  --atlas-host localhost \
-  --atlas-port 21000 \
-  --atlas-user my-user \
-  --atlas-pass my-pass \
+  --datacatalog-project-id=$APACHE_ATLAS2DC_DATACATALOG_PROJECT_ID \
+  --atlas-host=$APACHE_ATLAS2DC_HOST \
+  --atlas-port=$APACHE_ATLAS2DC_PORT \
+  --atlas-user $APACHE_ATLAS2DC_USER \
+  --atlas-pass $APACHE_ATLAS2DC_PASS \
   --event-servers my-event-server \
   --event-consumer-group-id atlas-event-sync \
   --atlas-entity-types DB,View,Table,hbase_table,hive_db (Optional)
 ```
 
-- Or using Docker
+### 4.2. Run Docker entry point
 
 ```bash
 docker build --rm --tag apache-atlas2datacatalog .
 docker run --rm --tty -v <YOUR-CREDENTIALS_FILES_FOLDER>:/data \
   apache-atlas2datacatalog sync-event-hook \ 
-  --datacatalog-project-id <YOUR-DATACATALOG-PROJECT-ID> \
-  --atlas-host localhost \
-  --atlas-port 21000 \
-  --atlas-user my-user \
-  --atlas-pass my-pass \
+  --datacatalog-project-id=$APACHE_ATLAS2DC_DATACATALOG_PROJECT_ID \
+  --atlas-host=$APACHE_ATLAS2DC_HOST \
+  --atlas-port=$APACHE_ATLAS2DC_PORT \
+  --atlas-user $APACHE_ATLAS2DC_USER \
+  --atlas-pass $APACHE_ATLAS2DC_PASS \
   --event-servers my-event-server \
   --event-consumer-group-id atlas-event-sync \  
   --atlas-entity-types DB,View,Table,hbase_table,hive_db (Optional)
 ```
 
-## 4. Developer environment
+## 5. Developer environment
 
-### 4.1. Install and run Yapf formatter
+### 5.1. Install and run Yapf formatter
 
 ```bash
 pip install --upgrade yapf
@@ -190,25 +211,24 @@ chmod a+x pre-commit.sh
 mv pre-commit.sh .git/hooks/pre-commit
 ```
 
-### 4.2. Install and run Flake8 linter
+### 5.2. Install and run Flake8 linter
 
 ```bash
 pip install --upgrade flake8
 flake8 src tests
 ```
 
-### 4.3. Run Tests
+### 5.3. Run Tests
 
 ```bash
-pip install ./lib/datacatalog_connectors_commons_test-1.0.0-py2.py3-none-any.whl
 python setup.py test
 ```
 
-## 5. Metrics
+## 6. Metrics
 
 [Metrics README.md](docs/README.md)
 
-## 6. Troubleshooting
+## 7. Troubleshooting
 
 In the case a connector execution hits Data Catalog quota limit, an error will
 be raised and logged with the following detailment, depending on the performed
