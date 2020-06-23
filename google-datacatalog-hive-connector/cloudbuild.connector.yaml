@@ -34,7 +34,7 @@ steps:
   id: 'PREPARE_SERVICE_ACCOUNT'
   args: ['cp',
          'gs://connectors_build_env/hive2dc-credentials.json',
-         '/workspace/hive/.']         
+         '/workspace/hive/infrastructure/.']         
 - name: 'gcr.io/cloudshell-images/cloudshell:latest'
   id: 'PREPARE_ENV'
   entrypoint: '/bin/bash'
