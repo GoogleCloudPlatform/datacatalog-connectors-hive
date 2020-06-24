@@ -16,6 +16,8 @@ arg to provide only the types the connector should sync.
 At this time Data Catalog does not support Lineage, so this connector does not use the Lineage information. We might
 consider updating this if things change.
 
+[![Python package][3]][3] [![PyPi][4]][5] [![License][6]][6] [![Issues][7]][8]
+
 **Disclaimer: This is not an officially supported Google product.**
 
 <!--
@@ -61,11 +63,11 @@ consider updating this if things change.
 
 ## 1. Installation
 
-Install this library in a [virtualenv][1] using pip. [virtualenv][1] is a tool to
+Install this library in a [virtualenv][2] using pip. [virtualenv][2] is a tool to
 create isolated Python environments. The basic problem it addresses is one of
 dependencies and versions, and indirectly permissions.
 
-With [virtualenv][1], it's possible to install this library without needing system
+With [virtualenv][2], it's possible to install this library without needing system
 install permissions, and without clashing with the installed system
 dependencies. Make sure you use Python 3.7+.
 
@@ -251,3 +253,10 @@ debug_error_string =
 For more information on Data Catalog quota, please refer to: [Data Catalog quota docs][1].
 
 [1]: https://cloud.google.com/data-catalog/docs/resources/quotas
+[2]: https://virtualenv.pypa.io/en/latest/
+[3]: https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive/workflows/Python%20package/badge.svg?branch=master
+[4]: https://img.shields.io/pypi/v/google-datacatalog-apache-atlas-connector.svg
+[5]: https://pypi.org/project/google-datacatalog-apache-atlas-connector/
+[6]: https://img.shields.io/github/license/GoogleCloudPlatform/datacatalog-connectors-hive.svg
+[7]: https://img.shields.io/github/issues/GoogleCloudPlatform/datacatalog-connectors-hive.svg
+[8]: https://github.com/GoogleCloudPlatform/datacatalog-connectors-hive/issues
