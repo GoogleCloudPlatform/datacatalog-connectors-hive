@@ -1,0 +1,22 @@
+[
+    {
+        "typeName": "Fact",
+        "entityGuid": "2286a6bd-4b06-4f7c-a666-920d774b040e",
+        "propagate": true
+    },
+    {
+        "typeName": "ETL",
+        "entityGuid": "c8eb658b-15ef-4568-bff9-6b1d1962a160",
+        "propagate": true
+    },
+    {
+        "typeName": "Metric",
+        "entityGuid": "d220129f-a777-4bdc-9f55-19424a8c452d",
+        "propagate": true
+    },
+    {
+        "typeName": "Dimension",
+        "entityGuid": "6fd39817-35d0-4f9a-a24b-80fe9f4d56ad",
+        "propagate": true
+    }
+]

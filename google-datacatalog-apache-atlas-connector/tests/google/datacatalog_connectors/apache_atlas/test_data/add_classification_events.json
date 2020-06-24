@@ -1,0 +1,60 @@
+[
+    {
+        "topic": "ATLAS_ENTITIES",
+        "partition": 0,
+        "offset": 195,
+        "key": null,
+        "value": {
+            "version": {
+                "version": "1.0.0",
+                "versionParts": [
+                    1
+                ]
+            },
+            "msgCompressionKind": "NONE",
+            "msgSplitIdx": 1,
+            "msgSplitCount": 1,
+            "msgSourceIP": "10.128.0.41",
+            "msgCreatedBy": "",
+            "msgCreationTime": 1592247972131,
+            "message": {
+                "type": "ENTITY_NOTIFICATION_V2",
+                "entity": {
+                    "typeName": "Column",
+                    "attributes": {
+                        "name": "address"
+                    },
+                    "guid": "fe307578-e153-46bc-b044-09716c5ce638",
+                    "status": "ACTIVE",
+                    "displayText": "address",
+                    "classificationNames": [
+                        "Fact",
+                        "Log Data",
+                        "PII"
+                    ],
+                    "classifications": [
+                        {
+                            "typeName": "Fact",
+                            "entityGuid": "fe307578-e153-46bc-b044-09716c5ce638",
+                            "propagate": true,
+                            "validityPeriods": []
+                        },
+                        {
+                            "typeName": "Log Data",
+                            "entityGuid": "fe307578-e153-46bc-b044-09716c5ce638",
+                            "propagate": true,
+                            "validityPeriods": []
+                        },
+                        {
+                            "typeName": "PII",
+                            "entityGuid": "fe307578-e153-46bc-b044-09716c5ce638",
+                            "propagate": true,
+                            "validityPeriods": []
+                        }
+                    ]
+                },
+                "operationType": "CLASSIFICATION_ADD"
+            }
+        }
+    }
+]

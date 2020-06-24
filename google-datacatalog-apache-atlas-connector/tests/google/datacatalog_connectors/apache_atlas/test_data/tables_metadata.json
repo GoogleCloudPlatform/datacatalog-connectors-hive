@@ -1,0 +1,1832 @@
+{
+    "classifications": {
+        "PII": {
+            "name": "PII",
+            "guid": "7a4ab69a-e3eb-4c5c-aea5-a21b49a32b8f",
+            "data": {
+                "category": "CLASSIFICATION",
+                "guid": "7a4ab69a-e3eb-4c5c-aea5-a21b49a32b8f",
+                "createdBy": "admin",
+                "updatedBy": "admin",
+                "createTime": 1589983806111,
+                "updateTime": 1589983806111,
+                "version": 1,
+                "name": "PII",
+                "description": "PII Classification",
+                "typeVersion": "1.0",
+                "attributeDefs": [],
+                "superTypes": []
+            }
+        },
+        "Confidentiality": {
+            "name": "Confidentiality",
+            "guid": "a3f9f820-876c-4669-bf5e-01b25becd9ad",
+            "data": {
+                "category": "CLASSIFICATION",
+                "guid": "a3f9f820-876c-4669-bf5e-01b25becd9ad",
+                "createdBy": "admin",
+                "updatedBy": "admin",
+                "createTime": 1516313040008,
+                "updateTime": 1561996789356,
+                "version": 1,
+                "name": "Confidentiality",
+                "description": "Defines the level of confidentiality of related data items.",
+                "typeVersion": "1.0",
+                "attributeDefs": [
+                    {
+                        "name": "status",
+                        "typeName": "GovernanceClassificationStatus",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": true,
+                        "includeInNotification": true,
+                        "description": "Status of this classification."
+                    },
+                    {
+                        "name": "confidence",
+                        "typeName": "int",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": true,
+                        "includeInNotification": true,
+                        "description": "Level of confidence in the classification (0=none -> 100=excellent)."
+                    },
+                    {
+                        "name": "steward",
+                        "typeName": "string",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": true,
+                        "includeInNotification": true,
+                        "description": "Person responsible for maintaining this classification."
+                    },
+                    {
+                        "name": "source",
+                        "typeName": "string",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": true,
+                        "includeInNotification": true,
+                        "description": "Source of the classification."
+                    },
+                    {
+                        "name": "notes",
+                        "typeName": "string",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": true,
+                        "includeInNotification": true,
+                        "description": "Information relating to the classification."
+                    },
+                    {
+                        "name": "level",
+                        "typeName": "int",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": true,
+                        "includeInNotification": true,
+                        "description": "Level of confidentiality."
+                    }
+                ],
+                "superTypes": []
+            }
+        }
+    },
+    "entity_types": {
+        "Table": {
+            "name": "Table",
+            "data": {
+                "category": "ENTITY",
+                "guid": "112baf95-2c81-4d95-b758-e9c38a7b78c7",
+                "createdBy": "admin",
+                "updatedBy": "admin",
+                "createTime": 1589983806224,
+                "updateTime": 1589983806224,
+                "version": 1,
+                "name": "Table",
+                "description": "Table",
+                "typeVersion": "1.0",
+                "options": {
+                    "schemaElementsAttribute": "columns"
+                },
+                "attributeDefs": [
+                    {
+                        "name": "db",
+                        "typeName": "DB",
+                        "isOptional": false,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 1,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": true,
+                        "includeInNotification": false
+                    },
+                    {
+                        "name": "sd",
+                        "typeName": "StorageDesc",
+                        "isOptional": false,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 1,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": true,
+                        "includeInNotification": false,
+                        "constraints": [
+                            {
+                                "type": "ownedRef"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "owner",
+                        "typeName": "string",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": false,
+                        "includeInNotification": false
+                    },
+                    {
+                        "name": "createTime",
+                        "typeName": "long",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": false,
+                        "includeInNotification": false
+                    },
+                    {
+                        "name": "lastAccessTime",
+                        "typeName": "long",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": false,
+                        "includeInNotification": false
+                    },
+                    {
+                        "name": "retention",
+                        "typeName": "long",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": false,
+                        "includeInNotification": false
+                    },
+                    {
+                        "name": "viewOriginalText",
+                        "typeName": "string",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": false,
+                        "includeInNotification": false
+                    },
+                    {
+                        "name": "viewExpandedText",
+                        "typeName": "string",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": false,
+                        "includeInNotification": false
+                    },
+                    {
+                        "name": "tableType",
+                        "typeName": "string",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": false,
+                        "includeInNotification": false
+                    },
+                    {
+                        "name": "temporary",
+                        "typeName": "boolean",
+                        "isOptional": true,
+                        "cardinality": "SINGLE",
+                        "valuesMinCount": 0,
+                        "valuesMaxCount": 1,
+                        "isUnique": false,
+                        "isIndexable": false,
+                        "includeInNotification": false
+                    },
+                    {
+                        "name": "columns",
+                        "typeName": "array<Column>",
+                        "isOptional": false,
+                        "cardinality": "LIST",
+                        "valuesMinCount": 1,
+                        "valuesMaxCount": 2147483647,
+                        "isUnique": false,
+                        "isIndexable": true,
+                        "includeInNotification": false,
+                        "constraints": [
+                            {
+                                "type": "ownedRef"
+                            }
+                        ]
+                    }
+                ],
+                "superTypes": [
+                    "DataSet"
+                ]
+            },
+            "superTypes": [
+                "DataSet"
+            ],
+            "entities": {
+                "2286a6bd-4b06-4f7c-a666-920d774b040e": {
+                    "guid": "2286a6bd-4b06-4f7c-a666-920d774b040e",
+                    "data": {
+                        "typeName": "Table",
+                        "attributes": {
+                            "owner": "Joe",
+                            "temporary": false,
+                            "lastAccessTime": 1589983835754,
+                            "qualifiedName": "sales_fact",
+                            "columns": [
+                                {
+                                    "guid": "c53f1ab7-970f-4199-bc9a-899291c93622",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "time_id",
+                                            "comment": "time id",
+                                            "table": null
+                                        },
+                                        "guid": "c53f1ab7-970f-4199-bc9a-899291c93622",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983829550,
+                                        "updateTime": 1589983829550,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "e5188d7b-916e-4420-b02e-8eac75b17a68",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "product_id",
+                                            "comment": "product id",
+                                            "table": null
+                                        },
+                                        "guid": "e5188d7b-916e-4420-b02e-8eac75b17a68",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983829705,
+                                        "updateTime": 1589983829705,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "84d83e16-e767-46f9-8165-db7e3a7a3762",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "customer_id",
+                                            "comment": "customer id",
+                                            "table": null
+                                        },
+                                        "guid": "84d83e16-e767-46f9-8165-db7e3a7a3762",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983829845,
+                                        "updateTime": 1589983829845,
+                                        "version": 0
+                                    },
+                                    "classifications": [
+                                        {
+                                            "typeName": "PII",
+                                            "entityGuid": "84d83e16-e767-46f9-8165-db7e3a7a3762",
+                                            "propagate": true
+                                        }
+                                    ]
+                                },
+                                {
+                                    "guid": "909805b1-59f0-44db-b0c8-b6b0c384d2c5",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "double",
+                                            "name": "sales",
+                                            "comment": "product id",
+                                            "table": null
+                                        },
+                                        "guid": "909805b1-59f0-44db-b0c8-b6b0c384d2c5",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983832013,
+                                        "updateTime": 1589983832013,
+                                        "version": 0
+                                    },
+                                    "classifications": [
+                                        {
+                                            "typeName": "Metric",
+                                            "entityGuid": "909805b1-59f0-44db-b0c8-b6b0c384d2c5",
+                                            "propagate": true
+                                        }
+                                    ]
+                                }
+                            ],
+                            "description": "sales fact table",
+                            "viewExpandedText": null,
+                            "sd": {
+                                "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                "typeName": "StorageDesc",
+                                "data": {
+                                    "typeName": "StorageDesc",
+                                    "attributes": {
+                                        "location": "hdfs://host:8000/apps/warehouse/sales",
+                                        "compressed": true,
+                                        "inputFormat": "TextInputFormat",
+                                        "outputFormat": "TextOutputFormat",
+                                        "table": null
+                                    },
+                                    "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983829382,
+                                    "updateTime": 1589983849245,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "tableType": "Managed",
+                            "createTime": 1589983835754,
+                            "name": "sales_fact",
+                            "db": {
+                                "guid": "c0ebcb5e-21f8-424d-bf11-f39bb943ae2c",
+                                "typeName": "DB",
+                                "data": {
+                                    "typeName": "DB",
+                                    "attributes": {
+                                        "owner": "John ETL",
+                                        "createTime": 1589983828059,
+                                        "name": "Sales",
+                                        "description": "sales database",
+                                        "locationUri": null
+                                    },
+                                    "guid": "c0ebcb5e-21f8-424d-bf11-f39bb943ae2c",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983828109,
+                                    "updateTime": 1589983847367,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "retention": 1589983835754,
+                            "viewOriginalText": null
+                        },
+                        "guid": "2286a6bd-4b06-4f7c-a666-920d774b040e",
+                        "status": "ACTIVE",
+                        "createdBy": "admin",
+                        "updatedBy": "admin",
+                        "createTime": 1589983835765,
+                        "updateTime": 1589983850688,
+                        "version": 0,
+                        "relationshipAttributes": {
+                            "schema": [],
+                            "inputToProcesses": [
+                                {
+                                    "guid": "2aa15a65-ae8e-4e48-9b77-2ecb049f82b4",
+                                    "typeName": "LoadProcess",
+                                    "displayText": "loadSalesDaily",
+                                    "relationshipGuid": "95d240a4-009b-48c8-b1d3-66703720f60a",
+                                    "relationshipStatus": "ACTIVE",
+                                    "relationshipAttributes": {
+                                        "typeName": "dataset_process_inputs"
+                                    }
+                                }
+                            ],
+                            "relatedFromObjectAnnotations": [],
+                            "resourceListAnchors": [],
+                            "relatedToObjectAnnotations": null,
+                            "supportingResources": [],
+                            "meanings": [],
+                            "outputFromProcesses": []
+                        }
+                    },
+                    "classifications": [
+                        {
+                            "typeName": "Fact",
+                            "entityGuid": "2286a6bd-4b06-4f7c-a666-920d774b040e",
+                            "propagate": true
+                        }
+                    ]
+                },
+                "30cfc9fc-aec4-4017-b649-f1f92351a727": {
+                    "guid": "30cfc9fc-aec4-4017-b649-f1f92351a727",
+                    "data": {
+                        "typeName": "Table",
+                        "attributes": {
+                            "owner": "Tim ETL",
+                            "temporary": false,
+                            "lastAccessTime": 1589983847754,
+                            "qualifiedName": "log_fact_daily_mv",
+                            "columns": [
+                                {
+                                    "guid": "03810d11-9d72-47c0-99c5-cbd1d096ca94",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "time_id",
+                                            "comment": "time id",
+                                            "table": null
+                                        },
+                                        "guid": "03810d11-9d72-47c0-99c5-cbd1d096ca94",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983832524,
+                                        "updateTime": 1589983832524,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "2b60f606-ef43-4d76-a6c4-1e9a86f66c78",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "app_id",
+                                            "comment": "app id",
+                                            "table": null
+                                        },
+                                        "guid": "2b60f606-ef43-4d76-a6c4-1e9a86f66c78",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983832678,
+                                        "updateTime": 1589983832678,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "f4df3e4a-15b0-45d2-9cce-9a4bbed2e0ec",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "machine_id",
+                                            "comment": "machine id",
+                                            "table": null
+                                        },
+                                        "guid": "f4df3e4a-15b0-45d2-9cce-9a4bbed2e0ec",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983832831,
+                                        "updateTime": 1589983832831,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "57a25116-3ce5-4675-bb97-103fa0f5e9b4",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "string",
+                                            "name": "log",
+                                            "comment": "log data",
+                                            "table": null
+                                        },
+                                        "guid": "57a25116-3ce5-4675-bb97-103fa0f5e9b4",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983833023,
+                                        "updateTime": 1589983833023,
+                                        "version": 0
+                                    },
+                                    "classifications": [
+                                        {
+                                            "typeName": "Log Data",
+                                            "entityGuid": "57a25116-3ce5-4675-bb97-103fa0f5e9b4",
+                                            "propagate": true
+                                        }
+                                    ]
+                                }
+                            ],
+                            "description": "log fact daily materialized view",
+                            "viewExpandedText": null,
+                            "sd": {
+                                "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                "typeName": "StorageDesc",
+                                "data": {
+                                    "typeName": "StorageDesc",
+                                    "attributes": {
+                                        "location": "hdfs://host:8000/apps/warehouse/sales",
+                                        "compressed": true,
+                                        "inputFormat": "TextInputFormat",
+                                        "outputFormat": "TextOutputFormat",
+                                        "table": null
+                                    },
+                                    "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983829382,
+                                    "updateTime": 1589983849245,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "tableType": "Managed",
+                            "createTime": 1589983847754,
+                            "name": "log_fact_daily_mv",
+                            "db": {
+                                "guid": "e9edebf5-18c5-4f0c-b4fa-2a0e1e2ffc55",
+                                "typeName": "DB",
+                                "data": {
+                                    "typeName": "DB",
+                                    "attributes": {
+                                        "owner": "Tim ETL",
+                                        "createTime": 1589983829191,
+                                        "name": "Logging",
+                                        "description": "logging database",
+                                        "locationUri": null
+                                    },
+                                    "guid": "e9edebf5-18c5-4f0c-b4fa-2a0e1e2ffc55",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983829197,
+                                    "updateTime": 1589983848303,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "retention": 1589983847754,
+                            "viewOriginalText": null
+                        },
+                        "guid": "30cfc9fc-aec4-4017-b649-f1f92351a727",
+                        "status": "ACTIVE",
+                        "createdBy": "admin",
+                        "updatedBy": "admin",
+                        "createTime": 1589983847758,
+                        "updateTime": 1589983852532,
+                        "version": 0,
+                        "relationshipAttributes": {
+                            "schema": [],
+                            "inputToProcesses": [
+                                {
+                                    "guid": "e73656c9-da05-4db7-9b88-e3669c1a98eb",
+                                    "typeName": "LoadProcess",
+                                    "displayText": "loadLogsMonthly",
+                                    "relationshipGuid": "14d912f7-a214-4a17-934d-d994c474ffd3",
+                                    "relationshipStatus": "ACTIVE",
+                                    "relationshipAttributes": {
+                                        "typeName": "dataset_process_inputs"
+                                    }
+                                }
+                            ],
+                            "relatedFromObjectAnnotations": [],
+                            "resourceListAnchors": [],
+                            "relatedToObjectAnnotations": null,
+                            "supportingResources": [],
+                            "meanings": [],
+                            "outputFromProcesses": []
+                        }
+                    },
+                    "classifications": [
+                        {
+                            "typeName": "Log Data",
+                            "entityGuid": "30cfc9fc-aec4-4017-b649-f1f92351a727",
+                            "propagate": true
+                        }
+                    ]
+                },
+                "6fd39817-35d0-4f9a-a24b-80fe9f4d56ad": {
+                    "guid": "6fd39817-35d0-4f9a-a24b-80fe9f4d56ad",
+                    "data": {
+                        "typeName": "Table",
+                        "attributes": {
+                            "owner": "John Doe",
+                            "temporary": false,
+                            "lastAccessTime": 1589983847365,
+                            "qualifiedName": "time_dim",
+                            "columns": [
+                                {
+                                    "guid": "cb44a958-026c-48d9-b4f3-4a6e2eab7234",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "time_id",
+                                            "comment": "time id",
+                                            "table": null
+                                        },
+                                        "guid": "cb44a958-026c-48d9-b4f3-4a6e2eab7234",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983833857,
+                                        "updateTime": 1589983833857,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "a6624bef-5691-4448-a979-b7a2f1265438",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "dayOfYear",
+                                            "comment": "day Of Year",
+                                            "table": null
+                                        },
+                                        "guid": "a6624bef-5691-4448-a979-b7a2f1265438",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983834061,
+                                        "updateTime": 1589983834061,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "d1eb900a-3227-4b4f-9cde-daa301a9439e",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "weekDay",
+                                            "comment": "week Day",
+                                            "table": null
+                                        },
+                                        "guid": "d1eb900a-3227-4b4f-9cde-daa301a9439e",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983834231,
+                                        "updateTime": 1589983834231,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                }
+                            ],
+                            "description": "time dimension table",
+                            "viewExpandedText": null,
+                            "sd": {
+                                "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                "typeName": "StorageDesc",
+                                "data": {
+                                    "typeName": "StorageDesc",
+                                    "attributes": {
+                                        "location": "hdfs://host:8000/apps/warehouse/sales",
+                                        "compressed": true,
+                                        "inputFormat": "TextInputFormat",
+                                        "outputFormat": "TextOutputFormat",
+                                        "table": null
+                                    },
+                                    "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983829382,
+                                    "updateTime": 1589983849245,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "tableType": "External",
+                            "createTime": 1589983847365,
+                            "name": "time_dim",
+                            "db": {
+                                "guid": "c0ebcb5e-21f8-424d-bf11-f39bb943ae2c",
+                                "typeName": "DB",
+                                "data": {
+                                    "typeName": "DB",
+                                    "attributes": {
+                                        "owner": "John ETL",
+                                        "createTime": 1589983828059,
+                                        "name": "Sales",
+                                        "description": "sales database",
+                                        "locationUri": null
+                                    },
+                                    "guid": "c0ebcb5e-21f8-424d-bf11-f39bb943ae2c",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983828109,
+                                    "updateTime": 1589983847367,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "retention": 1589983847365,
+                            "viewOriginalText": null
+                        },
+                        "guid": "6fd39817-35d0-4f9a-a24b-80fe9f4d56ad",
+                        "status": "ACTIVE",
+                        "createdBy": "admin",
+                        "updatedBy": "admin",
+                        "createTime": 1589983847367,
+                        "updateTime": 1589983850688,
+                        "version": 0,
+                        "relationshipAttributes": {
+                            "schema": [],
+                            "inputToProcesses": [
+                                {
+                                    "guid": "2aa15a65-ae8e-4e48-9b77-2ecb049f82b4",
+                                    "typeName": "LoadProcess",
+                                    "displayText": "loadSalesDaily",
+                                    "relationshipGuid": "62315226-2362-48b1-8a3d-f11c8944b60d",
+                                    "relationshipStatus": "ACTIVE",
+                                    "relationshipAttributes": {
+                                        "typeName": "dataset_process_inputs"
+                                    }
+                                }
+                            ],
+                            "relatedFromObjectAnnotations": [],
+                            "resourceListAnchors": [],
+                            "relatedToObjectAnnotations": null,
+                            "supportingResources": [],
+                            "meanings": [],
+                            "outputFromProcesses": []
+                        }
+                    },
+                    "classifications": [
+                        {
+                            "typeName": "Dimension",
+                            "entityGuid": "6fd39817-35d0-4f9a-a24b-80fe9f4d56ad",
+                            "propagate": true
+                        }
+                    ]
+                },
+                "67e607d0-1470-43a5-8cc6-4fa810991cdb": {
+                    "guid": "67e607d0-1470-43a5-8cc6-4fa810991cdb",
+                    "data": {
+                        "typeName": "Table",
+                        "attributes": {
+                            "owner": "John Doe",
+                            "temporary": false,
+                            "lastAccessTime": 1589983846319,
+                            "qualifiedName": "product_dim",
+                            "columns": [
+                                {
+                                    "guid": "3c27f9ca-a578-4ea1-aafc-5cac87aee180",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "product_id",
+                                            "comment": "product id",
+                                            "table": null
+                                        },
+                                        "guid": "3c27f9ca-a578-4ea1-aafc-5cac87aee180",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983833369,
+                                        "updateTime": 1589983833369,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "7e3c2810-5b05-4c92-9b9f-604aea3cfa9f",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "string",
+                                            "name": "product_name",
+                                            "comment": "product name",
+                                            "table": null
+                                        },
+                                        "guid": "7e3c2810-5b05-4c92-9b9f-604aea3cfa9f",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983833527,
+                                        "updateTime": 1589983833527,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "b36979de-8778-48d4-8996-c655e8fda0fa",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "brand_name",
+                                            "comment": "brand name",
+                                            "table": null
+                                        },
+                                        "guid": "b36979de-8778-48d4-8996-c655e8fda0fa",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983833686,
+                                        "updateTime": 1589983833686,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                }
+                            ],
+                            "description": "product dimension table",
+                            "viewExpandedText": null,
+                            "sd": {
+                                "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                "typeName": "StorageDesc",
+                                "data": {
+                                    "typeName": "StorageDesc",
+                                    "attributes": {
+                                        "location": "hdfs://host:8000/apps/warehouse/sales",
+                                        "compressed": true,
+                                        "inputFormat": "TextInputFormat",
+                                        "outputFormat": "TextOutputFormat",
+                                        "table": null
+                                    },
+                                    "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983829382,
+                                    "updateTime": 1589983849245,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "tableType": "Managed",
+                            "createTime": 1589983846319,
+                            "name": "product_dim",
+                            "db": {
+                                "guid": "c0ebcb5e-21f8-424d-bf11-f39bb943ae2c",
+                                "typeName": "DB",
+                                "data": {
+                                    "typeName": "DB",
+                                    "attributes": {
+                                        "owner": "John ETL",
+                                        "createTime": 1589983828059,
+                                        "name": "Sales",
+                                        "description": "sales database",
+                                        "locationUri": null
+                                    },
+                                    "guid": "c0ebcb5e-21f8-424d-bf11-f39bb943ae2c",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983828109,
+                                    "updateTime": 1589983847367,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "retention": 1589983846319,
+                            "viewOriginalText": null
+                        },
+                        "guid": "67e607d0-1470-43a5-8cc6-4fa810991cdb",
+                        "status": "ACTIVE",
+                        "createdBy": "admin",
+                        "updatedBy": "admin",
+                        "createTime": 1589983846323,
+                        "updateTime": 1589983846323,
+                        "version": 0,
+                        "relationshipAttributes": {
+                            "schema": [],
+                            "inputToProcesses": [],
+                            "relatedFromObjectAnnotations": [],
+                            "resourceListAnchors": [],
+                            "relatedToObjectAnnotations": null,
+                            "supportingResources": [],
+                            "meanings": [],
+                            "outputFromProcesses": []
+                        }
+                    },
+                    "classifications": [
+                        {
+                            "typeName": "Dimension",
+                            "entityGuid": "67e607d0-1470-43a5-8cc6-4fa810991cdb",
+                            "propagate": true
+                        }
+                    ]
+                },
+                "22fc6dcd-ff53-41ae-878e-526e41d6035f": {
+                    "guid": "22fc6dcd-ff53-41ae-878e-526e41d6035f",
+                    "data": {
+                        "typeName": "Table",
+                        "attributes": {
+                            "owner": "fetl",
+                            "temporary": false,
+                            "lastAccessTime": 1589983846967,
+                            "qualifiedName": "customer_dim",
+                            "columns": [
+                                {
+                                    "guid": "4307bb52-599e-4e83-9e8c-3a6269dd3d04",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "customer_id",
+                                            "comment": "customer id",
+                                            "table": null
+                                        },
+                                        "guid": "4307bb52-599e-4e83-9e8c-3a6269dd3d04",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983834365,
+                                        "updateTime": 1589983834365,
+                                        "version": 0
+                                    },
+                                    "classifications": [
+                                        {
+                                            "typeName": "PII",
+                                            "entityGuid": "4307bb52-599e-4e83-9e8c-3a6269dd3d04",
+                                            "propagate": true
+                                        },
+                                        {
+                                            "typeName": "Business Glossary",
+                                            "attributes": {
+                                                "level": "6",
+                                                "confidence": "5",
+                                                "classification": "Imported",
+                                                "status": "3"
+                                            },
+                                            "entityGuid": "4307bb52-599e-4e83-9e8c-3a6269dd3d04",
+                                            "propagate": true,
+                                            "validityPeriods": []
+                                        },
+                                        {
+                                            "typeName": "ETL",
+                                            "entityGuid": "4307bb52-599e-4e83-9e8c-3a6269dd3d04",
+                                            "propagate": true,
+                                            "validityPeriods": []
+                                        },
+                                        {
+                                            "typeName": "Fact",
+                                            "entityGuid": "4307bb52-599e-4e83-9e8c-3a6269dd3d04",
+                                            "propagate": true,
+                                            "validityPeriods": []
+                                        }
+                                    ]
+                                },
+                                {
+                                    "guid": "c786287c-f319-4bf5-a3bb-517337d76619",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "string",
+                                            "name": "name",
+                                            "comment": "customer name",
+                                            "table": null
+                                        },
+                                        "guid": "c786287c-f319-4bf5-a3bb-517337d76619",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983834740,
+                                        "updateTime": 1589983834740,
+                                        "version": 0
+                                    },
+                                    "classifications": [
+                                        {
+                                            "typeName": "PII",
+                                            "entityGuid": "c786287c-f319-4bf5-a3bb-517337d76619",
+                                            "propagate": true
+                                        }
+                                    ]
+                                },
+                                {
+                                    "guid": "559ef572-249a-465c-ba38-366d5062d291",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "string",
+                                            "name": "address",
+                                            "comment": "customer address",
+                                            "table": null
+                                        },
+                                        "guid": "559ef572-249a-465c-ba38-366d5062d291",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983835316,
+                                        "updateTime": 1589983835316,
+                                        "version": 0
+                                    },
+                                    "classifications": [
+                                        {
+                                            "typeName": "PII",
+                                            "entityGuid": "559ef572-249a-465c-ba38-366d5062d291",
+                                            "propagate": true
+                                        }
+                                    ]
+                                }
+                            ],
+                            "description": "customer dimension table",
+                            "viewExpandedText": null,
+                            "sd": {
+                                "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                "typeName": "StorageDesc",
+                                "data": {
+                                    "typeName": "StorageDesc",
+                                    "attributes": {
+                                        "location": "hdfs://host:8000/apps/warehouse/sales",
+                                        "compressed": true,
+                                        "inputFormat": "TextInputFormat",
+                                        "outputFormat": "TextOutputFormat",
+                                        "table": null
+                                    },
+                                    "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983829382,
+                                    "updateTime": 1589983849245,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "tableType": "External",
+                            "createTime": 1589983846967,
+                            "name": "customer_dim",
+                            "db": {
+                                "guid": "c0ebcb5e-21f8-424d-bf11-f39bb943ae2c",
+                                "typeName": "DB",
+                                "data": {
+                                    "typeName": "DB",
+                                    "attributes": {
+                                        "owner": "John ETL",
+                                        "createTime": 1589983828059,
+                                        "name": "Sales",
+                                        "description": "sales database",
+                                        "locationUri": null
+                                    },
+                                    "guid": "c0ebcb5e-21f8-424d-bf11-f39bb943ae2c",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983828109,
+                                    "updateTime": 1589983847367,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "retention": 1589983846967,
+                            "viewOriginalText": null
+                        },
+                        "guid": "22fc6dcd-ff53-41ae-878e-526e41d6035f",
+                        "status": "ACTIVE",
+                        "createdBy": "admin",
+                        "updatedBy": "admin",
+                        "createTime": 1589983846971,
+                        "updateTime": 1589983846971,
+                        "version": 0,
+                        "relationshipAttributes": {
+                            "schema": [],
+                            "inputToProcesses": [],
+                            "relatedFromObjectAnnotations": [],
+                            "resourceListAnchors": [],
+                            "relatedToObjectAnnotations": null,
+                            "supportingResources": [],
+                            "meanings": [
+                                {
+                                    "guid": "29ebe9a3-34ee-4f60-aa1d-8236e014a447",
+                                    "typeName": "AtlasGlossaryTerm",
+                                    "displayText": "Area",
+                                    "relationshipGuid": "0f4869ad-9def-47d1-bbfa-60bcb101e4bf",
+                                    "relationshipStatus": "ACTIVE",
+                                    "relationshipAttributes": {
+                                        "typeName": "AtlasGlossarySemanticAssignment",
+                                        "attributes": {
+                                            "expression": null,
+                                            "createdBy": null,
+                                            "steward": null,
+                                            "confidence": null,
+                                            "description": null,
+                                            "source": null,
+                                            "status": null
+                                        }
+                                    }
+                                }
+                            ],
+                            "outputFromProcesses": []
+                        }
+                    },
+                    "classifications": [
+                        {
+                            "typeName": "Dimension",
+                            "entityGuid": "22fc6dcd-ff53-41ae-878e-526e41d6035f",
+                            "propagate": true
+                        },
+                        {
+                            "typeName": "Confidentiality",
+                            "attributes": {
+                                "notes": "notes were updated with additional info",
+                                "steward": "richard updated",
+                                "level": 30,
+                                "confidence": 10,
+                                "source": "governance department updated",
+                                "status": "Proposed"
+                            },
+                            "entityGuid": "22fc6dcd-ff53-41ae-878e-526e41d6035f",
+                            "propagate": true,
+                            "validityPeriods": []
+                        }
+                    ]
+                },
+                "e0a39f9c-b8b7-4d6a-9be2-ec3f553c6325": {
+                    "guid": "e0a39f9c-b8b7-4d6a-9be2-ec3f553c6325",
+                    "data": {
+                        "typeName": "Table",
+                        "attributes": {
+                            "owner": "Joe BI",
+                            "temporary": false,
+                            "lastAccessTime": 1589983848760,
+                            "qualifiedName": "sales_fact_daily_mv",
+                            "columns": [
+                                {
+                                    "guid": "c53f1ab7-970f-4199-bc9a-899291c93622",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "time_id",
+                                            "comment": "time id",
+                                            "table": null
+                                        },
+                                        "guid": "c53f1ab7-970f-4199-bc9a-899291c93622",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983829550,
+                                        "updateTime": 1589983829550,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "e5188d7b-916e-4420-b02e-8eac75b17a68",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "product_id",
+                                            "comment": "product id",
+                                            "table": null
+                                        },
+                                        "guid": "e5188d7b-916e-4420-b02e-8eac75b17a68",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983829705,
+                                        "updateTime": 1589983829705,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "84d83e16-e767-46f9-8165-db7e3a7a3762",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "customer_id",
+                                            "comment": "customer id",
+                                            "table": null
+                                        },
+                                        "guid": "84d83e16-e767-46f9-8165-db7e3a7a3762",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983829845,
+                                        "updateTime": 1589983829845,
+                                        "version": 0
+                                    },
+                                    "classifications": [
+                                        {
+                                            "typeName": "PII",
+                                            "entityGuid": "84d83e16-e767-46f9-8165-db7e3a7a3762",
+                                            "propagate": true
+                                        }
+                                    ]
+                                },
+                                {
+                                    "guid": "909805b1-59f0-44db-b0c8-b6b0c384d2c5",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "double",
+                                            "name": "sales",
+                                            "comment": "product id",
+                                            "table": null
+                                        },
+                                        "guid": "909805b1-59f0-44db-b0c8-b6b0c384d2c5",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983832013,
+                                        "updateTime": 1589983832013,
+                                        "version": 0
+                                    },
+                                    "classifications": [
+                                        {
+                                            "typeName": "Metric",
+                                            "entityGuid": "909805b1-59f0-44db-b0c8-b6b0c384d2c5",
+                                            "propagate": true
+                                        }
+                                    ]
+                                }
+                            ],
+                            "description": "sales fact daily materialized view",
+                            "viewExpandedText": null,
+                            "sd": {
+                                "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                "typeName": "StorageDesc",
+                                "data": {
+                                    "typeName": "StorageDesc",
+                                    "attributes": {
+                                        "location": "hdfs://host:8000/apps/warehouse/sales",
+                                        "compressed": true,
+                                        "inputFormat": "TextInputFormat",
+                                        "outputFormat": "TextOutputFormat",
+                                        "table": null
+                                    },
+                                    "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983829382,
+                                    "updateTime": 1589983849245,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "tableType": "Managed",
+                            "createTime": 1589983848760,
+                            "name": "sales_fact_daily_mv",
+                            "db": {
+                                "guid": "73bd400b-3698-4b74-a1aa-06f694c8e156",
+                                "typeName": "DB",
+                                "data": {
+                                    "typeName": "DB",
+                                    "attributes": {
+                                        "owner": "Jane BI",
+                                        "createTime": 1589983828968,
+                                        "name": "Reporting",
+                                        "description": "reporting database",
+                                        "locationUri": null
+                                    },
+                                    "guid": "73bd400b-3698-4b74-a1aa-06f694c8e156",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983828984,
+                                    "updateTime": 1589983850259,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "retention": 1589983848760,
+                            "viewOriginalText": null
+                        },
+                        "guid": "e0a39f9c-b8b7-4d6a-9be2-ec3f553c6325",
+                        "status": "ACTIVE",
+                        "createdBy": "admin",
+                        "updatedBy": "admin",
+                        "createTime": 1589983848764,
+                        "updateTime": 1589983851755,
+                        "version": 0,
+                        "relationshipAttributes": {
+                            "schema": [],
+                            "inputToProcesses": [
+                                {
+                                    "guid": "c8eb658b-15ef-4568-bff9-6b1d1962a160",
+                                    "typeName": "LoadProcess",
+                                    "displayText": "loadSalesMonthly",
+                                    "relationshipGuid": "8be736c1-4e56-4aca-87b8-15c10b4deb5e",
+                                    "relationshipStatus": "ACTIVE",
+                                    "relationshipAttributes": {
+                                        "typeName": "dataset_process_inputs"
+                                    }
+                                }
+                            ],
+                            "relatedFromObjectAnnotations": [],
+                            "resourceListAnchors": [],
+                            "relatedToObjectAnnotations": null,
+                            "supportingResources": [],
+                            "meanings": [],
+                            "outputFromProcesses": [
+                                {
+                                    "guid": "2aa15a65-ae8e-4e48-9b77-2ecb049f82b4",
+                                    "typeName": "LoadProcess",
+                                    "displayText": "loadSalesDaily",
+                                    "relationshipGuid": "21cc8900-1993-480b-b57d-fb14970babe8",
+                                    "relationshipStatus": "ACTIVE",
+                                    "relationshipAttributes": {
+                                        "typeName": "process_dataset_outputs"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "classifications": [
+                        {
+                            "typeName": "Fact",
+                            "entityGuid": "2286a6bd-4b06-4f7c-a666-920d774b040e",
+                            "propagate": true
+                        },
+                        {
+                            "typeName": "ETL",
+                            "entityGuid": "2aa15a65-ae8e-4e48-9b77-2ecb049f82b4",
+                            "propagate": true
+                        },
+                        {
+                            "typeName": "Dimension",
+                            "entityGuid": "6fd39817-35d0-4f9a-a24b-80fe9f4d56ad",
+                            "propagate": true
+                        },
+                        {
+                            "typeName": "Metric",
+                            "entityGuid": "e0a39f9c-b8b7-4d6a-9be2-ec3f553c6325",
+                            "propagate": true
+                        }
+                    ]
+                },
+                "15f5bf50-5a39-4994-9cba-6c01d016f52f": {
+                    "guid": "15f5bf50-5a39-4994-9cba-6c01d016f52f",
+                    "data": {
+                        "typeName": "Table",
+                        "attributes": {
+                            "owner": "Tim ETL",
+                            "temporary": false,
+                            "lastAccessTime": 1589983848291,
+                            "qualifiedName": "logging_fact_monthly_mv",
+                            "columns": [
+                                {
+                                    "guid": "03810d11-9d72-47c0-99c5-cbd1d096ca94",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "time_id",
+                                            "comment": "time id",
+                                            "table": null
+                                        },
+                                        "guid": "03810d11-9d72-47c0-99c5-cbd1d096ca94",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983832524,
+                                        "updateTime": 1589983832524,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "2b60f606-ef43-4d76-a6c4-1e9a86f66c78",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "app_id",
+                                            "comment": "app id",
+                                            "table": null
+                                        },
+                                        "guid": "2b60f606-ef43-4d76-a6c4-1e9a86f66c78",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983832678,
+                                        "updateTime": 1589983832678,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "f4df3e4a-15b0-45d2-9cce-9a4bbed2e0ec",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "machine_id",
+                                            "comment": "machine id",
+                                            "table": null
+                                        },
+                                        "guid": "f4df3e4a-15b0-45d2-9cce-9a4bbed2e0ec",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983832831,
+                                        "updateTime": 1589983832831,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "57a25116-3ce5-4675-bb97-103fa0f5e9b4",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "string",
+                                            "name": "log",
+                                            "comment": "log data",
+                                            "table": null
+                                        },
+                                        "guid": "57a25116-3ce5-4675-bb97-103fa0f5e9b4",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983833023,
+                                        "updateTime": 1589983833023,
+                                        "version": 0
+                                    },
+                                    "classifications": [
+                                        {
+                                            "typeName": "Log Data",
+                                            "entityGuid": "57a25116-3ce5-4675-bb97-103fa0f5e9b4",
+                                            "propagate": true
+                                        }
+                                    ]
+                                }
+                            ],
+                            "description": "logging fact monthly materialized view",
+                            "viewExpandedText": null,
+                            "sd": {
+                                "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                "typeName": "StorageDesc",
+                                "data": {
+                                    "typeName": "StorageDesc",
+                                    "attributes": {
+                                        "location": "hdfs://host:8000/apps/warehouse/sales",
+                                        "compressed": true,
+                                        "inputFormat": "TextInputFormat",
+                                        "outputFormat": "TextOutputFormat",
+                                        "table": null
+                                    },
+                                    "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983829382,
+                                    "updateTime": 1589983849245,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "tableType": "Managed",
+                            "createTime": 1589983848291,
+                            "name": "logging_fact_monthly_mv",
+                            "db": {
+                                "guid": "e9edebf5-18c5-4f0c-b4fa-2a0e1e2ffc55",
+                                "typeName": "DB",
+                                "data": {
+                                    "typeName": "DB",
+                                    "attributes": {
+                                        "owner": "Tim ETL",
+                                        "createTime": 1589983829191,
+                                        "name": "Logging",
+                                        "description": "logging database",
+                                        "locationUri": null
+                                    },
+                                    "guid": "e9edebf5-18c5-4f0c-b4fa-2a0e1e2ffc55",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983829197,
+                                    "updateTime": 1589983848303,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "retention": 1589983848291,
+                            "viewOriginalText": null
+                        },
+                        "guid": "15f5bf50-5a39-4994-9cba-6c01d016f52f",
+                        "status": "ACTIVE",
+                        "createdBy": "admin",
+                        "updatedBy": "admin",
+                        "createTime": 1589983848303,
+                        "updateTime": 1589983852532,
+                        "version": 0,
+                        "relationshipAttributes": {
+                            "schema": [],
+                            "inputToProcesses": [],
+                            "relatedFromObjectAnnotations": [],
+                            "resourceListAnchors": [],
+                            "relatedToObjectAnnotations": null,
+                            "supportingResources": [],
+                            "meanings": [],
+                            "outputFromProcesses": [
+                                {
+                                    "guid": "e73656c9-da05-4db7-9b88-e3669c1a98eb",
+                                    "typeName": "LoadProcess",
+                                    "displayText": "loadLogsMonthly",
+                                    "relationshipGuid": "aad451c9-0852-4795-a7f7-7f81e79eeaa5",
+                                    "relationshipStatus": "ACTIVE",
+                                    "relationshipAttributes": {
+                                        "typeName": "process_dataset_outputs"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "classifications": [
+                        {
+                            "typeName": "Log Data",
+                            "entityGuid": "15f5bf50-5a39-4994-9cba-6c01d016f52f",
+                            "propagate": true
+                        },
+                        {
+                            "typeName": "ETL",
+                            "entityGuid": "e73656c9-da05-4db7-9b88-e3669c1a98eb",
+                            "propagate": true
+                        }
+                    ]
+                },
+                "d220129f-a777-4bdc-9f55-19424a8c452d": {
+                    "guid": "d220129f-a777-4bdc-9f55-19424a8c452d",
+                    "data": {
+                        "typeName": "Table",
+                        "attributes": {
+                            "owner": "Jane BI",
+                            "temporary": false,
+                            "lastAccessTime": 1589983849238,
+                            "qualifiedName": "sales_fact_monthly_mv",
+                            "columns": [
+                                {
+                                    "guid": "c53f1ab7-970f-4199-bc9a-899291c93622",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "time_id",
+                                            "comment": "time id",
+                                            "table": null
+                                        },
+                                        "guid": "c53f1ab7-970f-4199-bc9a-899291c93622",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983829550,
+                                        "updateTime": 1589983829550,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "e5188d7b-916e-4420-b02e-8eac75b17a68",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "product_id",
+                                            "comment": "product id",
+                                            "table": null
+                                        },
+                                        "guid": "e5188d7b-916e-4420-b02e-8eac75b17a68",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983829705,
+                                        "updateTime": 1589983829705,
+                                        "version": 0
+                                    },
+                                    "classifications": null
+                                },
+                                {
+                                    "guid": "84d83e16-e767-46f9-8165-db7e3a7a3762",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "int",
+                                            "name": "customer_id",
+                                            "comment": "customer id",
+                                            "table": null
+                                        },
+                                        "guid": "84d83e16-e767-46f9-8165-db7e3a7a3762",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983829845,
+                                        "updateTime": 1589983829845,
+                                        "version": 0
+                                    },
+                                    "classifications": [
+                                        {
+                                            "typeName": "PII",
+                                            "entityGuid": "84d83e16-e767-46f9-8165-db7e3a7a3762",
+                                            "propagate": true
+                                        }
+                                    ]
+                                },
+                                {
+                                    "guid": "909805b1-59f0-44db-b0c8-b6b0c384d2c5",
+                                    "typeName": "Column",
+                                    "data": {
+                                        "typeName": "Column",
+                                        "attributes": {
+                                            "dataType": "double",
+                                            "name": "sales",
+                                            "comment": "product id",
+                                            "table": null
+                                        },
+                                        "guid": "909805b1-59f0-44db-b0c8-b6b0c384d2c5",
+                                        "status": "ACTIVE",
+                                        "createdBy": "admin",
+                                        "updatedBy": "admin",
+                                        "createTime": 1589983832013,
+                                        "updateTime": 1589983832013,
+                                        "version": 0
+                                    },
+                                    "classifications": [
+                                        {
+                                            "typeName": "Metric",
+                                            "entityGuid": "909805b1-59f0-44db-b0c8-b6b0c384d2c5",
+                                            "propagate": true
+                                        }
+                                    ]
+                                }
+                            ],
+                            "description": "sales fact monthly materialized view",
+                            "viewExpandedText": null,
+                            "sd": {
+                                "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                "typeName": "StorageDesc",
+                                "data": {
+                                    "typeName": "StorageDesc",
+                                    "attributes": {
+                                        "location": "hdfs://host:8000/apps/warehouse/sales",
+                                        "compressed": true,
+                                        "inputFormat": "TextInputFormat",
+                                        "outputFormat": "TextOutputFormat",
+                                        "table": null
+                                    },
+                                    "guid": "a0989a5b-19aa-4ac4-92db-e2449554c799",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983829382,
+                                    "updateTime": 1589983849245,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "tableType": "Managed",
+                            "createTime": 1589983849238,
+                            "name": "sales_fact_monthly_mv",
+                            "db": {
+                                "guid": "73bd400b-3698-4b74-a1aa-06f694c8e156",
+                                "typeName": "DB",
+                                "data": {
+                                    "typeName": "DB",
+                                    "attributes": {
+                                        "owner": "Jane BI",
+                                        "createTime": 1589983828968,
+                                        "name": "Reporting",
+                                        "description": "reporting database",
+                                        "locationUri": null
+                                    },
+                                    "guid": "73bd400b-3698-4b74-a1aa-06f694c8e156",
+                                    "status": "ACTIVE",
+                                    "createdBy": "admin",
+                                    "updatedBy": "admin",
+                                    "createTime": 1589983828984,
+                                    "updateTime": 1589983850259,
+                                    "version": 0
+                                },
+                                "classifications": null
+                            },
+                            "retention": 1589983849238,
+                            "viewOriginalText": null
+                        },
+                        "guid": "d220129f-a777-4bdc-9f55-19424a8c452d",
+                        "status": "ACTIVE",
+                        "createdBy": "admin",
+                        "updatedBy": "admin",
+                        "createTime": 1589983849245,
+                        "updateTime": 1589983851755,
+                        "version": 0,
+                        "relationshipAttributes": {
+                            "schema": [],
+                            "inputToProcesses": [],
+                            "relatedFromObjectAnnotations": [],
+                            "resourceListAnchors": [],
+                            "relatedToObjectAnnotations": null,
+                            "supportingResources": [],
+                            "meanings": [],
+                            "outputFromProcesses": [
+                                {
+                                    "guid": "c8eb658b-15ef-4568-bff9-6b1d1962a160",
+                                    "typeName": "LoadProcess",
+                                    "displayText": "loadSalesMonthly",
+                                    "relationshipGuid": "f12dcf37-1c3a-4114-964a-4f02e266deda",
+                                    "relationshipStatus": "ACTIVE",
+                                    "relationshipAttributes": {
+                                        "typeName": "process_dataset_outputs"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "classifications": [
+                        {
+                            "typeName": "Fact",
+                            "entityGuid": "2286a6bd-4b06-4f7c-a666-920d774b040e",
+                            "propagate": true
+                        },
+                        {
+                            "typeName": "ETL",
+                            "entityGuid": "c8eb658b-15ef-4568-bff9-6b1d1962a160",
+                            "propagate": true
+                        },
+                        {
+                            "typeName": "Metric",
+                            "entityGuid": "d220129f-a777-4bdc-9f55-19424a8c452d",
+                            "propagate": true
+                        },
+                        {
+                            "typeName": "Dimension",
+                            "entityGuid": "6fd39817-35d0-4f9a-a24b-80fe9f4d56ad",
+                            "propagate": true
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "enum_types": {}
+}

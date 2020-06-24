@@ -1,0 +1,107 @@
+[
+    {
+        "topic": "ATLAS_ENTITIES",
+        "partition": 0,
+        "offset": 193,
+        "key": null,
+        "value": {
+            "version": {
+                "version": "1.0.0",
+                "versionParts": [
+                    1
+                ]
+            },
+            "msgCompressionKind": "NONE",
+            "msgSplitIdx": 1,
+            "msgSplitCount": 1,
+            "msgSourceIP": "10.128.0.41",
+            "msgCreatedBy": "",
+            "msgCreationTime": 1592247955848,
+            "message": {
+                "type": "ENTITY_NOTIFICATION_V2",
+                "entity": {
+                    "typeName": "Column",
+                    "attributes": {
+                        "name": "name"
+                    },
+                    "guid": "fe3a52bb-63bb-4c4c-8250-c6648d0a42ec",
+                    "status": "ACTIVE",
+                    "displayText": "name",
+                    "classificationNames": [
+                        "PII"
+                    ],
+                    "classifications": [
+                        {
+                            "typeName": "PII",
+                            "entityGuid": "fe3a52bb-63bb-4c4c-8250-c6648d0a42ec",
+                            "propagate": true
+                        }
+                    ]
+                },
+                "operationType": "CLASSIFICATION_DELETE"
+            }
+        }
+    },
+    {
+        "topic": "ATLAS_ENTITIES",
+        "partition": 0,
+        "offset": 194,
+        "key": null,
+        "value": {
+            "version": {
+                "version": "1.0.0",
+                "versionParts": [
+                    1
+                ]
+            },
+            "msgCompressionKind": "NONE",
+            "msgSplitIdx": 1,
+            "msgSplitCount": 1,
+            "msgSourceIP": "10.128.0.41",
+            "msgCreatedBy": "",
+            "msgCreationTime": 1592247958705,
+            "message": {
+                "type": "ENTITY_NOTIFICATION_V2",
+                "entity": {
+                    "typeName": "Table",
+                    "attributes": {
+                        "owner": "fetl",
+                        "createTime": 1591818628249,
+                        "qualifiedName": "customer_dim",
+                        "name": "customer_dim",
+                        "description": "customer dimension table"
+                    },
+                    "guid": "b183c071-0d6e-4e0a-9d60-33151c78a7b3",
+                    "status": "ACTIVE",
+                    "displayText": "customer_dim",
+                    "classificationNames": [
+                        "Fact",
+                        "Log Data",
+                        "PII"
+                    ],
+                    "classifications": [
+                        {
+                            "typeName": "Fact",
+                            "entityGuid": "b183c071-0d6e-4e0a-9d60-33151c78a7b3",
+                            "propagate": true,
+                            "validityPeriods": []
+                        },
+                        {
+                            "typeName": "Log Data",
+                            "entityGuid": "b183c071-0d6e-4e0a-9d60-33151c78a7b3",
+                            "propagate": false,
+                            "validityPeriods": []
+                        },
+                        {
+                            "typeName": "PII",
+                            "entityGuid": "b183c071-0d6e-4e0a-9d60-33151c78a7b3",
+                            "propagate": true,
+                            "validityPeriods": []
+                        }
+                    ]
+                },
+                "operationType": "CLASSIFICATION_DELETE"
+            }
+        }
+    }
+]

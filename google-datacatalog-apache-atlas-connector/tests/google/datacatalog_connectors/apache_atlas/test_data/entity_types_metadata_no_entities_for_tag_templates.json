@@ -1,0 +1,504 @@
+{
+    "StorageDesc": {
+        "name": "StorageDesc",
+        "data": {
+            "category": "ENTITY",
+            "guid": "085fd19b-ab39-4f46-bc25-e30146b31352",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806158,
+            "updateTime": 1589983806158,
+            "version": 1,
+            "name": "StorageDesc",
+            "description": "StorageDesc",
+            "typeVersion": "1.0",
+            "attributeDefs": [
+                {
+                    "name": "table",
+                    "typeName": "Table",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false,
+                    "constraints": [
+                        {
+                            "type": "inverseRef",
+                            "params": {
+                                "attribute": "sd"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "location",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "inputFormat",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "outputFormat",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "compressed",
+                    "typeName": "boolean",
+                    "isOptional": false,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 1,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": false
+                }
+            ],
+            "superTypes": []
+        },
+        "superTypes": [],
+        "entities": {}
+    },
+    "DataSet": {
+        "name": "DataSet",
+        "data": {
+            "category": "ENTITY",
+            "guid": "229e63f7-d6ca-42cd-882f-2985df0862bf",
+            "createdBy": "root",
+            "updatedBy": "root",
+            "createTime": 1589983323343,
+            "updateTime": 1589983323343,
+            "version": 1,
+            "name": "DataSet",
+            "description": "DataSet",
+            "typeVersion": "1.1",
+            "attributeDefs": [],
+            "superTypes": [
+                "Asset"
+            ]
+        },
+        "superTypes": [
+            "Asset"
+        ],
+        "entities": {}
+    },
+    "Referenceable": {
+        "name": "Referenceable",
+        "data": {
+            "category": "ENTITY",
+            "guid": "d33c0511-ba1e-42c9-b6a5-f8c45bd6648f",
+            "createdBy": "root",
+            "updatedBy": "root",
+            "createTime": 1589983320881,
+            "updateTime": 1589983320881,
+            "version": 1,
+            "name": "Referenceable",
+            "description": "Referenceable",
+            "typeVersion": "1.0",
+            "attributeDefs": [
+                {
+                    "name": "qualifiedName",
+                    "typeName": "string",
+                    "isOptional": false,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 1,
+                    "valuesMaxCount": 1,
+                    "isUnique": true,
+                    "isIndexable": true,
+                    "includeInNotification": false
+                }
+            ],
+            "superTypes": []
+        },
+        "superTypes": [],
+        "entities": {}
+    },
+    "Asset": {
+        "name": "Asset",
+        "data": {
+            "category": "ENTITY",
+            "guid": "947d6791-fc77-409f-bdf9-cdfa1166f481",
+            "createdBy": "root",
+            "updatedBy": "root",
+            "createTime": 1589983322620,
+            "updateTime": 1589983322620,
+            "version": 1,
+            "name": "Asset",
+            "description": "Asset",
+            "typeVersion": "1.1",
+            "attributeDefs": [
+                {
+                    "name": "name",
+                    "typeName": "string",
+                    "isOptional": false,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 1,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "description",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "owner",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": false
+                }
+            ],
+            "superTypes": [
+                "Referenceable"
+            ]
+        },
+        "superTypes": [
+            "Referenceable"
+        ],
+        "entities": {}
+    },
+    "Column": {
+        "name": "Column",
+        "data": {
+            "category": "ENTITY",
+            "guid": "4f903d41-3cf6-41bd-bc8c-0a78aee39b17",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806198,
+            "updateTime": 1589983806198,
+            "version": 1,
+            "name": "Column",
+            "description": "Column",
+            "typeVersion": "1.0",
+            "options": {
+                "schemaAttributes": "[\"name\", \"description\", \"owner\", \"type\", \"comment\", \"position\"]"
+            },
+            "attributeDefs": [
+                {
+                    "name": "name",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "dataType",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "comment",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "table",
+                    "typeName": "Table",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false,
+                    "constraints": [
+                        {
+                            "type": "inverseRef",
+                            "params": {
+                                "attribute": "columns"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "superTypes": []
+        },
+        "superTypes": [],
+        "entities": {}
+    },
+    "Table": {
+        "name": "Table",
+        "data": {
+            "category": "ENTITY",
+            "guid": "112baf95-2c81-4d95-b758-e9c38a7b78c7",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806224,
+            "updateTime": 1589983806224,
+            "version": 1,
+            "name": "Table",
+            "description": "Table",
+            "typeVersion": "1.0",
+            "options": {
+                "schemaElementsAttribute": "columns"
+            },
+            "attributeDefs": [
+                {
+                    "name": "db",
+                    "typeName": "DB",
+                    "isOptional": false,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 1,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "sd",
+                    "typeName": "StorageDesc",
+                    "isOptional": false,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 1,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": false,
+                    "constraints": [
+                        {
+                            "type": "ownedRef"
+                        }
+                    ]
+                },
+                {
+                    "name": "owner",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "createTime",
+                    "typeName": "long",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "lastAccessTime",
+                    "typeName": "long",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "retention",
+                    "typeName": "long",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "viewOriginalText",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "viewExpandedText",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "tableType",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "temporary",
+                    "typeName": "boolean",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "columns",
+                    "typeName": "array<Column>",
+                    "isOptional": false,
+                    "cardinality": "LIST",
+                    "valuesMinCount": 1,
+                    "valuesMaxCount": 2147483647,
+                    "isUnique": false,
+                    "isIndexable": true,
+                    "includeInNotification": false,
+                    "constraints": [
+                        {
+                            "type": "ownedRef"
+                        }
+                    ]
+                }
+            ],
+            "superTypes": [
+                "DataSet"
+            ]
+        },
+        "superTypes": [
+            "DataSet"
+        ],
+        "entities": {}
+    },
+    "DB": {
+        "name": "DB",
+        "data": {
+            "category": "ENTITY",
+            "guid": "b11e24ca-c0f4-4754-92f7-d3a5febd2d2c",
+            "createdBy": "admin",
+            "updatedBy": "admin",
+            "createTime": 1589983806140,
+            "updateTime": 1589983806140,
+            "version": 1,
+            "name": "DB",
+            "description": "DB",
+            "typeVersion": "1.0",
+            "attributeDefs": [
+                {
+                    "name": "name",
+                    "typeName": "string",
+                    "isOptional": false,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 1,
+                    "valuesMaxCount": 1,
+                    "isUnique": true,
+                    "isIndexable": true,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "description",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "locationUri",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "owner",
+                    "typeName": "string",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                },
+                {
+                    "name": "createTime",
+                    "typeName": "long",
+                    "isOptional": true,
+                    "cardinality": "SINGLE",
+                    "valuesMinCount": 0,
+                    "valuesMaxCount": 1,
+                    "isUnique": false,
+                    "isIndexable": false,
+                    "includeInNotification": false
+                }
+            ],
+            "superTypes": []
+        },
+        "superTypes": [],
+        "entities": {}
+    }
+}
