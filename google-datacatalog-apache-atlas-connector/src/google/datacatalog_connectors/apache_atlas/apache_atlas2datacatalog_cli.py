@@ -85,19 +85,19 @@ class ApacheAtlas2DataCatalogCli:
         sync_sub_parser.add_argument('--datacatalog-project-id',
                                      help='Google Cloud Project ID',
                                      required=True)
-        sync_sub_parser.add_argument('--apache-host',
+        sync_sub_parser.add_argument('--atlas-host',
                                      help='Apache Atlas Host',
                                      required=True)
-        sync_sub_parser.add_argument('--apache-port',
+        sync_sub_parser.add_argument('--atlas-port',
                                      help='Apache Atlas Port',
                                      required=True)
-        sync_sub_parser.add_argument('--apache-user',
+        sync_sub_parser.add_argument('--atlas-user',
                                      help='Apache Atlas User',
                                      required=True)
-        sync_sub_parser.add_argument('--apache-passsword',
+        sync_sub_parser.add_argument('--atlas-passsword',
                                      help='Apache Atlas Pass',
                                      required=True)
-        sync_sub_parser.add_argument('--apache-entity-types',
+        sync_sub_parser.add_argument('--atlas-entity-types',
                                      help='Apache Atlas Entity Types')
         sync_sub_parser.add_argument(
             '--enable-monitoring',
@@ -105,46 +105,46 @@ class ApacheAtlas2DataCatalogCli:
 
     @classmethod
     def __run_synchronizer(cls, args):
-        apache_entity_types = cls.__get_apache_entity_types(args)
+        atlas_entity_types = cls.__get_atlas_entity_types(args)
 
         sync.MetadataSynchronizer(
             datacatalog_project_id=args.datacatalog_project_id,
             datacatalog_location_id=cls.__DATACATALOG_LOCATION_ID,
             atlas_connection_args={
-                'host': args.apache_host,
-                'port': args.apache_port,
-                'user': args.apache_user,
-                'pass': args.apache_passsword
+                'host': args.atlas_host,
+                'port': args.atlas_port,
+                'user': args.atlas_user,
+                'pass': args.atlas_passsword
             },
-            apache_entity_types=apache_entity_types,
+            atlas_entity_types=atlas_entity_types,
             enable_monitoring=args.enable_monitoring).run()
 
     @classmethod
     def __run_event_metadata_hook(cls, args):
-        apache_entity_types = cls.__get_apache_entity_types(args)
+        atlas_entity_types = cls.__get_atlas_entity_types(args)
 
         sync.MetadataEventSynchronizer(
             datacatalog_project_id=args.datacatalog_project_id,
             datacatalog_location_id=cls.__DATACATALOG_LOCATION_ID,
             atlas_connection_args={
-                'host': args.apache_host,
-                'port': args.apache_port,
-                'user': args.apache_user,
-                'pass': args.apache_passsword,
+                'host': args.atlas_host,
+                'port': args.atlas_port,
+                'user': args.atlas_user,
+                'pass': args.atlas_passsword,
                 'event_servers': args.event_servers.split(','),
                 'event_consumer_group_id': args.event_consumer_group_id,
                 'event_hook': True
             },
-            apache_entity_types=apache_entity_types,
+            atlas_entity_types=atlas_entity_types,
             enable_monitoring=args.enable_monitoring).run()
 
     @classmethod
-    def __get_apache_entity_types(cls, args):
+    def __get_atlas_entity_types(cls, args):
         # Split multiple values separated by comma.
-        apache_entity_types = None
-        if args.apache_entity_types:
-            apache_entity_types = args.apache_entity_types.split(',')
-        return apache_entity_types
+        atlas_entity_types = None
+        if args.atlas_entity_types:
+            atlas_entity_types = args.atlas_entity_types.split(',')
+        return atlas_entity_types
 
 
 def main():

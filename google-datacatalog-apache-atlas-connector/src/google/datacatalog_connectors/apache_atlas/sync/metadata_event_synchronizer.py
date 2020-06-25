@@ -35,10 +35,10 @@ class MetadataEventSynchronizer(metadata_synchronizer.MetadataSynchronizer):
                  datacatalog_project_id,
                  datacatalog_location_id,
                  atlas_connection_args,
-                 apache_entity_types=None,
+                 atlas_entity_types=None,
                  enable_monitoring=None):
         super().__init__(datacatalog_project_id, datacatalog_location_id,
-                         atlas_connection_args, apache_entity_types,
+                         atlas_connection_args, atlas_entity_types,
                          enable_monitoring)
 
         self._metadata_scraper = scrape.MetadataEventScraper(
@@ -64,7 +64,7 @@ class MetadataEventSynchronizer(metadata_synchronizer.MetadataSynchronizer):
         self._log_metadata(metadata_dict)
         tag_templates_dict = self._make_tag_templates_dict(metadata_dict)
         assembled_entries = self._make_assembled_entries(
-            metadata_dict, self._apache_entity_types)
+            metadata_dict, self._atlas_entity_types)
         logging.info('==== DONE ========================================')
         logging.info('')
         self._sync_assembled_entries(assembled_entries, tag_templates_dict)

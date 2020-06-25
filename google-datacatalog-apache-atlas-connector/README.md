@@ -139,9 +139,9 @@ Executes full scrape process in Apache Atlas and sync Data Catalog metadata crea
 
 ```bash
 google-datacatalog-apache-atlas-connector sync \
-  --datacatalog-project-id=$APACHE_ATLAS2DC_DATACATALOG_PROJECT_ID \
-  --atlas-host=$APACHE_ATLAS2DC_HOST \
-  --atlas-port=$APACHE_ATLAS2DC_PORT \
+  --datacatalog-project-id $APACHE_ATLAS2DC_DATACATALOG_PROJECT_ID \
+  --atlas-host $APACHE_ATLAS2DC_HOST \
+  --atlas-port $APACHE_ATLAS2DC_PORT \
   --atlas-user $APACHE_ATLAS2DC_USER \
   --atlas-pass $APACHE_ATLAS2DC_PASS \
   --atlas-entity-types DB,View,Table,hbase_table,hive_db (Optional)
@@ -154,9 +154,9 @@ Executes incremental scrape process in Apache Atlas and sync Data Catalog metada
 docker build --rm --tag apache-atlas2datacatalog .
 docker run --rm --tty -v <YOUR-CREDENTIALS_FILES_FOLDER>:/data \
   apache-atlas2datacatalog sync \ 
-  --datacatalog-project-id=$APACHE_ATLAS2DC_DATACATALOG_PROJECT_ID \
-  --atlas-host=$APACHE_ATLAS2DC_HOST \
-  --atlas-port=$APACHE_ATLAS2DC_PORT \
+  --datacatalog-project-id $APACHE_ATLAS2DC_DATACATALOG_PROJECT_ID \
+  --atlas-host $APACHE_ATLAS2DC_HOST \
+  --atlas-port $APACHE_ATLAS2DC_PORT \
   --atlas-user $APACHE_ATLAS2DC_USER \
   --atlas-pass $APACHE_ATLAS2DC_PASS \
   --atlas-entity-types DB,View,Table,hbase_table,hive_db (Optional)
@@ -170,9 +170,9 @@ docker run --rm --tty -v <YOUR-CREDENTIALS_FILES_FOLDER>:/data \
 
 ```bash
 google-datacatalog-apache-atlas-connector sync-event-hook \
-  --datacatalog-project-id=$APACHE_ATLAS2DC_DATACATALOG_PROJECT_ID \
-  --atlas-host=$APACHE_ATLAS2DC_HOST \
-  --atlas-port=$APACHE_ATLAS2DC_PORT \
+  --datacatalog-project-id $APACHE_ATLAS2DC_DATACATALOG_PROJECT_ID \
+  --atlas-host $APACHE_ATLAS2DC_HOST \
+  --atlas-port $APACHE_ATLAS2DC_PORT \
   --atlas-user $APACHE_ATLAS2DC_USER \
   --atlas-pass $APACHE_ATLAS2DC_PASS \
   --event-servers my-event-server \
@@ -186,9 +186,9 @@ google-datacatalog-apache-atlas-connector sync-event-hook \
 docker build --rm --tag apache-atlas2datacatalog .
 docker run --rm --tty -v <YOUR-CREDENTIALS_FILES_FOLDER>:/data \
   apache-atlas2datacatalog sync-event-hook \ 
-  --datacatalog-project-id=$APACHE_ATLAS2DC_DATACATALOG_PROJECT_ID \
-  --atlas-host=$APACHE_ATLAS2DC_HOST \
-  --atlas-port=$APACHE_ATLAS2DC_PORT \
+  --datacatalog-project-id $APACHE_ATLAS2DC_DATACATALOG_PROJECT_ID \
+  --atlas-host $APACHE_ATLAS2DC_HOST \
+  --atlas-port $APACHE_ATLAS2DC_PORT \
   --atlas-user $APACHE_ATLAS2DC_USER \
   --atlas-pass $APACHE_ATLAS2DC_PASS \
   --event-servers my-event-server \
