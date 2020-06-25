@@ -7,14 +7,6 @@ FROM python:3.7 as builder
 ENV GOOGLE_APPLICATION_CREDENTIALS=/data/apache-atlas2dc-credentials.json
 
 # Copy local dependencies and install them (temporary).
-WORKDIR /lib
-
-COPY ./lib/datacatalog_connectors_commons-1.0.1-py2.py3-none-any.whl .
-RUN pip install datacatalog_connectors_commons-1.0.1-py2.py3-none-any.whl
-
-COPY ./lib/datacatalog_connectors_commons_test-1.0.0-py2.py3-none-any.whl .
-RUN pip install datacatalog_connectors_commons_test-1.0.0-py2.py3-none-any.whl
-
 WORKDIR /app
 
 # Copy project files (see .dockerignore).
