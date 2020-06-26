@@ -28,8 +28,8 @@ class ApacheAtlas2DataCatalogCliTest(unittest.TestCase):
         self.assertRaises(
             SystemExit, apache_atlas2datacatalog_cli.
             ApacheAtlas2DataCatalogCli._parse_args, [
-                'sync', '--apache-host', 'my-host', '--apache-port', 'my-port',
-                '--apache-user', 'my-user', '--apache-passsword', 'my-pass'
+                'sync', '--atlas-host', 'my-host', '--atlas-port', 'my-port',
+                '--atlas-user', 'my-user', '--atlas-passsword', 'my-pass'
             ])
 
     def test_parse_args_missing_atlas_credentials_should_raise_system_exit(
@@ -38,7 +38,7 @@ class ApacheAtlas2DataCatalogCliTest(unittest.TestCase):
             SystemExit, apache_atlas2datacatalog_cli.
             ApacheAtlas2DataCatalogCli._parse_args, [
                 'sync', '--datacatalog-project-id', 'dc-project_id',
-                '--apache-host', 'my-host', '--apache-port', 'my-port'
+                '--atlas-host', 'my-host', '--atlas-port', 'my-port'
             ])
 
     @mock.patch('google.datacatalog_connectors.apache_atlas.sync'
@@ -46,12 +46,12 @@ class ApacheAtlas2DataCatalogCliTest(unittest.TestCase):
     def test_run_should_call_synchronizer(self, mock_metadata_synchonizer):
         apache_atlas2datacatalog_cli.ApacheAtlas2DataCatalogCli.run([
             'sync', '--datacatalog-project-id', 'dc-project_id',
-            '--apache-host', 'my-host', '--apache-port', 'my-port',
-            '--apache-user', 'my-user', '--apache-passsword', 'my-pass'
+            '--atlas-host', 'my-host', '--atlas-port', 'my-port',
+            '--atlas-user', 'my-user', '--atlas-passsword', 'my-pass'
         ])
 
         mock_metadata_synchonizer.assert_called_once_with(
-            apache_entity_types=None,
+            atlas_entity_types=None,
             atlas_connection_args={
                 'host': 'my-host',
                 'port': 'my-port',
@@ -71,13 +71,13 @@ class ApacheAtlas2DataCatalogCliTest(unittest.TestCase):
             self, mock_metadata_synchonizer):
         apache_atlas2datacatalog_cli.ApacheAtlas2DataCatalogCli.run([
             'sync', '--datacatalog-project-id', 'dc-project_id',
-            '--apache-host', 'my-host', '--apache-port', 'my-port',
-            '--apache-user', 'my-user', '--apache-passsword', 'my-pass',
-            '--apache-entity-types', 'Tables,Columns'
+            '--atlas-host', 'my-host', '--atlas-port', 'my-port',
+            '--atlas-user', 'my-user', '--atlas-passsword', 'my-pass',
+            '--atlas-entity-types', 'Tables,Columns'
         ])
 
         mock_metadata_synchonizer.assert_called_once_with(
-            apache_entity_types=['Tables', 'Columns'],
+            atlas_entity_types=['Tables', 'Columns'],
             atlas_connection_args={
                 'host': 'my-host',
                 'port': 'my-port',
@@ -99,13 +99,13 @@ class ApacheAtlas2DataCatalogCliTest(unittest.TestCase):
             'sync-event-hook',
             '--datacatalog-project-id',
             'dc-project_id',
-            '--apache-host',
+            '--atlas-host',
             'my-host',
-            '--apache-port',
+            '--atlas-port',
             'my-port',
-            '--apache-user',
+            '--atlas-user',
             'my-user',
-            '--apache-passsword',
+            '--atlas-passsword',
             'my-pass',
             '--event-servers',
             'my-host:port',
@@ -114,7 +114,7 @@ class ApacheAtlas2DataCatalogCliTest(unittest.TestCase):
         ])
 
         mock_metadata_synchonizer.assert_called_once_with(
-            apache_entity_types=None,
+            atlas_entity_types=None,
             atlas_connection_args={
                 'host': 'my-host',
                 'port': 'my-port',

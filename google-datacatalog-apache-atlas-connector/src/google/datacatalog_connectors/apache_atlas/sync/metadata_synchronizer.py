@@ -32,12 +32,12 @@ class MetadataSynchronizer:
                  datacatalog_project_id,
                  datacatalog_location_id,
                  atlas_connection_args,
-                 apache_entity_types=None,
+                 atlas_entity_types=None,
                  enable_monitoring=None):
         self._project_id = datacatalog_project_id
         self._location_id = datacatalog_location_id
         self._atlas_connection_args = atlas_connection_args
-        self._apache_entity_types = apache_entity_types
+        self._atlas_entity_types = atlas_entity_types
 
         event_hook = atlas_connection_args.get('event_hook')
 
@@ -75,7 +75,7 @@ class MetadataSynchronizer:
         self._log_metadata(metadata_dict)
         tag_templates_dict = self._make_tag_templates_dict(metadata_dict)
         assembled_entries = self._make_assembled_entries(
-            metadata_dict, self._apache_entity_types)
+            metadata_dict, self._atlas_entity_types)
         logging.info('==== DONE ========================================')
         logging.info('')
         self._clean_up_obsolete_metadata(assembled_entries)
@@ -115,10 +115,10 @@ class MetadataSynchronizer:
             make_tag_templates_from_apache_atlas_metadata(
                 metadata_dict)
 
-    def _make_assembled_entries(self, metadata_dict, apache_entity_types=None):
+    def _make_assembled_entries(self, metadata_dict, atlas_entity_types=None):
         assembled_entries = self._assembled_entry_factory.\
             make_assembled_entries_list(
-                metadata_dict, apache_entity_types)
+                metadata_dict, atlas_entity_types)
 
         return assembled_entries
 

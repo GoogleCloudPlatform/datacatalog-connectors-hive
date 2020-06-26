@@ -23,7 +23,7 @@ with open('README.md') as readme_file:
 
 setuptools.setup(
     name='google-datacatalog-apache-atlas-connector',
-    version='0.5.0',
+    version='0.5.1',
     author='Google LLC',
     description='Package for ingesting Apache Atlas metadata'
     ' into Google Cloud Data Catalog',
