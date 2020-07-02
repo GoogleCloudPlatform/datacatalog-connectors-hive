@@ -28,7 +28,7 @@ from google.datacatalog_connectors.apache_atlas.sync import \
 
 
 class MetadataEventSynchronizer(metadata_synchronizer.MetadataSynchronizer):
-    __EVENT_POLL_SLEEP_TIME_MS = 5
+    __EVENT_POLL_SLEEP_TIME_SECONDS = 5
     __STRING_TYPE = enums.FieldType.PrimitiveType.STRING
 
     def __init__(self,
@@ -53,7 +53,7 @@ class MetadataEventSynchronizer(metadata_synchronizer.MetadataSynchronizer):
         while True:
             self.__run()
             logging.info('===> Sleeping...')
-            sleep(self.__EVENT_POLL_SLEEP_TIME_MS)
+            sleep(self.__EVENT_POLL_SLEEP_TIME_SECONDS)
 
     def __run(self):
         """Coordinates a full scrape > prepare > ingest process."""
