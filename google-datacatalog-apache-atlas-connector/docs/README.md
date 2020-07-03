@@ -14,7 +14,7 @@ The following metrics are not a guarantee, they are approximations that may chan
 | **metadata_payload_bytes** | Amount of bytes processed from the source system. | 4537882 (4.54 MB) |
 | **datacatalog_api_calls**  | Amount of Data Catalog API calls executed.        | 17000             |
 
-The elapsed time grows linearly, so for each 1000 entities should take more ~20 minute. Keep in mind that the memory/cpu consuption will also grown,since the Scrape process does a single call at the beginning to retrieve the metadata. 
+The elapsed time grows linearly, so for each 1000 entities should take more ~20 minute. Keep in mind that the memory/cpu consuption will also grown, since the Scrape process does a single call at the beginning to retrieve the metadata. 
 
 For reference Data catalog provides a free tier of `1 million API calls` in a month, and `$10 per 100,000 API calls` over `1 million API calls`.
 
