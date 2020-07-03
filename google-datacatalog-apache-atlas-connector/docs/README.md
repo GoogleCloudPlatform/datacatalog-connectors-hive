@@ -2,7 +2,7 @@
 
 # Metrics
 
-This execution was collected from an Apache Atlas 1.0.0 instance populated with 1013 Tables, 1 StorageDesc, 3026 Columns, 2 Views, 3 Dabases and 3 LoadProcesses, resulting in 4048 entities, running the apache-atlas2datacatalog connector to ingest those entities into Data Catalog. This shows what the user might expect when running this connector.
+This execution was collected from an Apache Atlas 1.0.0 instance populated with 1013 Tables, 1 StorageDesc, 3026 Columns, 2 Views, 3 Databases and 3 LoadProcesses, resulting in 4048 entities, running the apache-atlas2datacatalog connector to ingest those entities into Data Catalog. This shows what the user might expect when running this connector.
 
 The following metrics are not a guarantee, they are approximations that may change depending on the environment, network and execution.
 
