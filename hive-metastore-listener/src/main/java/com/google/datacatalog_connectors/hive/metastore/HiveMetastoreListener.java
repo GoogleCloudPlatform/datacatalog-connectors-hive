@@ -52,7 +52,7 @@ public class HiveMetastoreListener extends MetaStoreEventListener {
 
   public HiveMetastoreListener(Configuration config) {
     super(config);
-    LOGGER.info("[Thread: " + Thread.currentThread().getName() + "] | [version: 0.3.1] | " +
+    LOGGER.info("[Thread: " + Thread.currentThread().getName() + "] | [version: 1.0-SNAPSHOT] | " +
         "[method: " + Thread.currentThread().getStackTrace()[1].getMethodName() +
         " ] | HiveMetastoreListener created ");
   }

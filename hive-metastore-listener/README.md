@@ -3,6 +3,8 @@
 Library that works as an agent running on your Hive Metastore, subscribes to some Metastore Events, currently we
 support: Create/Alter Tables Events, for each Metastore Event the agent sends a message to Pub/Sub with the processed entity metadata.
 
+The branch: hive-metastore-v2.3.7 works on Google Dataproc Hive Metastore 2.3.7.
+
 **Disclaimer: This is not an officially supported Google product.**
 
 <!--
@@ -86,7 +88,7 @@ This step depends on your environment, once the jar file is inside the Hive Meta
 ### 1.7. Linux environment:
 At the end of the file, add the lines:
 ````bash
-/opt/hive/conf/hive-env.sh
+/etc/hive/conf/hive-env.sh
 ````
 
 ````bash
@@ -99,7 +101,7 @@ export METASTORE_HOST_NAME=your-metastore-host-name
 
 At the end of the file, add the line:
 ````bash
-/opt/hive/conf/hive-site.xml
+/etc/hive/conf/hive-site.xml
 ````
 
 ````xml
@@ -111,7 +113,7 @@ Add the tag before the closing configuration tag </configuration>:
 
 ### 1.8. Restart your Hive Metastore
 Verify on the log that your Metastore Listener have been registered.
-At the file /tmp/root/hive.log (if you use a different user to run your Hive Metastore, replace it to the correct one)
+At the file /var/log/hive/hive-metastore.log (if you use a different user to run your Hive Metastore, replace it to the correct one)
 
 You should see a line like this:
 ````bash
