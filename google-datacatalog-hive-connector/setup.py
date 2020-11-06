@@ -23,7 +23,7 @@ with open('README.md') as readme_file:
 
 setuptools.setup(
     name='google-datacatalog-hive-connector',
-    version='0.6.0',
+    version='0.6.1',
     author='Google LLC',
     description=
     'Library for ingesting Hive metadata into Google Cloud Data Catalog',
@@ -41,10 +41,10 @@ setuptools.setup(
         'psycopg2-binary',
         'mysqlclient',
         'sqlalchemy',
-        'google-datacatalog-connectors-commons',
+        'google-datacatalog-connectors-commons>=0.5.2,<0.6.0',
     ),
     setup_requires=('pytest-runner',),
-    tests_require=('pytest-cov', 'google-datacatalog-connectors-commons-test'),
+    tests_require=('pytest-cov', 'google-datacatalog-connectors-commons-test>=0.5.1,<0.6.0'),
     classifiers=(
         release_status,
         'Programming Language :: Python :: 3.7',
