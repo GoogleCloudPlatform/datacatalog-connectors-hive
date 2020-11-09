@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from google.cloud import datacatalog_v1beta1
+from google.cloud import datacatalog
+from google.protobuf import timestamp_pb2
 
 
 class DataCatalogEntryFactory:
@@ -31,14 +32,14 @@ class DataCatalogEntryFactory:
         # Force lowercase since hive is case insensitive
         entry_id = entry_id.lower()
 
-        entry = datacatalog_v1beta1.types.Entry()
+        entry = datacatalog.Entry()
 
         entry.user_specified_type = 'database'
         entry.user_specified_system = 'hive'
 
         entry.display_name = database_metadata.name
 
-        entry.name = datacatalog_v1beta1.DataCatalogClient.entry_path(
+        entry.name = datacatalog.DataCatalogClient.entry_path(
             self.__project_id, self.__location_id, self.__entry_group_id,
             entry_id)
 
@@ -58,14 +59,14 @@ class DataCatalogEntryFactory:
         # Force lowercase since hive is case insensitive
         entry_id = entry_id.lower()
 
-        entry = datacatalog_v1beta1.types.Entry()
+        entry = datacatalog.Entry()
 
         entry.user_specified_type = 'table'
         entry.user_specified_system = 'hive'
 
         entry.display_name = table_metadata.name
 
-        entry.name = datacatalog_v1beta1.DataCatalogClient.entry_path(
+        entry.name = datacatalog.DataCatalogClient.entry_path(
             self.__project_id, self.__location_id, self.__entry_group_id,
             entry_id)
 
@@ -78,27 +79,30 @@ class DataCatalogEntryFactory:
             '//{}//{}'.format(self.__metadata_host_server,
                               table_storage.location)
 
-        entry.source_system_timestamps. \
-            create_time.seconds = table_metadata.create_time
+        created_timestamp = timestamp_pb2.Timestamp()
+        created_timestamp.FromSeconds(table_metadata.create_time)
+
+        entry.source_system_timestamps.create_time = created_timestamp
+
         update_time_seconds = \
             DataCatalogEntryFactory. \
             __extract_update_time_from_table_metadata(table_metadata)
         if update_time_seconds is not None:
-            entry.source_system_timestamps.update_time.seconds = \
-                update_time_seconds
+            updated_timestamp = timestamp_pb2.Timestamp()
+            updated_timestamp.FromSeconds(update_time_seconds)
+
+            entry.source_system_timestamps.update_time = updated_timestamp
         else:
-            entry.source_system_timestamps.update_time.seconds = \
-                table_metadata.create_time
+            entry.source_system_timestamps.update_time = created_timestamp
 
         columns = []
         for column in table_storage.columns:
             columns.append(
-                datacatalog_v1beta1.types.ColumnSchema(
+                datacatalog.ColumnSchema(
                     column=column.name,
                     type=DataCatalogEntryFactory.__format_entry_column_type(
                         column.type),
-                    description=column.comment,
-                    mode=None))
+                    description=column.comment))
         entry.schema.columns.extend(columns)
 
         return entry_id, entry

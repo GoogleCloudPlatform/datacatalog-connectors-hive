@@ -27,10 +27,10 @@ from google.datacatalog_connectors.apache_atlas.prepare import \
 class DataCatalogTagTemplateFactoryTest(unittest.TestCase):
     __MODULE_PATH = os.path.dirname(os.path.abspath(__file__))
 
-    __BOOL_TYPE = datacatalog.enums.FieldType.PrimitiveType.BOOL
-    __DOUBLE_TYPE = datacatalog.enums.FieldType.PrimitiveType.DOUBLE
-    __STRING_TYPE = datacatalog.enums.FieldType.PrimitiveType.STRING
-    __TIMESTAMP_TYPE = datacatalog.enums.FieldType.PrimitiveType.TIMESTAMP
+    __BOOL_TYPE = datacatalog.FieldType.PrimitiveType.BOOL
+    __DOUBLE_TYPE = datacatalog.FieldType.PrimitiveType.DOUBLE
+    __STRING_TYPE = datacatalog.FieldType.PrimitiveType.STRING
+    __TIMESTAMP_TYPE = datacatalog.FieldType.PrimitiveType.TIMESTAMP
 
     def setUp(self):
         self.__factory = datacatalog_tag_template_factory. \

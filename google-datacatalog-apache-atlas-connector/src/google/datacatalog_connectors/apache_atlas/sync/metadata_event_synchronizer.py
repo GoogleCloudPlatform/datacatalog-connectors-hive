@@ -17,7 +17,7 @@
 import logging
 from time import sleep
 
-from google.cloud.datacatalog import enums
+from google.cloud import datacatalog
 from google.datacatalog_connectors.commons import \
     datacatalog_facade
 
@@ -29,7 +29,7 @@ from google.datacatalog_connectors.apache_atlas.sync import \
 
 class MetadataEventSynchronizer(metadata_synchronizer.MetadataSynchronizer):
     __EVENT_POLL_SLEEP_TIME_SECONDS = 5
-    __STRING_TYPE = enums.FieldType.PrimitiveType.STRING
+    __STRING_TYPE = datacatalog.FieldType.PrimitiveType.STRING
 
     def __init__(self,
                  datacatalog_project_id,

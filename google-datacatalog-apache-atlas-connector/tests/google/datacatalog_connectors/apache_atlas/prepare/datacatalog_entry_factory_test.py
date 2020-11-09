@@ -64,10 +64,12 @@ class DataCatalogEntryFactoryTest(unittest.TestCase):
             'table_2286a6bd_4b06_4f7c_a666_920d774b040e',
             entry.linked_resource)
 
-        self.assertEqual(1589983836,
-                         entry.source_system_timestamps.create_time.seconds)
-        self.assertEqual(1589983851,
-                         entry.source_system_timestamps.update_time.seconds)
+        self.assertEqual(
+            1589983836.0,
+            entry.source_system_timestamps.create_time.timestamp())
+        self.assertEqual(
+            1589983851.0,
+            entry.source_system_timestamps.update_time.timestamp())
 
         columns = entry.schema.columns
         self.assertEqual(4, len(columns))
@@ -116,10 +118,12 @@ class DataCatalogEntryFactoryTest(unittest.TestCase):
         self.assertEqual('//my_entry_specified_location',
                          entry.linked_resource)
 
-        self.assertEqual(1589983836,
-                         entry.source_system_timestamps.create_time.seconds)
-        self.assertEqual(1589983836,
-                         entry.source_system_timestamps.update_time.seconds)
+        self.assertEqual(
+            1589983836.0,
+            entry.source_system_timestamps.create_time.timestamp())
+        self.assertEqual(
+            1589983836.0,
+            entry.source_system_timestamps.update_time.timestamp())
 
         columns = entry.schema.columns
         self.assertEqual(4, len(columns))

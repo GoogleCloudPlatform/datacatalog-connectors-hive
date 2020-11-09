@@ -18,22 +18,25 @@ import os
 import unittest
 
 from google.cloud import datacatalog
-from google.cloud.datacatalog import types
 
-datacatalog = datacatalog.DataCatalogClient()
+datacatalog_client = datacatalog.DataCatalogClient()
 
 
 class ExecutionResultsTest(unittest.TestCase):
 
-    def test_tableau_entries_should_exist_after_connector_execution(self):
+    def test_entries_should_exist_after_connector_execution(self):
         query = 'system=hive'
 
-        scope = types.SearchCatalogRequest.Scope()
+        scope = datacatalog.SearchCatalogRequest.Scope()
         scope.include_project_ids.append(
             os.environ['HIVE2DC_DATACATALOG_PROJECT_ID'])
 
+        request = datacatalog.SearchCatalogRequest()
+        request.scope = scope
+        request.query = query
+        request.page_size = 1000
+
         search_results = [
-            result for result in datacatalog.search_catalog(
-                scope=scope, query=query, order_by='relevance', page_size=1000)
+            result for result in datacatalog_client.search_catalog(request)
         ]
         self.assertGreater(len(search_results), 0)

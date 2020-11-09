@@ -20,9 +20,9 @@ import re
 import sys
 
 from google.api_core import exceptions
-from google.cloud import datacatalog_v1beta1
+from google.cloud import datacatalog
 
-datacatalog = datacatalog_v1beta1.DataCatalogClient()
+__datacatalog = datacatalog.DataCatalogClient()
 
 
 def __delete_entries_and_groups(project_ids):
@@ -30,19 +30,21 @@ def __delete_entries_and_groups(project_ids):
 
     query = 'system=hive'
 
-    scope = datacatalog_v1beta1.types.SearchCatalogRequest.Scope()
+    scope = datacatalog.SearchCatalogRequest.Scope()
     scope.include_project_ids.extend(project_ids)
 
-    search_results = datacatalog.search_catalog(scope=scope,
-                                                query=query,
-                                                order_by='relevance',
-                                                page_size=1000)
+    request = datacatalog.SearchCatalogRequest()
+    request.scope = scope
+    request.query = query
+    request.page_size = 1000
+
+    search_results = __datacatalog.search_catalog(request)
     datacatalog_entry_name_pattern = '(?P<entry_group_name>.+?)/entries/(.+?)'
 
     entry_group_names = []
     for result in search_results:
         try:
-            datacatalog.delete_entry(result.relative_resource_name)
+            __datacatalog.delete_entry(name=result.relative_resource_name)
             logging.info('Entry deleted: %s', result.relative_resource_name)
             entry_group_name = re.match(
                 pattern=datacatalog_entry_name_pattern,
@@ -54,7 +56,7 @@ def __delete_entries_and_groups(project_ids):
     # Delete any pre-existing Entry Groups.
     for entry_group_name in set(entry_group_names):
         try:
-            datacatalog.delete_entry_group(entry_group_name)
+            __datacatalog.delete_entry_group(name=entry_group_name)
             logging.info('--> Entry Group deleted: %s', entry_group_name)
         except exceptions.GoogleAPICallError as e:
             logging.warning('Exception deleting entry group: %s', str(e))

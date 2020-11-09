@@ -15,19 +15,20 @@
 # limitations under the License.
 
 from google.cloud import datacatalog
-from google.cloud.datacatalog import enums, types
+
+from google.datacatalog_connectors.commons import prepare
 
 from google.datacatalog_connectors.apache_atlas.prepare import constant
 from google.datacatalog_connectors.apache_atlas.prepare import \
     datacatalog_attribute_normalizer as attr_normalizer
 
 
-class DataCatalogTagTemplateFactory:
+class DataCatalogTagTemplateFactory(prepare.BaseTagTemplateFactory):
 
-    __BOOL_TYPE = enums.FieldType.PrimitiveType.BOOL
-    __DOUBLE_TYPE = enums.FieldType.PrimitiveType.DOUBLE
-    __STRING_TYPE = enums.FieldType.PrimitiveType.STRING
-    __TIMESTAMP_TYPE = enums.FieldType.PrimitiveType.TIMESTAMP
+    __BOOL_TYPE = datacatalog.FieldType.PrimitiveType.BOOL
+    __DOUBLE_TYPE = datacatalog.FieldType.PrimitiveType.DOUBLE
+    __STRING_TYPE = datacatalog.FieldType.PrimitiveType.STRING
+    __TIMESTAMP_TYPE = datacatalog.FieldType.PrimitiveType.TIMESTAMP
 
     def __init__(self, project_id, location_id):
         self.__project_id = project_id
@@ -60,7 +61,7 @@ class DataCatalogTagTemplateFactory:
         return tag_templates
 
     def make_column_tag_template(self):
-        tag_template = types.TagTemplate()
+        tag_template = datacatalog.TagTemplate()
 
         tag_template_id = attr_normalizer.DataCatalogAttributeNormalizer.\
             create_tag_template_id(
@@ -70,13 +71,11 @@ class DataCatalogTagTemplateFactory:
 
         tag_template.display_name = 'Column'
 
-        tag_template.fields[
-            'column_guid'].type.primitive_type = self.__STRING_TYPE
-        tag_template.fields['column_guid'].display_name = 'column guid'
-        tag_template.fields[
-            'column_entry'].type.primitive_type = self.__STRING_TYPE
-        tag_template.fields[
-            'column_entry'].display_name = 'column data catalog entry'
+        self._add_primitive_type_field(tag_template, 'column_guid',
+                                       self.__STRING_TYPE, 'column guid')
+        self._add_primitive_type_field(tag_template, 'column_entry',
+                                       self.__STRING_TYPE,
+                                       'column data catalog entry')
 
         return {tag_template_id: tag_template}
 
@@ -101,7 +100,7 @@ class DataCatalogTagTemplateFactory:
     def __create_classification_tag_template(self, classification_dict,
                                              classifications_dict,
                                              enum_types_dict):
-        tag_template = types.TagTemplate()
+        tag_template = datacatalog.TagTemplate()
 
         classification_data = classification_dict['data']
 
@@ -132,15 +131,14 @@ class DataCatalogTagTemplateFactory:
         self.__add_fields_from_attribute_defs(tag_template, attribute_defs,
                                               enum_types_dict)
 
-        tag_template.fields[
-            formatted_name].type.primitive_type = self.__BOOL_TYPE
-        tag_template.fields[formatted_name].display_name = formatted_name
+        self._add_primitive_type_field(tag_template, formatted_name,
+                                       self.__BOOL_TYPE, formatted_name)
 
         return {tag_template_id: tag_template}
 
     def __create_entity_type_tag_template(self, entity_type_dict,
                                           entity_types_dict, enum_types_dict):
-        tag_template = types.TagTemplate()
+        tag_template = datacatalog.TagTemplate()
 
         entity_type_data = entity_type_dict['data']
         name = entity_type_data['name']
@@ -169,19 +167,15 @@ class DataCatalogTagTemplateFactory:
         self.__add_fields_from_attribute_defs(tag_template, attribute_defs,
                                               enum_types_dict)
 
-        tag_template.fields[
-            formatted_name].type.primitive_type = self.__BOOL_TYPE
-        tag_template.fields[formatted_name].display_name = formatted_name
+        self._add_primitive_type_field(tag_template, formatted_name,
+                                       self.__BOOL_TYPE, formatted_name)
 
-        tag_template.fields[
-            constant.ENTITY_GUID].type.primitive_type = self.__STRING_TYPE
-        tag_template.fields[constant.ENTITY_GUID].display_name = 'entity guid'
+        self._add_primitive_type_field(tag_template, constant.ENTITY_GUID,
+                                       self.__STRING_TYPE, 'entity guid')
 
-        tag_template.fields[
-            constant.
-            INSTANCE_URL_FIELD].type.primitive_type = self.__STRING_TYPE
-        tag_template.fields[
-            constant.INSTANCE_URL_FIELD].display_name = 'instance url'
+        self._add_primitive_type_field(tag_template,
+                                       constant.INSTANCE_URL_FIELD,
+                                       self.__STRING_TYPE, 'instance url')
 
         self.__create_custom_fields_for_entity_type(tag_template,
                                                     entity_type_data)
@@ -201,6 +195,10 @@ class DataCatalogTagTemplateFactory:
             format_name(name)
         type_name = attribute_def['typeName']
         enum_type = enum_types_dict.get(type_name)
+
+        field = datacatalog.TagTemplateField()
+        field.display_name = name
+
         if type_name in constant.DATACATALOG_TARGET_PRIMITIVE_TYPES:
             if type_name in constant.DATACATALOG_TARGET_DOUBLE_TYPE:
                 target_type = self.__DOUBLE_TYPE
@@ -209,20 +207,18 @@ class DataCatalogTagTemplateFactory:
             else:
                 target_type = self.__STRING_TYPE
 
-            tag_template.fields[
-                formatted_name].type.primitive_type = target_type
+            field.type.primitive_type = target_type
         elif enum_type:
             enum_element_defs = enum_type['data']['elementDefs']
             for enum_element_def in enum_element_defs:
-                tag_template.fields[formatted_name].type.enum_type\
-                    .allowed_values.add().display_name =\
-                    enum_element_def['value']
+                enum_value = datacatalog.FieldType.EnumType.EnumValue()
+                enum_value.display_name = enum_element_def['value']
+                field.type.enum_type.allowed_values.append(enum_value)
         else:
             # String is the default type.
-            tag_template.fields[
-                formatted_name].type.primitive_type = self.__STRING_TYPE
+            field.type.primitive_type = self.__STRING_TYPE
 
-        tag_template.fields[formatted_name].display_name = name
+        tag_template.fields[formatted_name] = field
 
     def __add_fields_from_super_types(self, tag_template, super_types,
                                       types_dict, enum_types_dict):
@@ -254,37 +250,36 @@ class DataCatalogTagTemplateFactory:
     def __create_custom_fields_for_table_type(self, tag_template):
         self.__add_db_fields(tag_template)
 
-        tag_template.fields['sd_guid'].type.primitive_type =\
-            self.__STRING_TYPE
-        tag_template.fields['sd_guid'].display_name = 'sd guid'
+        self._add_primitive_type_field(tag_template, 'sd_guid',
+                                       self.__STRING_TYPE, 'sd guid')
 
-        tag_template.fields[
-            'sd_entry'].type.primitive_type = self.__STRING_TYPE
-        tag_template.fields['sd_entry'].display_name = 'sd data catalog entry'
+        self._add_primitive_type_field(tag_template, 'sd_entry',
+                                       self.__STRING_TYPE,
+                                       'sd data catalog entry')
 
     def __add_db_fields(self, tag_template):
-        tag_template.fields['db_name'].type.primitive_type =\
-            self.__STRING_TYPE
-        tag_template.fields['db_name'].display_name = 'db name'
-        tag_template.fields['db_guid'].type.primitive_type =\
-            self.__STRING_TYPE
-        tag_template.fields['db_guid'].display_name = 'db guid'
-        tag_template.fields[
-            'db_entry'].type.primitive_type = self.__STRING_TYPE
-        tag_template.fields['db_entry'].display_name = 'db data catalog entry'
+
+        self._add_primitive_type_field(tag_template, 'db_name',
+                                       self.__STRING_TYPE, 'db name')
+
+        self._add_primitive_type_field(tag_template, 'db_guid',
+                                       self.__STRING_TYPE, 'db guid')
+
+        self._add_primitive_type_field(tag_template, 'db_entry',
+                                       self.__STRING_TYPE,
+                                       'db data catalog entry')
 
     def __create_custom_fields_for_view_type(self, tag_template):
         self.__add_db_fields(tag_template)
 
-        tag_template.fields[
-            'input_tables_names'].type.primitive_type = self.__STRING_TYPE
-        tag_template.fields[
-            'input_tables_names'].display_name = 'input tables names'
+        self._add_primitive_type_field(tag_template, 'input_tables_names',
+                                       self.__STRING_TYPE,
+                                       'input tables names')
 
     def __create_custom_fields_for_load_process_type(self, tag_template):
-        tag_template.fields[
-            'inputs_names'].type.primitive_type = self.__STRING_TYPE
-        tag_template.fields['inputs_names'].display_name = 'inputs names'
-        tag_template.fields[
-            'outputs_names'].type.primitive_type = self.__STRING_TYPE
-        tag_template.fields['outputs_names'].display_name = 'outputs names'
+
+        self._add_primitive_type_field(tag_template, 'inputs_names',
+                                       self.__STRING_TYPE, 'inputs names')
+
+        self._add_primitive_type_field(tag_template, 'outputs_names',
+                                       self.__STRING_TYPE, 'outputs names')

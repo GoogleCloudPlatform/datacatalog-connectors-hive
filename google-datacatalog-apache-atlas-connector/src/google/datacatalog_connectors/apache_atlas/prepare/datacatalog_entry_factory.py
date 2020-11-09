@@ -17,7 +17,7 @@
 import logging
 
 from google.cloud import datacatalog
-from google.cloud.datacatalog import types
+from google.protobuf import timestamp_pb2
 from google.datacatalog_connectors.commons import prepare
 
 from google.datacatalog_connectors.apache_atlas.prepare import \
@@ -39,7 +39,7 @@ class DataCatalogEntryFactory(prepare.BaseEntryFactory):
         self.__server_id = instance_url[instance_url.find('//') + 2:]
 
     def make_entry_for_entity(self, entity):
-        entry = types.Entry()
+        entry = datacatalog.Entry()
 
         guid = entity['guid']
         data = entity['data']
@@ -113,15 +113,19 @@ class DataCatalogEntryFactory(prepare.BaseEntryFactory):
         update_time = data.get('updateTime')
         if create_time:
             # Transform millis to seconds.
-            entry.source_system_timestamps.create_time.seconds = round(
-                create_time / 1000)
+            created_timestamp = timestamp_pb2.Timestamp()
+            created_timestamp.FromSeconds(round(create_time / 1000))
+
+            entry.source_system_timestamps.create_time = created_timestamp
 
             if not update_time:
                 update_time = create_time
 
-            # Transform millis to seconds. ADD 10 seconds because
-            entry.source_system_timestamps.update_time.seconds = round(
-                update_time / 1000)
+            # Transform millis to seconds.
+            updated_timestamp = timestamp_pb2.Timestamp()
+            updated_timestamp.FromSeconds(round(update_time / 1000))
+
+            entry.source_system_timestamps.update_time = updated_timestamp
         else:
             logging.info('Entity "%s" has no created_time information!',
                          generated_id)
@@ -144,9 +148,7 @@ class DataCatalogEntryFactory(prepare.BaseEntryFactory):
                             DataCatalogAttributeNormalizer.format_name(
                                 column_name)
                         entry_columns.append(
-                            datacatalog.types.ColumnSchema(
-                                column=column_name,
-                                description=column_desc,
-                                type=data_type,
-                                mode=None))
+                            datacatalog.ColumnSchema(column=column_name,
+                                                     description=column_desc,
+                                                     type=data_type))
         entry.schema.columns.extend(entry_columns)

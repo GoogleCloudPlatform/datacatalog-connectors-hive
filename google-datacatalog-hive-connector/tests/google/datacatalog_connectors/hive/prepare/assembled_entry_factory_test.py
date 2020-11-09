@@ -107,11 +107,13 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
                 table_entry = assembled_table.entry
                 self.assertEqual('default__funds', assembled_table.entry_id)
                 self.assertEqual(
-                    1567519048,
-                    table_entry.source_system_timestamps.create_time.seconds)
+                    1567519048.0,
+                    table_entry.source_system_timestamps.create_time.timestamp(
+                    ))
                 self.assertEqual(
-                    1567519078,
-                    table_entry.source_system_timestamps.update_time.seconds)
+                    1567519078.0,
+                    table_entry.source_system_timestamps.update_time.timestamp(
+                    ))
                 # Assert specific fields for table
                 self.assertEqual('table', table_entry.user_specified_type)
                 self.assertEqual('hive', table_entry.user_specified_system)
@@ -192,10 +194,10 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
                 table_entry = user_defined_table.entry
                 self.__assert_required(user_defined_table.entry_id,
                                        table_entry)
-                self.assertIsNotNone(
-                    table_entry.source_system_timestamps.create_time.seconds)
-                self.assertIsNotNone(
-                    table_entry.source_system_timestamps.update_time.seconds)
+                self.assertIsNotNone(table_entry.source_system_timestamps.
+                                     create_time.timestamp())
+                self.assertIsNotNone(table_entry.source_system_timestamps.
+                                     update_time.timestamp())
                 # Assert specific fields for table
                 self.assertEqual('table', table_entry.user_specified_type)
                 self.assertEqual('hive', table_entry.user_specified_system)
