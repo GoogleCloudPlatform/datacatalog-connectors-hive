@@ -71,9 +71,10 @@ class DataCatalogTagTemplateFactory(prepare.BaseTagTemplateFactory):
 
         tag_template.display_name = 'Column'
 
-        self._add_primitive_type_field(tag_template, 'column_guid', self.__STRING_TYPE,
-                                       'column guid')
-        self._add_primitive_type_field(tag_template, 'column_entry', self.__STRING_TYPE,
+        self._add_primitive_type_field(tag_template, 'column_guid',
+                                       self.__STRING_TYPE, 'column guid')
+        self._add_primitive_type_field(tag_template, 'column_entry',
+                                       self.__STRING_TYPE,
                                        'column data catalog entry')
 
         return {tag_template_id: tag_template}
@@ -130,8 +131,8 @@ class DataCatalogTagTemplateFactory(prepare.BaseTagTemplateFactory):
         self.__add_fields_from_attribute_defs(tag_template, attribute_defs,
                                               enum_types_dict)
 
-        self._add_primitive_type_field(tag_template, formatted_name, self.__BOOL_TYPE,
-                                       formatted_name)
+        self._add_primitive_type_field(tag_template, formatted_name,
+                                       self.__BOOL_TYPE, formatted_name)
 
         return {tag_template_id: tag_template}
 
@@ -166,13 +167,14 @@ class DataCatalogTagTemplateFactory(prepare.BaseTagTemplateFactory):
         self.__add_fields_from_attribute_defs(tag_template, attribute_defs,
                                               enum_types_dict)
 
-        self._add_primitive_type_field(tag_template, formatted_name, self.__BOOL_TYPE,
-                                       formatted_name)
+        self._add_primitive_type_field(tag_template, formatted_name,
+                                       self.__BOOL_TYPE, formatted_name)
 
-        self._add_primitive_type_field(tag_template, constant.ENTITY_GUID, self.__STRING_TYPE,
-                                       'entity guid')
+        self._add_primitive_type_field(tag_template, constant.ENTITY_GUID,
+                                       self.__STRING_TYPE, 'entity guid')
 
-        self._add_primitive_type_field(tag_template, constant.INSTANCE_URL_FIELD,
+        self._add_primitive_type_field(tag_template,
+                                       constant.INSTANCE_URL_FIELD,
                                        self.__STRING_TYPE, 'instance url')
 
         self.__create_custom_fields_for_entity_type(tag_template,
@@ -248,34 +250,36 @@ class DataCatalogTagTemplateFactory(prepare.BaseTagTemplateFactory):
     def __create_custom_fields_for_table_type(self, tag_template):
         self.__add_db_fields(tag_template)
 
-        self._add_primitive_type_field(tag_template, 'sd_guid', self.__STRING_TYPE,
-                                       'sd guid')
+        self._add_primitive_type_field(tag_template, 'sd_guid',
+                                       self.__STRING_TYPE, 'sd guid')
 
-        self._add_primitive_type_field(tag_template, 'sd_entry', self.__STRING_TYPE,
+        self._add_primitive_type_field(tag_template, 'sd_entry',
+                                       self.__STRING_TYPE,
                                        'sd data catalog entry')
 
     def __add_db_fields(self, tag_template):
 
-        self._add_primitive_type_field(tag_template, 'db_name', self.__STRING_TYPE,
-                                       'db name')
+        self._add_primitive_type_field(tag_template, 'db_name',
+                                       self.__STRING_TYPE, 'db name')
 
-        self._add_primitive_type_field(tag_template, 'db_guid', self.__STRING_TYPE,
-                                       'db guid')
+        self._add_primitive_type_field(tag_template, 'db_guid',
+                                       self.__STRING_TYPE, 'db guid')
 
-        self._add_primitive_type_field(tag_template, 'db_entry', self.__STRING_TYPE,
+        self._add_primitive_type_field(tag_template, 'db_entry',
+                                       self.__STRING_TYPE,
                                        'db data catalog entry')
 
     def __create_custom_fields_for_view_type(self, tag_template):
         self.__add_db_fields(tag_template)
 
-        self._add_primitive_type_field(tag_template, 'input_tables_names', self.__STRING_TYPE,
+        self._add_primitive_type_field(tag_template, 'input_tables_names',
+                                       self.__STRING_TYPE,
                                        'input tables names')
 
     def __create_custom_fields_for_load_process_type(self, tag_template):
 
-        self._add_primitive_type_field(tag_template, 'inputs_names', self.__STRING_TYPE,
-                                       'inputs names')
+        self._add_primitive_type_field(tag_template, 'inputs_names',
+                                       self.__STRING_TYPE, 'inputs names')
 
-        self._add_primitive_type_field(tag_template, 'outputs_names', self.__STRING_TYPE,
-                                       'outputs names')
-
+        self._add_primitive_type_field(tag_template, 'outputs_names',
+                                       self.__STRING_TYPE, 'outputs names')

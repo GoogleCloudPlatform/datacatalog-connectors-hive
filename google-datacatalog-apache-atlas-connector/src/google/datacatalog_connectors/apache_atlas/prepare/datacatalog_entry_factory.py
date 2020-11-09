@@ -148,8 +148,7 @@ class DataCatalogEntryFactory(prepare.BaseEntryFactory):
                             DataCatalogAttributeNormalizer.format_name(
                                 column_name)
                         entry_columns.append(
-                            datacatalog.ColumnSchema(
-                                column=column_name,
-                                description=column_desc,
-                                type=data_type))
+                            datacatalog.ColumnSchema(column=column_name,
+                                                     description=column_desc,
+                                                     type=data_type))
         entry.schema.columns.extend(entry_columns)
