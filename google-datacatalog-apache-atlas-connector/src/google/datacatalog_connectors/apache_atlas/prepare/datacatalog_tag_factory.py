@@ -17,7 +17,6 @@
 import copy
 
 from google.cloud import datacatalog
-from google.cloud.datacatalog import types
 from google.datacatalog_connectors.commons import prepare
 
 from google.datacatalog_connectors.apache_atlas.prepare import constant
@@ -43,7 +42,7 @@ class DataCatalogTagFactory(prepare.BaseTagFactory):
                                     classifications,
                                     enum_types_dict,
                                     column_name=None):
-        tag = types.Tag()
+        tag = datacatalog.Tag()
 
         classification_name = entity_classification['typeName']
 
@@ -79,7 +78,7 @@ class DataCatalogTagFactory(prepare.BaseTagFactory):
         return tag
 
     def make_tag_for_column_ref(self, column_guid, column_name):
-        tag = types.Tag()
+        tag = datacatalog.Tag()
 
         tag_template_id = attr_normalizer.DataCatalogAttributeNormalizer.\
             create_tag_template_id('ref', constant.COLUMN_PREFIX)
@@ -97,7 +96,7 @@ class DataCatalogTagFactory(prepare.BaseTagFactory):
         return tag
 
     def make_tag_for_entity(self, entity, entity_types_dict, enum_types_dict):
-        tag = types.Tag()
+        tag = datacatalog.Tag()
 
         guid = entity['guid']
         data = entity['data']
@@ -174,7 +173,9 @@ class DataCatalogTagFactory(prepare.BaseTagFactory):
                     super()._set_string_field(tag, formatted_name,
                                               str(tag_value))
             elif enum_type:
-                tag.fields[formatted_name].enum_value.display_name = tag_value
+                enum_field = datacatalog.TagField()
+                enum_field.enum_value.display_name = tag_value
+                tag.fields[formatted_name] = enum_field
             else:
                 super()._set_string_field(tag, formatted_name, str(tag_value))
 

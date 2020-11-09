@@ -222,7 +222,7 @@ class DataCatalogTagFactoryTest(unittest.TestCase):
         self.assertEqual(True, tag.fields['view'].bool_value)
         self.assertEqual('55a5f51f-1b21-4742-9059-818b7531df85',
                          tag.fields['guid'].string_value)
-        self.assertEqual('', tag.fields['owner'].string_value)
+        self.assertIsNone(tag.fields.get('owner'))
         self.assertEqual('customer_dim',
                          tag.fields['input_tables_names'].string_value)
         self.assertEqual('https://test.server.com',
@@ -273,7 +273,7 @@ class DataCatalogTagFactoryTest(unittest.TestCase):
         self.assertEqual(True, tag.fields['loadprocess'].bool_value)
         self.assertEqual('e73656c9-da05-4db7-9b88-e3669c1a98eb',
                          tag.fields['guid'].string_value)
-        self.assertEqual('', tag.fields['owner'].string_value)
+        self.assertIsNone(tag.fields.get('owner'))
         self.assertEqual('log_fact_daily_mv',
                          tag.fields['inputs_names'].string_value)
         self.assertEqual(

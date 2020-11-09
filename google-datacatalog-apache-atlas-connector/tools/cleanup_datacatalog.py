@@ -15,73 +15,72 @@
 # limitations under the License.
 
 import argparse
+import logging
 import re
+import sys
 
+from google.api_core import exceptions
 from google.cloud import datacatalog
-
-__DATACATALOG_LOCATION_ID = 'us-central1'
-__DATACATALOG_ENTRY_GROUP_ID = 'apache_atlas'
 
 __datacatalog = datacatalog.DataCatalogClient()
 
 
-def __delete_entries_and_groups(project_id):
-    entry_name_pattern = '(?P<entry_group_name>.+?)/entries/(.+?)'
+def __delete_entries_and_groups(project_ids):
+    logging.info('\nStarting to clean up the catalog...')
 
-    query = 'system={}'.format(__DATACATALOG_ENTRY_GROUP_ID)
+    query = 'system=apache_atlas'
 
-    scope = datacatalog.types.SearchCatalogRequest.Scope()
-    scope.include_project_ids.extend([project_id])
+    scope = datacatalog.SearchCatalogRequest.Scope()
+    scope.include_project_ids.extend(project_ids)
 
-    # TODO Replace "search entries" by "list entries by group"
-    #  when/if it becomes available.
-    search_results = [result for result in __datacatalog.search_catalog(scope=scope,
-                                                                        query=query,
-                                                                        page_size=1000,
-                                                                        timeout=300000)]
+    request = datacatalog.SearchCatalogRequest()
+    request.scope = scope
+    request.query = query
+    request.page_size = 1000
+
+    search_results = __datacatalog.search_catalog(request)
+    datacatalog_entry_name_pattern = '(?P<entry_group_name>.+?)/entries/(.+?)'
 
     entry_group_names = []
     for result in search_results:
         try:
-            __datacatalog.delete_entry(result.relative_resource_name)
-            print('Entry deleted: {}'.format(result.relative_resource_name))
+            __datacatalog.delete_entry(name=result.relative_resource_name)
+            logging.info('Entry deleted: %s', result.relative_resource_name)
             entry_group_name = re.match(
-                pattern=entry_name_pattern,
-                string=result.relative_resource_name
-            ).group('entry_group_name')
+                pattern=datacatalog_entry_name_pattern,
+                string=result.relative_resource_name).group('entry_group_name')
             entry_group_names.append(entry_group_name)
-        except Exception as e:
-            print('Exception deleting Entry')
-            print(e)
+        except exceptions.GoogleAPICallError as e:
+            logging.warning('Exception deleting entry: %s', str(e))
 
     # Delete any pre-existing Entry Groups.
     for entry_group_name in set(entry_group_names):
         try:
-            __datacatalog.delete_entry_group(entry_group_name, force=True)
-            print('--> Entry Group deleted: {}'.format(entry_group_name))
-        except Exception as e:
-            print('Exception deleting Entry Group')
-            print(str(e))
+            __datacatalog.delete_entry_group(name=entry_group_name)
+            logging.info('--> Entry Group deleted: %s', entry_group_name)
+        except exceptions.GoogleAPICallError as e:
+            logging.warning('Exception deleting entry group: %s', str(e))
 
 
 def __delete_tag_templates(project_id):
-    query = 'type=TAG_TEMPLATE name:{}'.format(__DATACATALOG_ENTRY_GROUP_ID)
+    query = 'type=TAG_TEMPLATE name:apache_atlas'
 
-    scope = datacatalog.types.SearchCatalogRequest.Scope()
+    scope = datacatalog.SearchCatalogRequest.Scope()
     scope.include_project_ids.extend([project_id])
 
-    search_results = [result for result in __datacatalog.search_catalog(scope=scope,
-                                                                        query=query,
-                                                                        page_size=1000,
-                                                                        timeout=300000)]
+    request = datacatalog.SearchCatalogRequest()
+    request.scope = scope
+    request.query = query
+    request.page_size = 1000
+
+    search_results = __datacatalog.search_catalog(request)
 
     for result in search_results:
         try:
-            __datacatalog.delete_tag_template(result.relative_resource_name, force=True)
-            print('--> Tag Template deleted: {}'.format(result.relative_resource_name))
-        except Exception as e:
-            print('Exception deleting Tag Template')
-            print(str(e))
+            __datacatalog.delete_tag_template(name=result.relative_resource_name, force=True)
+            logging.info('--> Tag Template deleted: %s', result.relative_resource_name)
+        except exceptions.GoogleAPICallError as e:
+            logging.warning('Exception deleting Tag Template: %s', str(e))
 
 
 def __parse_args():
@@ -100,10 +99,14 @@ def __parse_args():
 if __name__ == "__main__":
     args = __parse_args()
 
-    # Split multiple values separated by comma.
-    datacatalog_project_ids = \
-        [item for item in args.datacatalog_project_ids.split(',')]
+    # Enable logging
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-    for project_id in datacatalog_project_ids:
-        __delete_entries_and_groups(project_id)
-        __delete_tag_templates(project_id)
+    # Split multiple values separated by comma.
+    datacatalog_project_ids = args.datacatalog_project_ids.split(',')
+
+    __delete_entries_and_groups(datacatalog_project_ids)
+    for datacatalog_project_id in datacatalog_project_ids:
+        __delete_tag_templates(datacatalog_project_id)
+
+    logging.info('\nFinished to clean up the catalog')

@@ -18,7 +18,7 @@ import os
 import unittest
 from unittest import mock
 
-from google.cloud.datacatalog import types
+from google.cloud import datacatalog
 from google.datacatalog_connectors.commons_test import utils
 
 from google.datacatalog_connectors.apache_atlas import prepare
@@ -161,21 +161,21 @@ class AssembledEntryFactoryTest(unittest.TestCase):
 
     @classmethod
     def __mock_make_entry(cls, entity):
-        entry = types.Entry()
+        entry = datacatalog.Entry()
         entry_id = entity['guid']
         entry.name = 'fake_entries/{}'.format(entry_id)
         return entry_id, entry
 
     @classmethod
     def __mock_make_tag(cls, entity, *_):
-        tag = types.Tag()
+        tag = datacatalog.Tag()
         tag.template = 'fake_template/entity_type/{}'.format(
             entity['data']['typeName'])
         return tag
 
     @classmethod
     def __mock_make_tag_classification(cls, classification, *args):
-        tag = types.Tag()
+        tag = datacatalog.Tag()
 
         template = 'fake_template/{}'.format(classification['typeName'])
 
@@ -187,6 +187,6 @@ class AssembledEntryFactoryTest(unittest.TestCase):
 
     @classmethod
     def __mock_make_tag_for_column_ref(cls, column_guid, _):
-        tag = types.Tag()
+        tag = datacatalog.Tag()
         tag.template = 'fake_template/{}/column_ref'.format(column_guid)
         return tag
