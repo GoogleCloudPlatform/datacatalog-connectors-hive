@@ -42,7 +42,7 @@ backed by a PostgreSQL or MySQL database.
     + [4.3.1 Set additional environment variables](#431-set-additional-environment-variables)
     + [4.3.2 Execute pubsub config script](#432-execute-pubsub-config-script)
     + [4.3.4 Send a message to your Pub/Sub topic to test](#434-send-a-message-to-your-pubsub-topic-to-test)
-- [4. Tools (Optional)](#4-tools-optional)
+- [5. Tools (Optional)](#4-tools-optional)
   * [5.1. Clean up all entries on DataCatalog from the hive entrygroup](#51-clean-up-all-entries-on-datacatalog-from-the-hive-entrygroup)
   * [5.2. Sample of Hive2Datacatalog Library usage](#52-sample-of-hive2datacatalog-library-usage)
 - [6. Developer environment](#6-developer-environment)
@@ -198,7 +198,7 @@ source tools/create_pub_sub_run_invoker.sh
 #### 4.3.4 Send a message to your Pub/Sub topic to test
 You can look at valid message events examples on: tools/resources/*.json
 
-## 4. Tools (Optional)
+## 5. Tools (Optional)
 
 ### 5.1. Clean up all entries on DataCatalog from the hive entrygroup
 run ```python tools/cleanup_datacatalog.py```
