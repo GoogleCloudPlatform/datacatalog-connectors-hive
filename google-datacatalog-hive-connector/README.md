@@ -249,6 +249,20 @@ python setup.py test
 [Architecture README.md](docs/Architecture.md)
 
 ## 9. Troubleshooting
+In the case you receive the error:
+```
+OSError: mysql_config not found
+
+or
+
+sqlalchemy.exc.NoSuchModuleError: Can't load plugin: sqlalchemy.dialects:MySQL
+```
+Some system libraries or the MySQL driver was not found in the running machine, try installing it by running (On linux machines):
+```
+sudo apt-get install libmysqlclient-dev python-dev
+```
+
+
 
 In the case a connector execution hits Data Catalog quota limit, an error will be raised and logged with the following detailement, depending on the performed operation READ/WRITE/SEARCH: 
 ```
