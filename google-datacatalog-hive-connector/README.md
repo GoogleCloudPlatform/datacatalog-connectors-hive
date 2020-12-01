@@ -129,9 +129,10 @@ export HIVE2DC_HIVE_METASTORE_DB_HOST=hive_metastore_db_server
 export HIVE2DC_HIVE_METASTORE_DB_USER=hive_metastore_db_user
 export HIVE2DC_HIVE_METASTORE_DB_PASS=hive_metastore_db_pass
 export HIVE2DC_HIVE_METASTORE_DB_NAME=hive_metastore_db_name
-export HIVE2DC_HIVE_METASTORE_DB_TYPE=hive_metastore_db_type
+export HIVE2DC_HIVE_METASTORE_DB_TYPE=mysql or postgres
 
 ```
+Make sure you use `mysql` on `HIVE2DC_HIVE_METASTORE_DB_NAME` if you are connecting to a MySQL backed Hive Metastore or `postgres` if it's a PostgreSQL backed Hive Metastore.
 
 ## 3. Run entry point
 
