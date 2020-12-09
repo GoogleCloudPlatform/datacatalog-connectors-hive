@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         build-dir: ['./google-datacatalog-hive-connector', './google-datacatalog-apache-atlas-connector']
-        python-version: [3.7, 3.8]
+        python-version: [3.6, 3.7, 3.8]
     defaults:
       run:
         working-directory: ${{ matrix.build-dir }}
