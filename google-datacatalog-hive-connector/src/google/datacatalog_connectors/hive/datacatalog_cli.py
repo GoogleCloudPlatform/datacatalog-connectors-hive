@@ -31,6 +31,9 @@ class Hive2DatacatalogCli:
         # Enable logging
         logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
+        # not sure how to 'bind' to the logger in __main__.py
+        logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+
         if args.service_account_path:
             os.environ['GOOGLE_APPLICATION_CREDENTIALS']\
                 = args.service_account_path
