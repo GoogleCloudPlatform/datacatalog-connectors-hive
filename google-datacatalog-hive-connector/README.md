@@ -262,6 +262,10 @@ Some system libraries or the MySQL driver was not found in the running machine, 
 ```
 sudo apt-get install libmysqlclient-dev python-dev
 ```
+In case the package `libmysqlclient-dev` is not available, use `default-libmysqlclient-dev`: 
+```
+sudo apt-get install default-libmysqlclient-dev  python-dev
+```
 
 
 
