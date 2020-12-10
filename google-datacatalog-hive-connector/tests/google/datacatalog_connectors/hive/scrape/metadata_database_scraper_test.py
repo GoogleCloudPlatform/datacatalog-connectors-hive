@@ -52,9 +52,10 @@ class MetadataScraperTestCase(unittest.TestCase):
         mocked_session.offset.return_value = mocked_session
 
         # Mocks with 2 pages, and third page is empty.
-        mocked_session.all.side_effect = [retrieve_json_file('databases.json'),
-                                          retrieve_json_file('databases.json'),
-                                          []]
+        mocked_session.all.side_effect = [
+            retrieve_json_file('databases.json'),
+            retrieve_json_file('databases.json'), []
+        ]
 
         sessionmaker.return_value = mocked_session
 
@@ -106,4 +107,3 @@ def retrieve_json_file(name):
 
     with open(resolved_name) as json_file:
         return json.load(json_file)
-

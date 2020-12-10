@@ -50,24 +50,28 @@ class MetadataDatabaseScraper:
                 session_wrapper = sessionmaker(bind=self.__engine)
                 session = session_wrapper()
 
-                number_of_rows_per_page = paginated_query_conf['number_of_rows_per_page']
+                number_of_rows_per_page = paginated_query_conf[
+                    'number_of_rows_per_page']
 
                 # Use subqueryload to eagerly execute the queries in the same session.
                 query = session.query(entities.Database).options(
-                    subqueryload(entities.Database.tables).subqueryload(entities.Table.table_params),
                     subqueryload(entities.Database.tables).subqueryload(
-                        entities.Table.table_storages).
-                    subqueryload(entities.TableStorage.columns))
+                        entities.Table.table_params),
+                    subqueryload(entities.Database.tables).subqueryload(
+                        entities.Table.table_storages).subqueryload(
+                            entities.TableStorage.columns))
 
                 # Add pagination clause
                 query = query.limit(number_of_rows_per_page).offset(
-                        (paginated_query_conf['page_number'] - 1) * number_of_rows_per_page)
+                    (paginated_query_conf['page_number'] - 1) *
+                    number_of_rows_per_page)
 
                 results = query.all()
                 databases.extend(results)
 
                 # Set next page
-                paginated_query_conf['page_number'] = paginated_query_conf['page_number'] + 1
+                paginated_query_conf[
+                    'page_number'] = paginated_query_conf['page_number'] + 1
 
                 # It means there are no more pages.
                 if len(results) == 0:
