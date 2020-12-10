@@ -45,7 +45,7 @@ setuptools.setup(
     ),
     setup_requires=('pytest-runner',),
     tests_require=('numpy==1.19.4',
-                   'pytest-cov', 'google-datacatalog-connectors-commons-test>=0.6.0'),
+                   'pytest-cov==2.10.1', 'google-datacatalog-connectors-commons-test>=0.6.0'),
     classifiers=(
         release_status,
         'Programming Language :: Python :: 3.7',
