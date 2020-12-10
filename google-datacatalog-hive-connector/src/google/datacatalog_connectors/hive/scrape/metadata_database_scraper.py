@@ -53,7 +53,8 @@ class MetadataDatabaseScraper:
                 number_of_rows_per_page = paginated_query_conf[
                     'number_of_rows_per_page']
 
-                # Use subqueryload to eagerly execute the queries in the same session.
+                # Use subqueryload to eagerly execute
+                # the queries in the same session.
                 query = session.query(entities.Database).options(
                     subqueryload(entities.Database.tables).subqueryload(
                         entities.Table.table_params),
