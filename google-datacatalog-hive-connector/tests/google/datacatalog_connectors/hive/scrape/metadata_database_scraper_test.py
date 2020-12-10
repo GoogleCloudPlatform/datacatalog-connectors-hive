@@ -71,6 +71,35 @@ class MetadataScraperTestCase(unittest.TestCase):
         self.assertEqual(12, len(databases_metadata['databases']))
 
     @mock.patch(f'{__SCRAPE_PACKAGE}.metadata_database_scraper.sessionmaker')
+    def test_scrape_databases_metadata_when_no_pages_should_return_empty(
+            self, sessionmaker):  # noqa
+
+        mocked_session = mock.MagicMock()
+
+        # Return the same instance, since session object
+        # uses a builder pattern.
+        mocked_session.return_value = mocked_session
+        mocked_session.query.return_value = mocked_session
+        mocked_session.limit.return_value = mocked_session
+        mocked_session.options.return_value = mocked_session
+        mocked_session.offset.return_value = mocked_session
+
+        mocked_session.all.return_value = []
+
+        sessionmaker.return_value = mocked_session
+
+        metadata_scraper = scrape.MetadataDatabaseScraper(
+            MetadataScraperTestCase.hive_metastore_db_host,
+            MetadataScraperTestCase.hive_metastore_db_user,
+            MetadataScraperTestCase.hive_metastore_db_pass,
+            MetadataScraperTestCase.hive_metastore_db_name,
+            MetadataScraperTestCase.hive_metastore_db_type)
+
+        databases_metadata = metadata_scraper.get_database_metadata()
+
+        self.assertEqual(0, len(databases_metadata['databases']))
+
+    @mock.patch(f'{__SCRAPE_PACKAGE}.metadata_database_scraper.sessionmaker')
     def test_scrape_databases_metadata_on_operational_error_should_reraise(
             self, sessionmaker):  # noqa
 
