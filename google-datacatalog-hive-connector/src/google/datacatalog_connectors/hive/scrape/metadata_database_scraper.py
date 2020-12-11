@@ -44,7 +44,8 @@ class MetadataDatabaseScraper:
             }
 
             # Since we can have Hive databases with thousands of tables,
-            # we add pagination logic to avoid holding the session for too long.
+            # we add pagination logic to avoid holding the session for
+            # too long.
             # Pagination is done at the top level: the databases.
             while paginated_query_conf['execute']:
                 session_wrapper = sessionmaker(bind=self.__engine)
