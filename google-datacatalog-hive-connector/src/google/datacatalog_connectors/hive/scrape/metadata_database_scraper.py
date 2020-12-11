@@ -19,10 +19,12 @@ import logging
 from google.datacatalog_connectors.hive import entities
 from sqlalchemy import create_engine
 from sqlalchemy import exc
-from sqlalchemy.orm import defaultload, sessionmaker
+from sqlalchemy.orm import subqueryload, sessionmaker
 
 
 class MetadataDatabaseScraper:
+    DATABASES_PER_PAGE = 5
+    INITIAL_PAGE_NUMBER = 1
 
     def __init__(self, hive_metastore_db_host, hive_metastore_db_user,
                  hive_metastore_db_pass, hive_metastore_db_name,
@@ -33,15 +35,47 @@ class MetadataDatabaseScraper:
             hive_metastore_db_name))
 
     def get_database_metadata(self):
-        session_wrapper = sessionmaker(bind=self.__engine)
-        session = session_wrapper()
         try:
-            databases = session.query(entities.Database).options(
-                defaultload(entities.Database.tables).joinedload(
-                    entities.Table.table_params),
-                defaultload(entities.Database.tables).joinedload(
-                    entities.Table.table_storages).joinedload(
-                        entities.TableStorage.columns)).all()
+            databases = []
+            paginated_query_conf = {
+                'execute': True,
+                'rows_per_page': self.DATABASES_PER_PAGE,
+                'page_number': self.INITIAL_PAGE_NUMBER
+            }
+
+            # Since we can have Hive databases with thousands of tables,
+            # we add pagination logic to avoid holding the session for
+            # too long.
+            # Pagination is done at the top level: the databases.
+            while paginated_query_conf['execute']:
+                session_wrapper = sessionmaker(bind=self.__engine)
+                session = session_wrapper()
+
+                rows_per_page = paginated_query_conf['rows_per_page']
+
+                # Use subqueryload to eagerly execute
+                # the queries in the same session.
+                query = session.query(entities.Database).options(
+                    subqueryload(entities.Database.tables).subqueryload(
+                        entities.Table.table_params),
+                    subqueryload(entities.Database.tables).subqueryload(
+                        entities.Table.table_storages).subqueryload(
+                            entities.TableStorage.columns))
+
+                # Add pagination clause
+                query = query.limit(rows_per_page).offset(
+                    (paginated_query_conf['page_number'] - 1) * rows_per_page)
+
+                results = query.all()
+                databases.extend(results)
+
+                # Set next page
+                paginated_query_conf[
+                    'page_number'] = paginated_query_conf['page_number'] + 1
+
+                # It means there are no more pages.
+                if len(results) == 0:
+                    paginated_query_conf['execute'] = False
 
             return {'databases': databases}
         except exc.OperationalError:

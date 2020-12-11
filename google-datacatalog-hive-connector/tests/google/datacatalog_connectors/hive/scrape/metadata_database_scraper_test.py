@@ -18,7 +18,7 @@ import json
 import os
 
 import unittest
-from unittest.mock import patch
+from unittest import mock
 
 from sqlalchemy import exc
 from pytest import raises
@@ -37,11 +37,27 @@ class MetadataScraperTestCase(unittest.TestCase):
         MetadataScraperTestCase.hive_metastore_db_name = 'metastore'
         MetadataScraperTestCase.hive_metastore_db_type = 'postgresql'
 
-    @patch(f'{__SCRAPE_PACKAGE}.metadata_database_scraper.sessionmaker')
+    @mock.patch(f'{__SCRAPE_PACKAGE}.metadata_database_scraper.sessionmaker')
     def test_scrape_databases_metadata_should_return_objects(
             self, sessionmaker):  # noqa
 
-        sessionmaker.return_value = MockedSession
+        mocked_session = mock.MagicMock()
+
+        # Return the same instance, since session object
+        # uses a builder pattern.
+        mocked_session.return_value = mocked_session
+        mocked_session.query.return_value = mocked_session
+        mocked_session.limit.return_value = mocked_session
+        mocked_session.options.return_value = mocked_session
+        mocked_session.offset.return_value = mocked_session
+
+        # Mocks with 2 pages, and third page is empty.
+        mocked_session.all.side_effect = [
+            retrieve_json_file('databases.json'),
+            retrieve_json_file('databases.json'), []
+        ]
+
+        sessionmaker.return_value = mocked_session
 
         metadata_scraper = scrape.MetadataDatabaseScraper(
             MetadataScraperTestCase.hive_metastore_db_host,
@@ -52,13 +68,55 @@ class MetadataScraperTestCase(unittest.TestCase):
 
         databases_metadata = metadata_scraper.get_database_metadata()
 
-        self.assertEqual(6, len(databases_metadata['databases']))
+        self.assertEqual(12, len(databases_metadata['databases']))
 
-    @patch(f'{__SCRAPE_PACKAGE}.metadata_database_scraper.sessionmaker')
+    @mock.patch(f'{__SCRAPE_PACKAGE}.metadata_database_scraper.sessionmaker')
+    def test_scrape_databases_metadata_when_no_pages_should_return_empty(
+            self, sessionmaker):  # noqa
+
+        mocked_session = mock.MagicMock()
+
+        # Return the same instance, since session object
+        # uses a builder pattern.
+        mocked_session.return_value = mocked_session
+        mocked_session.query.return_value = mocked_session
+        mocked_session.limit.return_value = mocked_session
+        mocked_session.options.return_value = mocked_session
+        mocked_session.offset.return_value = mocked_session
+
+        mocked_session.all.return_value = []
+
+        sessionmaker.return_value = mocked_session
+
+        metadata_scraper = scrape.MetadataDatabaseScraper(
+            MetadataScraperTestCase.hive_metastore_db_host,
+            MetadataScraperTestCase.hive_metastore_db_user,
+            MetadataScraperTestCase.hive_metastore_db_pass,
+            MetadataScraperTestCase.hive_metastore_db_name,
+            MetadataScraperTestCase.hive_metastore_db_type)
+
+        databases_metadata = metadata_scraper.get_database_metadata()
+
+        self.assertEqual(0, len(databases_metadata['databases']))
+
+    @mock.patch(f'{__SCRAPE_PACKAGE}.metadata_database_scraper.sessionmaker')
     def test_scrape_databases_metadata_on_operational_error_should_reraise(
             self, sessionmaker):  # noqa
 
-        sessionmaker.return_value = MockedErrorSession
+        mocked_session = mock.MagicMock()
+
+        # Return the same instance, since session object
+        # uses a builder pattern.
+        mocked_session.return_value = mocked_session
+        mocked_session.query.return_value = mocked_session
+        mocked_session.limit.return_value = mocked_session
+        mocked_session.options.return_value = mocked_session
+        mocked_session.offset.return_value = mocked_session
+
+        mocked_session.all.side_effect = exc.OperationalError(
+            statement='SQL QUERY', params=[], orig=1)
+
+        sessionmaker.return_value = mocked_session
 
         with raises(exc.OperationalError):
             metadata_scraper = scrape.MetadataDatabaseScraper(
@@ -67,7 +125,7 @@ class MetadataScraperTestCase(unittest.TestCase):
                 MetadataScraperTestCase.hive_metastore_db_pass,
                 MetadataScraperTestCase.hive_metastore_db_name,
                 MetadataScraperTestCase.hive_metastore_db_type)
-            with patch('logging.error') as mocked_method:
+            with mock.patch('logging.error') as mocked_method:
                 metadata_scraper.get_database_metadata()
                 mocked_method.assert_called_once()
 
@@ -78,38 +136,3 @@ def retrieve_json_file(name):
 
     with open(resolved_name) as json_file:
         return json.load(json_file)
-
-
-class MockedSession(object):
-
-    def __init__(self):
-        self.__dict__ = {}
-        self.__setitem__('query', lambda *args: MockedSession())
-        self.__setitem__('options', lambda *args: MockedSession())
-        self.__setitem__('all',
-                         lambda *args: retrieve_json_file('databases.json'))
-
-    def __setitem__(self, key, value):
-        self.__dict__[key] = value
-
-    def __getitem__(self, key):
-        return self.__dict__[key]
-
-
-def raise_operational_error():
-    raise exc.OperationalError(statement='SQL QUERY', params=[], orig=1)
-
-
-class MockedErrorSession(object):
-
-    def __init__(self):
-        self.__dict__ = {}
-        self.__setitem__('query', lambda *args: MockedErrorSession())
-        self.__setitem__('options', lambda *args: MockedErrorSession())
-        self.__setitem__('all', lambda *args: raise_operational_error())
-
-    def __setitem__(self, key, value):
-        self.__dict__[key] = value
-
-    def __getitem__(self, key):
-        return self.__dict__[key]

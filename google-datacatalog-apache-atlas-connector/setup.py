@@ -16,7 +16,7 @@
 
 import setuptools
 
-release_status='Development Status :: 4 - Beta'
+release_status = 'Development Status :: 4 - Beta'
 
 with open('README.md') as readme_file:
     readme = readme_file.read()
@@ -37,13 +37,11 @@ setuptools.setup(
         ],
     },
     include_package_data=True,
-    install_requires=(
-        'atlasclient',
-        'kafka-python',
-        'google-datacatalog-connectors-commons>=0.6.0'
-    ),
+    install_requires=('atlasclient', 'kafka-python',
+                      'google-datacatalog-connectors-commons>=0.6.0'),
     setup_requires=('pytest-runner',),
-    tests_require=('pytest-cov', 'google-datacatalog-connectors-commons-test>=0.6.0'),
+    tests_require=('google-datacatalog-connectors-commons-test>=0.6.0',
+                   'numpy==1.19.4', 'pytest-cov==2.10.1'),
     classifiers=(
         release_status,
         'Programming Language :: Python :: 3.7',
