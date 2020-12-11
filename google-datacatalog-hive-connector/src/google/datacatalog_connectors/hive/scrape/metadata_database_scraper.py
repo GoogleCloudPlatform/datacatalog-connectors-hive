@@ -39,7 +39,7 @@ class MetadataDatabaseScraper:
             databases = []
             paginated_query_conf = {
                 'execute': True,
-                'number_of_rows_per_page': self.DATABASES_PER_PAGE,
+                'rows_per_page': self.DATABASES_PER_PAGE,
                 'page_number': self.INITIAL_PAGE_NUMBER
             }
 
@@ -50,8 +50,7 @@ class MetadataDatabaseScraper:
                 session_wrapper = sessionmaker(bind=self.__engine)
                 session = session_wrapper()
 
-                number_of_rows_per_page = paginated_query_conf[
-                    'number_of_rows_per_page']
+                rows_per_page = paginated_query_conf['rows_per_page']
 
                 # Use subqueryload to eagerly execute
                 # the queries in the same session.
@@ -63,9 +62,8 @@ class MetadataDatabaseScraper:
                             entities.TableStorage.columns))
 
                 # Add pagination clause
-                query = query.limit(number_of_rows_per_page).offset(
-                    (paginated_query_conf['page_number'] - 1) *
-                    number_of_rows_per_page)
+                query = query.limit(rows_per_page).offset(
+                    (paginated_query_conf['page_number'] - 1) * rows_per_page)
 
                 results = query.all()
                 databases.extend(results)
