@@ -23,6 +23,7 @@ from sqlalchemy.orm import subqueryload, sessionmaker
 
 
 class MetadataDatabaseScraper:
+    CONNECTION_POOL_SIZE = 20
     DATABASES_PER_PAGE = 5
     INITIAL_PAGE_NUMBER = 1
 
@@ -32,7 +33,7 @@ class MetadataDatabaseScraper:
         self.__engine = create_engine('{}://{}:{}@{}/{}'.format(
             hive_metastore_db_type, hive_metastore_db_user,
             hive_metastore_db_pass, hive_metastore_db_host,
-            hive_metastore_db_name))
+            hive_metastore_db_name), pool_size=self.CONNECTION_POOL_SIZE)
 
     def get_database_metadata(self):
         try:
@@ -47,37 +48,41 @@ class MetadataDatabaseScraper:
             # we add pagination logic to avoid holding the session for
             # too long.
             # Pagination is done at the top level: the databases.
+            session_wrapper = sessionmaker(bind=self.__engine)
+
             while paginated_query_conf['execute']:
-                session_wrapper = sessionmaker(bind=self.__engine)
-                session = session_wrapper()
+                # Use context  manager to make sure session is removed.
+                with session_wrapper() as session:
+                    rows_per_page = paginated_query_conf['rows_per_page']
 
-                rows_per_page = paginated_query_conf['rows_per_page']
+                    # Use subqueryload to eagerly execute
+                    # the queries in the same session.
+                    query = session.query(entities.Database).options(
+                        subqueryload(entities.Database.tables).subqueryload(
+                            entities.Table.table_params),
+                        subqueryload(entities.Database.tables).subqueryload(
+                            entities.Table.table_storages).subqueryload(
+                                entities.TableStorage.columns))
 
-                # Use subqueryload to eagerly execute
-                # the queries in the same session.
-                query = session.query(entities.Database).options(
-                    subqueryload(entities.Database.tables).subqueryload(
-                        entities.Table.table_params),
-                    subqueryload(entities.Database.tables).subqueryload(
-                        entities.Table.table_storages).subqueryload(
-                            entities.TableStorage.columns))
+                    # Add pagination clause
+                    query = query.limit(rows_per_page).offset(
+                        (paginated_query_conf['page_number'] - 1) * rows_per_page)
 
-                # Add pagination clause
-                query = query.limit(rows_per_page).offset(
-                    (paginated_query_conf['page_number'] - 1) * rows_per_page)
+                    results = query.all()
+                    databases.extend(results)
 
-                results = query.all()
-                databases.extend(results)
+                    # Set next page
+                    paginated_query_conf[
+                        'page_number'] = paginated_query_conf['page_number'] + 1
 
-                # Set next page
-                paginated_query_conf[
-                    'page_number'] = paginated_query_conf['page_number'] + 1
-
-                # It means there are no more pages.
-                if len(results) == 0:
-                    paginated_query_conf['execute'] = False
+                    # It means there are no more pages.
+                    if len(results) == 0:
+                        paginated_query_conf['execute'] = False
 
             return {'databases': databases}
         except exc.OperationalError:
             logging.error('Unable to connect to the metadata database.')
             raise
+        finally:
+            # Make sure we have closed all connections of the connection pool.
+            self.__engine.dispose()
