@@ -23,7 +23,7 @@ with open('README.md') as readme_file:
 
 setuptools.setup(
     name='google-datacatalog-hive-connector',
-    version='0.8.0',
+    version='0.8.1',
     author='Google LLC',
     description=
     'Library for ingesting Hive metadata into Google Cloud Data Catalog',
