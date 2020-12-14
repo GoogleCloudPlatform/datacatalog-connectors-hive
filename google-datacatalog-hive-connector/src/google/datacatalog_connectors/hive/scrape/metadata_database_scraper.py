@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from contextlib import contextmanager
 import logging
 
 from google.datacatalog_connectors.hive import entities
@@ -48,11 +49,9 @@ class MetadataDatabaseScraper:
             # we add pagination logic to avoid holding the session for
             # too long.
             # Pagination is done at the top level: the databases.
-            session_wrapper = sessionmaker(bind=self.__engine)
-
             while paginated_query_conf['execute']:
                 # Use context  manager to make sure session is removed.
-                with session_wrapper() as session:
+                with self.session_scope() as session:
                     rows_per_page = paginated_query_conf['rows_per_page']
 
                     # Use subqueryload to eagerly execute
@@ -86,3 +85,15 @@ class MetadataDatabaseScraper:
         finally:
             # Make sure we have closed all connections of the connection pool.
             self.__engine.dispose()
+
+    @contextmanager
+    def session_scope(self):
+        session_wrapper = sessionmaker(bind=self.__engine)
+        session = session_wrapper()
+        try:
+            yield session
+        except exc.OperationalError:
+            session.rollback()
+            raise
+        finally:
+            session.close()
