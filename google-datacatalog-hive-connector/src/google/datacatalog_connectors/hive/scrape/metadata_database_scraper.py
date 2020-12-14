@@ -34,7 +34,8 @@ class MetadataDatabaseScraper:
         self.__engine = create_engine('{}://{}:{}@{}/{}'.format(
             hive_metastore_db_type, hive_metastore_db_user,
             hive_metastore_db_pass, hive_metastore_db_host,
-            hive_metastore_db_name), pool_size=self.CONNECTION_POOL_SIZE)
+            hive_metastore_db_name),
+                                      pool_size=self.CONNECTION_POOL_SIZE)
 
     def get_database_metadata(self):
         try:
@@ -52,6 +53,8 @@ class MetadataDatabaseScraper:
             while paginated_query_conf['execute']:
                 # Use context  manager to make sure session is removed.
                 with self.session_scope() as session:
+                    logging.info('[Scrape] fetching page: %s.',
+                                 paginated_query_conf['page_number'])
                     rows_per_page = paginated_query_conf['rows_per_page']
 
                     # Use subqueryload to eagerly execute
@@ -65,17 +68,21 @@ class MetadataDatabaseScraper:
 
                     # Add pagination clause
                     query = query.limit(rows_per_page).offset(
-                        (paginated_query_conf['page_number'] - 1) * rows_per_page)
+                        (paginated_query_conf['page_number'] - 1) *
+                        rows_per_page)
 
                     results = query.all()
                     databases.extend(results)
 
                     # Set next page
-                    paginated_query_conf[
-                        'page_number'] = paginated_query_conf['page_number'] + 1
+                    paginated_query_conf['page_number'] = paginated_query_conf[
+                        'page_number'] + 1
 
                     # It means there are no more pages.
                     if len(results) == 0:
+                        logging.info(
+                            '[Scrape] finished execution at page: %s.',
+                            paginated_query_conf['page_number'])
                         paginated_query_conf['execute'] = False
 
             return {'databases': databases}
