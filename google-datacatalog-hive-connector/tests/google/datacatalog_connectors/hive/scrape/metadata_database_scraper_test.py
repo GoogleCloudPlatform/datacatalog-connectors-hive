@@ -51,6 +51,9 @@ class MetadataScraperTestCase(unittest.TestCase):
         mocked_session.options.return_value = mocked_session
         mocked_session.offset.return_value = mocked_session
 
+        # Mock context creation
+        mocked_session.__enter__.return_value = mocked_session
+
         # Mocks with 2 pages, and third page is empty.
         mocked_session.all.side_effect = [
             retrieve_json_file('databases.json'),
@@ -84,6 +87,9 @@ class MetadataScraperTestCase(unittest.TestCase):
         mocked_session.options.return_value = mocked_session
         mocked_session.offset.return_value = mocked_session
 
+        # Mock context creation
+        mocked_session.__enter__.return_value = mocked_session
+
         mocked_session.all.return_value = []
 
         sessionmaker.return_value = mocked_session
@@ -112,6 +118,9 @@ class MetadataScraperTestCase(unittest.TestCase):
         mocked_session.limit.return_value = mocked_session
         mocked_session.options.return_value = mocked_session
         mocked_session.offset.return_value = mocked_session
+
+        # Mock context creation
+        mocked_session.__enter__.return_value = mocked_session
 
         mocked_session.all.side_effect = exc.OperationalError(
             statement='SQL QUERY', params=[], orig=1)
