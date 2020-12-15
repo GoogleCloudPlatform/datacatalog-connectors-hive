@@ -18,8 +18,7 @@ from contextlib import contextmanager
 import logging
 
 from google.datacatalog_connectors.hive import entities
-from sqlalchemy import create_engine
-from sqlalchemy import exc
+from sqlalchemy import create_engine, exc
 from sqlalchemy.orm import subqueryload, sessionmaker
 
 
@@ -31,11 +30,12 @@ class MetadataDatabaseScraper:
     def __init__(self, hive_metastore_db_host, hive_metastore_db_user,
                  hive_metastore_db_pass, hive_metastore_db_name,
                  hive_metastore_db_type):
+        # yapf: disable
         self.__engine = create_engine('{}://{}:{}@{}/{}'.format(
             hive_metastore_db_type, hive_metastore_db_user,
             hive_metastore_db_pass, hive_metastore_db_host,
-            hive_metastore_db_name),
-                                      pool_size=self.CONNECTION_POOL_SIZE)
+            hive_metastore_db_name), pool_size=self.CONNECTION_POOL_SIZE)
+        # yapf: enable
 
     def get_database_metadata(self):
         try:
