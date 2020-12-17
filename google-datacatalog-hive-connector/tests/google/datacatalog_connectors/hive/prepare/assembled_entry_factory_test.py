@@ -72,6 +72,60 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
         self.assertEqual(expected_created_entries_len, created_entries_len)
         self.__assert_created_entry_fields(assembled_entries)
 
+    def test_database_metadata_invalid_ids_should_be_converted_to_assembled_entries(  # noqa:E501
+            self, entry_path):  # noqa
+
+        entry_path.return_value = \
+            AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH
+
+        factory = assembled_entry_factory.AssembledEntryFactory(
+            AssembledEntryFactoryTestCase.__PROJECT_ID,
+            AssembledEntryFactoryTestCase.__LOCATION_ID,
+            AssembledEntryFactoryTestCase.__METADATA_SERVER_HOST,
+            AssembledEntryFactoryTestCase.__ENTRY_GROUP_ID)
+
+        database_metadata = convert_json_to_metadata_object(
+            retrieve_json_file('databases_invalid_ids.json'))
+
+        assembled_entries = \
+            factory.make_entries_from_database_metadata(
+                database_metadata)
+
+        databases = database_metadata['databases']
+
+        # This is the size of the combination of tables and databases metadata
+        # The returned object contains a list of database +
+        # a list of tables for each database
+        expected_created_entries_len = \
+            sum([len(database_item['tables']) for database_item in databases],
+                len(databases))
+
+        # This is the size of the entries created based on the metadata
+        # The returned tuple contains 1 database +
+        # a list of tables related to the database on
+        # each iteration
+        created_entries_len = sum(
+            [len(tables) for (database, tables) in assembled_entries],
+            len(assembled_entries))
+
+        self.assertEqual(expected_created_entries_len, created_entries_len)
+
+        for assembled_database, assembled_tables in assembled_entries:
+            self.__assert_required(assembled_database.entry_id,
+                                   assembled_database.entry)
+            self.assertEqual('organization_warehouse7192ecb2',
+                             assembled_database.entry_id)
+
+            for user_defined_table in assembled_tables:
+                table_entry = user_defined_table.entry
+                self.__assert_required(user_defined_table.entry_id,
+                                       table_entry)
+                # Assert specific fields for table
+                self.assertEqual(
+                    'organization_warehouse7192ecb2__'
+                    'personsc3a8d512_businessa14b6c76',
+                    user_defined_table.entry_id)
+
     def test_database_metadata_should_be_converted_to_assembled_entries_verify_all_fields(  # noqa: E501
             self, entry_path):
         entry_path.return_value = \

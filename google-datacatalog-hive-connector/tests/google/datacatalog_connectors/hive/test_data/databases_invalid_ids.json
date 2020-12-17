@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "name": "organization_warehouse7192ecb2",
+        "desc": "Default Hive database",
+        "uri": "hdfs://namenode:8020/user/hive/warehouse",
+        "tables": [
+            {
+                "id": 1,
+                "name": "personsc3a8d512_business_area_and_segment_of_marketing",
+                "type": "MANAGED_TABLE",
+                "create_time": 1567519048,
+                "database_id": 1,
+                "sd_id": 1,
+                "table_storages": [
+                    {
+                        "sd_id": 1,
+                        "location": "hdfs://namenode:8020/user/hive/warehouse/funds",
+                        "cd_id": 2,
+                        "columns": [
+                            {
+                                "id": 2,
+                                "name": "addr",
+                                "type": "string",
+                                "comment": "a new addr column"
+                            },
+                            {
+                                "id": 2,
+                                "name": "bar",
+                                "type": "string",
+                                "comment": null
+                            },
+                            {
+                                "id": 2,
+                                "name": "foo",
+                                "type": "int",
+                                "comment": null
+                            }
+                        ]
+                    }
+                ],
+                "table_params": [
+                    {
+                        "id": 1,
+                        "param_key": "last_modified_by",
+                        "param_value": "root"
+                    },
+                    {
+                        "id": 1,
+                        "param_key": "last_modified_time",
+                        "param_value": "1567519078"
+                    },
+                    {
+                        "id": 1,
+                        "param_key": "transient_lastDdlTime",
+                        "param_value": "1567519078"
+                    },
+                    {
+                        "id": 1,
+                        "param_key": "numFiles",
+                        "param_value": "1"
+                    },
+                    {
+                        "id": 1,
+                        "param_key": "rawDataSize",
+                        "param_value": "0"
+                    },
+                    {
+                        "id": 1,
+                        "param_key": "numRows",
+                        "param_value": "0"
+                    },
+                    {
+                        "id": 1,
+                        "param_key": "totalSize",
+                        "param_value": "5812"
+                    }
+                ]
+            }
+        ]
+    }
+]
