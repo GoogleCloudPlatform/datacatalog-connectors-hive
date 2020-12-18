@@ -51,10 +51,10 @@ class DataCatalogEntryFactory(BaseEntryFactory):
         if isinstance(database_desc, str):
             entry.description = database_desc
         entry.linked_resource = \
-            '//{}//{}'.format(
+            self._format_linked_resource('//{}//{}'.format(
                 self.__metadata_host_server,
                 database_metadata.uri
-            )
+            ))
 
         return entry_id, entry
 
@@ -76,8 +76,9 @@ class DataCatalogEntryFactory(BaseEntryFactory):
         table_storage = table_metadata.table_storages[0]
 
         entry.linked_resource = \
-            '//{}//{}'.format(self.__metadata_host_server,
-                              table_storage.location)
+            self._format_linked_resource(
+                '//{}//{}'.format(self.__metadata_host_server,
+                                  table_storage.location))
 
         created_timestamp = timestamp_pb2.Timestamp()
         created_timestamp.FromSeconds(table_metadata.create_time)
