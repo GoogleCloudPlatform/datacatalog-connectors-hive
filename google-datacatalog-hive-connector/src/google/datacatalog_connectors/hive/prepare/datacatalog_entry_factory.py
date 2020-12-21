@@ -109,12 +109,12 @@ class DataCatalogEntryFactory(BaseEntryFactory):
         return entry_id, entry
 
     def __make_entry_id_for_table(self, database_name, table_metadata):
-        # We normalize and hash first the database_name
+        # We normalize and hash first the database_name.
         normalized_database_name = self._format_id_with_hashing(
             database_name.lower(),
             regex_pattern=self.__ENTRY_ID_INVALID_CHARS_REGEX_PATTERN)
 
-        # Next we do the same for the table name
+        # Next we do the same for the table name.
         normalized_table_name = self._format_id_with_hashing(
             table_metadata.name.lower(),
             regex_pattern=self.__ENTRY_ID_INVALID_CHARS_REGEX_PATTERN)
