@@ -41,7 +41,7 @@ class DataCatalogEntryFactory(BaseEntryFactory):
         entry.user_specified_type = 'database'
         entry.user_specified_system = 'hive'
 
-        entry.display_name = database_metadata.name
+        entry.display_name = self._format_display_name(database_metadata.name)
 
         entry.name = datacatalog.DataCatalogClient.entry_path(
             self.__project_id, self.__location_id, self.__entry_group_id,
@@ -67,7 +67,7 @@ class DataCatalogEntryFactory(BaseEntryFactory):
         entry.user_specified_type = 'table'
         entry.user_specified_system = 'hive'
 
-        entry.display_name = table_metadata.name
+        entry.display_name = self._format_display_name(table_metadata.name)
 
         entry.name = datacatalog.DataCatalogClient.entry_path(
             self.__project_id, self.__location_id, self.__entry_group_id,
