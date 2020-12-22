@@ -35,9 +35,7 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
             retrieve_json_file('databases_with_one_table.json'))['databases']
 
         factory = datacatalog_entry_factory.DataCatalogEntryFactory(
-            self.__PROJECT_ID,
-            self.__LOCATION_ID,
-            self.__METADATA_SERVER_HOST,
+            self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
             self.__ENTRY_GROUP_ID)
 
         entry_id, entry = \
@@ -63,9 +61,7 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
         table = databases[0].tables[0]
 
         factory = datacatalog_entry_factory.DataCatalogEntryFactory(
-            self.__PROJECT_ID,
-            self.__LOCATION_ID,
-            self.__METADATA_SERVER_HOST,
+            self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
             self.__ENTRY_GROUP_ID)
 
         entry_id, entry = \
@@ -96,9 +92,7 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
         table = databases[0].tables[0]
 
         factory = datacatalog_entry_factory.DataCatalogEntryFactory(
-            self.__PROJECT_ID,
-            self.__LOCATION_ID,
-            self.__METADATA_SERVER_HOST,
+            self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
             self.__ENTRY_GROUP_ID)
 
         invalid_database_name = 'my::::????)()()____invalid_huge_' \
@@ -137,9 +131,7 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
         table = databases[0].tables[0]
 
         factory = datacatalog_entry_factory.DataCatalogEntryFactory(
-            self.__PROJECT_ID,
-            self.__LOCATION_ID,
-            self.__METADATA_SERVER_HOST,
+            self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
             self.__ENTRY_GROUP_ID)
 
         invalid_table_name = 'my::::????)()()____invalid_huge_' \
@@ -200,9 +192,7 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
             'too_long_and_needs_to_be_truncated'
 
         factory = datacatalog_entry_factory.DataCatalogEntryFactory(
-            self.__PROJECT_ID,
-            self.__LOCATION_ID,
-            self.__METADATA_SERVER_HOST,
+            self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
             self.__ENTRY_GROUP_ID)
 
         entry_id, entry = \
