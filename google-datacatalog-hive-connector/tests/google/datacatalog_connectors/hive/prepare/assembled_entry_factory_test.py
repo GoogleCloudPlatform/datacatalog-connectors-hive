@@ -36,8 +36,7 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
     def test_database_metadata_should_be_converted_to_assembled_entries(
             self, entry_path):  # noqa
 
-        entry_path.return_value = \
-            self.__MOCKED_ENTRY_PATH
+        entry_path.return_value = self.__MOCKED_ENTRY_PATH
 
         factory = assembled_entry_factory.AssembledEntryFactory(
             self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
@@ -73,8 +72,7 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
     def test_database_metadata_invalid_ids_should_be_converted_to_assembled_entries(  # noqa:E501
             self, entry_path):
 
-        entry_path.return_value = \
-            self.__MOCKED_ENTRY_PATH
+        entry_path.return_value = self.__MOCKED_ENTRY_PATH
 
         factory = assembled_entry_factory.AssembledEntryFactory(
             self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
@@ -124,8 +122,7 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
 
     def test_database_metadata_should_be_converted_to_assembled_entries_verify_all_fields(  # noqa: E501
             self, entry_path):
-        entry_path.return_value = \
-            self.__MOCKED_ENTRY_PATH
+        entry_path.return_value = self.__MOCKED_ENTRY_PATH
         factory = assembled_entry_factory.AssembledEntryFactory(
             self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
             self.__ENTRY_GROUP_ID)
@@ -142,8 +139,7 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
 
             self.assertEqual('default', assembled_database.entry_id)
             self.assertEqual('database', database_entry.user_specified_type)
-            self.assertEqual(AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH,
-                             database_entry.name)
+            self.assertEqual(self.__MOCKED_ENTRY_PATH, database_entry.name)
             self.assertEqual('Default Hive database',
                              database_entry.description)
             self.assertEqual(
@@ -165,9 +161,7 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
                 # Assert specific fields for table
                 self.assertEqual('table', table_entry.user_specified_type)
                 self.assertEqual('hive', table_entry.user_specified_system)
-                self.assertEqual(
-                    AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH,
-                    table_entry.name)
+                self.assertEqual(self.__MOCKED_ENTRY_PATH, table_entry.name)
                 self.assertEqual(
                     '//metadata_host//hdfs://'
                     'namenode:8020/user/hive/warehouse/funds',
@@ -188,8 +182,7 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
 
     def test_database_metadata_no_tables_should_be_converted_to_datacatalog_entries(  # noqa: E501
             self, entry_path):
-        entry_path.return_value = \
-            self.__MOCKED_ENTRY_PATH
+        entry_path.return_value = self.__MOCKED_ENTRY_PATH
         factory = assembled_entry_factory.AssembledEntryFactory(
             self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
             self.__ENTRY_GROUP_ID)
@@ -231,9 +224,8 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
             # Assert specific fields for database
             self.assertEqual('database', database_entry.user_specified_type)
             self.assertEqual('hive', database_entry.user_specified_system)
-            self.assertEqual(AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH,
-                             database_entry.name)
-            self.assertIn(AssembledEntryFactoryTestCase.__METADATA_SERVER_HOST,
+            self.assertEqual(self.__MOCKED_ENTRY_PATH, database_entry.name)
+            self.assertIn(self.__METADATA_SERVER_HOST,
                           database_entry.linked_resource)
 
             for user_defined_table in assembled_tables:
@@ -247,12 +239,9 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
                 # Assert specific fields for table
                 self.assertEqual('table', table_entry.user_specified_type)
                 self.assertEqual('hive', table_entry.user_specified_system)
-                self.assertEqual(
-                    AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH,
-                    table_entry.name)
-                self.assertIn(
-                    AssembledEntryFactoryTestCase.__METADATA_SERVER_HOST,
-                    table_entry.linked_resource)
+                self.assertEqual(self.__MOCKED_ENTRY_PATH, table_entry.name)
+                self.assertIn(self.__METADATA_SERVER_HOST,
+                              table_entry.linked_resource)
                 self.assertGreater(len(table_entry.schema.columns), 0)
                 for column in table_entry.schema.columns:
                     self.assertIsNotNone(column.type)

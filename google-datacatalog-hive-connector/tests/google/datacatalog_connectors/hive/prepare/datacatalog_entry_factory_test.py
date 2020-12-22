@@ -35,10 +35,10 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
             retrieve_json_file('databases_with_one_table.json'))['databases']
 
         factory = datacatalog_entry_factory.DataCatalogEntryFactory(
-            DataCatalogEntryFactoryTestCase.__PROJECT_ID,
-            DataCatalogEntryFactoryTestCase.__LOCATION_ID,
-            DataCatalogEntryFactoryTestCase.__METADATA_SERVER_HOST,
-            DataCatalogEntryFactoryTestCase.__ENTRY_GROUP_ID)
+            self.__PROJECT_ID,
+            self.__LOCATION_ID,
+            self.__METADATA_SERVER_HOST,
+            self.__ENTRY_GROUP_ID)
 
         entry_id, entry = \
             factory.make_entries_for_database(databases[0])
@@ -63,10 +63,10 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
         table = databases[0].tables[0]
 
         factory = datacatalog_entry_factory.DataCatalogEntryFactory(
-            DataCatalogEntryFactoryTestCase.__PROJECT_ID,
-            DataCatalogEntryFactoryTestCase.__LOCATION_ID,
-            DataCatalogEntryFactoryTestCase.__METADATA_SERVER_HOST,
-            DataCatalogEntryFactoryTestCase.__ENTRY_GROUP_ID)
+            self.__PROJECT_ID,
+            self.__LOCATION_ID,
+            self.__METADATA_SERVER_HOST,
+            self.__ENTRY_GROUP_ID)
 
         entry_id, entry = \
             factory.make_entry_for_table(table, 'my_datawarehouse')
@@ -96,10 +96,10 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
         table = databases[0].tables[0]
 
         factory = datacatalog_entry_factory.DataCatalogEntryFactory(
-            DataCatalogEntryFactoryTestCase.__PROJECT_ID,
-            DataCatalogEntryFactoryTestCase.__LOCATION_ID,
-            DataCatalogEntryFactoryTestCase.__METADATA_SERVER_HOST,
-            DataCatalogEntryFactoryTestCase.__ENTRY_GROUP_ID)
+            self.__PROJECT_ID,
+            self.__LOCATION_ID,
+            self.__METADATA_SERVER_HOST,
+            self.__ENTRY_GROUP_ID)
 
         invalid_database_name = 'my::::????)()()____invalid_huge_' \
                                 'database_name_!!!!!!_@@@@@@_with' \
@@ -137,10 +137,10 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
         table = databases[0].tables[0]
 
         factory = datacatalog_entry_factory.DataCatalogEntryFactory(
-            DataCatalogEntryFactoryTestCase.__PROJECT_ID,
-            DataCatalogEntryFactoryTestCase.__LOCATION_ID,
-            DataCatalogEntryFactoryTestCase.__METADATA_SERVER_HOST,
-            DataCatalogEntryFactoryTestCase.__ENTRY_GROUP_ID)
+            self.__PROJECT_ID,
+            self.__LOCATION_ID,
+            self.__METADATA_SERVER_HOST,
+            self.__ENTRY_GROUP_ID)
 
         invalid_table_name = 'my::::????)()()____invalid_huge_' \
                              'table_name_!!!!!!_@@@@@@_with' \
@@ -200,10 +200,10 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
             'too_long_and_needs_to_be_truncated'
 
         factory = datacatalog_entry_factory.DataCatalogEntryFactory(
-            DataCatalogEntryFactoryTestCase.__PROJECT_ID,
-            DataCatalogEntryFactoryTestCase.__LOCATION_ID,
-            DataCatalogEntryFactoryTestCase.__METADATA_SERVER_HOST,
-            DataCatalogEntryFactoryTestCase.__ENTRY_GROUP_ID)
+            self.__PROJECT_ID,
+            self.__LOCATION_ID,
+            self.__METADATA_SERVER_HOST,
+            self.__ENTRY_GROUP_ID)
 
         entry_id, entry = \
             factory.make_entry_for_table(table, 'my_datawarehouse')
