@@ -37,13 +37,11 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
             self, entry_path):  # noqa
 
         entry_path.return_value = \
-            AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH
+            self.__MOCKED_ENTRY_PATH
 
         factory = assembled_entry_factory.AssembledEntryFactory(
-            AssembledEntryFactoryTestCase.__PROJECT_ID,
-            AssembledEntryFactoryTestCase.__LOCATION_ID,
-            AssembledEntryFactoryTestCase.__METADATA_SERVER_HOST,
-            AssembledEntryFactoryTestCase.__ENTRY_GROUP_ID)
+            self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
+            self.__ENTRY_GROUP_ID)
 
         database_metadata = convert_json_to_metadata_object(
             retrieve_json_file('databases.json'))
@@ -73,16 +71,14 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
         self.__assert_created_entry_fields(assembled_entries)
 
     def test_database_metadata_invalid_ids_should_be_converted_to_assembled_entries(  # noqa:E501
-            self, entry_path):  # noqa
+            self, entry_path):
 
         entry_path.return_value = \
-            AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH
+            self.__MOCKED_ENTRY_PATH
 
         factory = assembled_entry_factory.AssembledEntryFactory(
-            AssembledEntryFactoryTestCase.__PROJECT_ID,
-            AssembledEntryFactoryTestCase.__LOCATION_ID,
-            AssembledEntryFactoryTestCase.__METADATA_SERVER_HOST,
-            AssembledEntryFactoryTestCase.__ENTRY_GROUP_ID)
+            self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
+            self.__ENTRY_GROUP_ID)
 
         database_metadata = convert_json_to_metadata_object(
             retrieve_json_file('databases_invalid_ids.json'))
@@ -129,12 +125,10 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
     def test_database_metadata_should_be_converted_to_assembled_entries_verify_all_fields(  # noqa: E501
             self, entry_path):
         entry_path.return_value = \
-            AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH
+            self.__MOCKED_ENTRY_PATH
         factory = assembled_entry_factory.AssembledEntryFactory(
-            AssembledEntryFactoryTestCase.__PROJECT_ID,
-            AssembledEntryFactoryTestCase.__LOCATION_ID,
-            AssembledEntryFactoryTestCase.__METADATA_SERVER_HOST,
-            AssembledEntryFactoryTestCase.__ENTRY_GROUP_ID)
+            self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
+            self.__ENTRY_GROUP_ID)
 
         database_metadata = convert_json_to_metadata_object(
             retrieve_json_file('databases_with_one_table.json'))
@@ -195,12 +189,10 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
     def test_database_metadata_no_tables_should_be_converted_to_datacatalog_entries(  # noqa: E501
             self, entry_path):
         entry_path.return_value = \
-            AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH
+            self.__MOCKED_ENTRY_PATH
         factory = assembled_entry_factory.AssembledEntryFactory(
-            AssembledEntryFactoryTestCase.__PROJECT_ID,
-            AssembledEntryFactoryTestCase.__LOCATION_ID,
-            AssembledEntryFactoryTestCase.__METADATA_SERVER_HOST,
-            AssembledEntryFactoryTestCase.__ENTRY_GROUP_ID)
+            self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
+            self.__ENTRY_GROUP_ID)
 
         database_metadata = convert_json_to_metadata_object(
             retrieve_json_file('databases_no_tables.json'))

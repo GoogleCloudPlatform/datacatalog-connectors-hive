@@ -17,11 +17,10 @@
 from google.cloud import datacatalog
 from google.protobuf import timestamp_pb2
 
-from google.datacatalog_connectors.commons.prepare.base_entry_factory import \
-    BaseEntryFactory
+from google.datacatalog_connectors.commons.prepare import base_entry_factory
 
 
-class DataCatalogEntryFactory(BaseEntryFactory):
+class DataCatalogEntryFactory(base_entry_factory.BaseEntryFactory):
     __ENTRY_ID_INVALID_CHARS_REGEX_PATTERN = r'[^a-zA-Z0-9_]+'
 
     def __init__(self, project_id, location_id, metadata_host_server,

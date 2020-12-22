@@ -30,8 +30,7 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
     __METADATA_SERVER_HOST = 'metadata_host'
     __ENTRY_GROUP_ID = 'sql_database'
 
-    def test_make_entry_for_database_should_set_all_available_fields(
-            self):  # noqa:E125
+    def test_make_entry_for_database_should_set_all_available_fields(self):
         databases = convert_json_to_metadata_object(
             retrieve_json_file('databases_with_one_table.json'))['databases']
 
@@ -57,8 +56,7 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
         self.assertIsNone(entry.source_system_timestamps.create_time)
         self.assertIsNone(entry.source_system_timestamps.update_time)
 
-    def test_make_entry_for_table_should_set_all_available_fields(
-            self):  # noqa:E125
+    def test_make_entry_for_table_should_set_all_available_fields(self):
         databases = convert_json_to_metadata_object(
             retrieve_json_file('databases_with_one_table.json'))['databases']
 
@@ -91,7 +89,7 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
                          str(entry.source_system_timestamps.update_time))
 
     def test_make_entry_for_table_invalid_database_name_should_set_all_available_fields(  # noqa:E501
-            self):  # noqa:E125
+            self):
         databases = convert_json_to_metadata_object(
             retrieve_json_file('databases_with_one_table.json'))['databases']
 
@@ -132,7 +130,7 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
                          str(entry.source_system_timestamps.update_time))
 
     def test_make_entry_for_table_invalid_table_name_should_set_all_available_fields(  # noqa:E501
-            self):  # noqa:E125
+            self):
         databases = convert_json_to_metadata_object(
             retrieve_json_file('databases_with_one_table.json'))['databases']
 
@@ -179,7 +177,7 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
                          str(entry.source_system_timestamps.update_time))
 
     def test_make_entry_for_table_long_linked_resource_should_set_all_available_fields(  # noqa:E501
-            self):  # noqa:E125
+            self):
         databases = convert_json_to_metadata_object(
             retrieve_json_file('databases_with_one_table.json'))['databases']
 
@@ -187,7 +185,7 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
 
         table.table_storages[0].location = \
             'my::::????)()()____invalid_huge_table_name_!!!!!!_@@@@@@_with' \
-            '_chars_not_supported_by_dc_and_alength_that_is_' \
+            '_chars_not_supported_by_dc_and_a_length_that_is_' \
             'too_long_and_needs_to_be_truncated' \
             'too_long_and_needs_to_be_truncated' \
             'too_long_and_needs_to_be_truncated' \
@@ -220,9 +218,9 @@ class DataCatalogEntryFactoryTestCase(unittest.TestCase):
         self.assertEqual('table', entry.user_specified_type)
         self.assertEqual(
             '//metadata_host//my::::_____invalid_huge_table_name'
-            '_____with_chars_not_supported_by_dc_and_alength_that'
-            '_is_too_long_and_needs_to_be_truncatedtoo_long_and_'
-            'needs_to_be_truncatedtoo_long_and_needs_to_...',
+            '_____with_chars_not_supported_by_dc_and_a_length_that'
+            '_is_too_long_and_needs_to_be_truncatedtoo_long_and'
+            '_needs_to_be_truncatedtoo_long_and_needs_to...',
             entry.linked_resource)
         self.assertEqual('2019-09-03 13:57:28+00:00',
                          str(entry.source_system_timestamps.create_time))
