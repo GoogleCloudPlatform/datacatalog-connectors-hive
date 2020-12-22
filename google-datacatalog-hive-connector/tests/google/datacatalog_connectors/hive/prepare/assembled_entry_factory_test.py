@@ -36,14 +36,11 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
     def test_database_metadata_should_be_converted_to_assembled_entries(
             self, entry_path):  # noqa
 
-        entry_path.return_value = \
-            AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH
+        entry_path.return_value = self.__MOCKED_ENTRY_PATH
 
         factory = assembled_entry_factory.AssembledEntryFactory(
-            AssembledEntryFactoryTestCase.__PROJECT_ID,
-            AssembledEntryFactoryTestCase.__LOCATION_ID,
-            AssembledEntryFactoryTestCase.__METADATA_SERVER_HOST,
-            AssembledEntryFactoryTestCase.__ENTRY_GROUP_ID)
+            self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
+            self.__ENTRY_GROUP_ID)
 
         database_metadata = convert_json_to_metadata_object(
             retrieve_json_file('databases.json'))
@@ -72,15 +69,63 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
         self.assertEqual(expected_created_entries_len, created_entries_len)
         self.__assert_created_entry_fields(assembled_entries)
 
+    def test_database_metadata_invalid_ids_should_be_converted_to_assembled_entries(  # noqa:E501
+            self, entry_path):
+
+        entry_path.return_value = self.__MOCKED_ENTRY_PATH
+
+        factory = assembled_entry_factory.AssembledEntryFactory(
+            self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
+            self.__ENTRY_GROUP_ID)
+
+        database_metadata = convert_json_to_metadata_object(
+            retrieve_json_file('databases_invalid_ids.json'))
+
+        assembled_entries = \
+            factory.make_entries_from_database_metadata(
+                database_metadata)
+
+        databases = database_metadata['databases']
+
+        # This is the size of the combination of tables and databases metadata
+        # The returned object contains a list of database +
+        # a list of tables for each database
+        expected_created_entries_len = \
+            sum([len(database_item['tables']) for database_item in databases],
+                len(databases))
+
+        # This is the size of the entries created based on the metadata
+        # The returned tuple contains 1 database +
+        # a list of tables related to the database on
+        # each iteration
+        created_entries_len = sum(
+            [len(tables) for (database, tables) in assembled_entries],
+            len(assembled_entries))
+
+        self.assertEqual(expected_created_entries_len, created_entries_len)
+
+        for assembled_database, assembled_tables in assembled_entries:
+            self.__assert_required(assembled_database.entry_id,
+                                   assembled_database.entry)
+            self.assertEqual('organization_warehouse7192ecb2',
+                             assembled_database.entry_id)
+
+            for user_defined_table in assembled_tables:
+                table_entry = user_defined_table.entry
+                self.__assert_required(user_defined_table.entry_id,
+                                       table_entry)
+                # Assert specific fields for table
+                self.assertEqual(
+                    'organization_warehouse7192ecb2__'
+                    'personsc3a8d512_businessa14b6c76',
+                    user_defined_table.entry_id)
+
     def test_database_metadata_should_be_converted_to_assembled_entries_verify_all_fields(  # noqa: E501
             self, entry_path):
-        entry_path.return_value = \
-            AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH
+        entry_path.return_value = self.__MOCKED_ENTRY_PATH
         factory = assembled_entry_factory.AssembledEntryFactory(
-            AssembledEntryFactoryTestCase.__PROJECT_ID,
-            AssembledEntryFactoryTestCase.__LOCATION_ID,
-            AssembledEntryFactoryTestCase.__METADATA_SERVER_HOST,
-            AssembledEntryFactoryTestCase.__ENTRY_GROUP_ID)
+            self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
+            self.__ENTRY_GROUP_ID)
 
         database_metadata = convert_json_to_metadata_object(
             retrieve_json_file('databases_with_one_table.json'))
@@ -94,8 +139,7 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
 
             self.assertEqual('default', assembled_database.entry_id)
             self.assertEqual('database', database_entry.user_specified_type)
-            self.assertEqual(AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH,
-                             database_entry.name)
+            self.assertEqual(self.__MOCKED_ENTRY_PATH, database_entry.name)
             self.assertEqual('Default Hive database',
                              database_entry.description)
             self.assertEqual(
@@ -117,9 +161,7 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
                 # Assert specific fields for table
                 self.assertEqual('table', table_entry.user_specified_type)
                 self.assertEqual('hive', table_entry.user_specified_system)
-                self.assertEqual(
-                    AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH,
-                    table_entry.name)
+                self.assertEqual(self.__MOCKED_ENTRY_PATH, table_entry.name)
                 self.assertEqual(
                     '//metadata_host//hdfs://'
                     'namenode:8020/user/hive/warehouse/funds',
@@ -140,13 +182,10 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
 
     def test_database_metadata_no_tables_should_be_converted_to_datacatalog_entries(  # noqa: E501
             self, entry_path):
-        entry_path.return_value = \
-            AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH
+        entry_path.return_value = self.__MOCKED_ENTRY_PATH
         factory = assembled_entry_factory.AssembledEntryFactory(
-            AssembledEntryFactoryTestCase.__PROJECT_ID,
-            AssembledEntryFactoryTestCase.__LOCATION_ID,
-            AssembledEntryFactoryTestCase.__METADATA_SERVER_HOST,
-            AssembledEntryFactoryTestCase.__ENTRY_GROUP_ID)
+            self.__PROJECT_ID, self.__LOCATION_ID, self.__METADATA_SERVER_HOST,
+            self.__ENTRY_GROUP_ID)
 
         database_metadata = convert_json_to_metadata_object(
             retrieve_json_file('databases_no_tables.json'))
@@ -185,9 +224,8 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
             # Assert specific fields for database
             self.assertEqual('database', database_entry.user_specified_type)
             self.assertEqual('hive', database_entry.user_specified_system)
-            self.assertEqual(AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH,
-                             database_entry.name)
-            self.assertIn(AssembledEntryFactoryTestCase.__METADATA_SERVER_HOST,
+            self.assertEqual(self.__MOCKED_ENTRY_PATH, database_entry.name)
+            self.assertIn(self.__METADATA_SERVER_HOST,
                           database_entry.linked_resource)
 
             for user_defined_table in assembled_tables:
@@ -201,12 +239,9 @@ class AssembledEntryFactoryTestCase(unittest.TestCase):
                 # Assert specific fields for table
                 self.assertEqual('table', table_entry.user_specified_type)
                 self.assertEqual('hive', table_entry.user_specified_system)
-                self.assertEqual(
-                    AssembledEntryFactoryTestCase.__MOCKED_ENTRY_PATH,
-                    table_entry.name)
-                self.assertIn(
-                    AssembledEntryFactoryTestCase.__METADATA_SERVER_HOST,
-                    table_entry.linked_resource)
+                self.assertEqual(self.__MOCKED_ENTRY_PATH, table_entry.name)
+                self.assertIn(self.__METADATA_SERVER_HOST,
+                              table_entry.linked_resource)
                 self.assertGreater(len(table_entry.schema.columns), 0)
                 for column in table_entry.schema.columns:
                     self.assertIsNotNone(column.type)

@@ -17,8 +17,11 @@
 from google.cloud import datacatalog
 from google.protobuf import timestamp_pb2
 
+from google.datacatalog_connectors.commons.prepare import base_entry_factory
 
-class DataCatalogEntryFactory:
+
+class DataCatalogEntryFactory(base_entry_factory.BaseEntryFactory):
+    __ENTRY_ID_INVALID_CHARS_REGEX_PATTERN = r'[^a-zA-Z0-9_]+'
 
     def __init__(self, project_id, location_id, metadata_host_server,
                  entry_group_id):
@@ -28,16 +31,16 @@ class DataCatalogEntryFactory:
         self.__entry_group_id = entry_group_id
 
     def make_entries_for_database(self, database_metadata):
-        entry_id = '{}'.format(database_metadata.name)
-        # Force lowercase since hive is case insensitive
-        entry_id = entry_id.lower()
+        entry_id = self._format_id_with_hashing(
+            database_metadata.name.lower(),
+            regex_pattern=self.__ENTRY_ID_INVALID_CHARS_REGEX_PATTERN)
 
         entry = datacatalog.Entry()
 
         entry.user_specified_type = 'database'
         entry.user_specified_system = 'hive'
 
-        entry.display_name = database_metadata.name
+        entry.display_name = self._format_display_name(database_metadata.name)
 
         entry.name = datacatalog.DataCatalogClient.entry_path(
             self.__project_id, self.__location_id, self.__entry_group_id,
@@ -47,37 +50,34 @@ class DataCatalogEntryFactory:
         if isinstance(database_desc, str):
             entry.description = database_desc
         entry.linked_resource = \
-            '//{}//{}'.format(
+            self._format_linked_resource('//{}//{}'.format(
                 self.__metadata_host_server,
                 database_metadata.uri
-            )
+            ))
 
         return entry_id, entry
 
     def make_entry_for_table(self, table_metadata, database_name):
-        entry_id = '{}__{}'.format(database_name, table_metadata.name)
-        # Force lowercase since hive is case insensitive
-        entry_id = entry_id.lower()
+        entry_id = self.__make_entry_id_for_table(database_name,
+                                                  table_metadata)
 
         entry = datacatalog.Entry()
 
         entry.user_specified_type = 'table'
         entry.user_specified_system = 'hive'
 
-        entry.display_name = table_metadata.name
+        entry.display_name = self._format_display_name(table_metadata.name)
 
         entry.name = datacatalog.DataCatalogClient.entry_path(
             self.__project_id, self.__location_id, self.__entry_group_id,
             entry_id)
 
-        # For now we are using the first table_storage relationship,
-        # with table partitions we might have to deal
-        # with more than one record
         table_storage = table_metadata.table_storages[0]
 
         entry.linked_resource = \
-            '//{}//{}'.format(self.__metadata_host_server,
-                              table_storage.location)
+            self._format_linked_resource(
+                '//{}//{}'.format(self.__metadata_host_server,
+                                  table_storage.location))
 
         created_timestamp = timestamp_pb2.Timestamp()
         created_timestamp.FromSeconds(table_metadata.create_time)
@@ -106,6 +106,26 @@ class DataCatalogEntryFactory:
         entry.schema.columns.extend(columns)
 
         return entry_id, entry
+
+    def __make_entry_id_for_table(self, database_name, table_metadata):
+        # We normalize and hash first the database_name.
+        normalized_database_name = self._format_id_with_hashing(
+            database_name.lower(),
+            regex_pattern=self.__ENTRY_ID_INVALID_CHARS_REGEX_PATTERN)
+
+        # Next we do the same for the table name.
+        normalized_table_name = self._format_id_with_hashing(
+            table_metadata.name.lower(),
+            regex_pattern=self.__ENTRY_ID_INVALID_CHARS_REGEX_PATTERN)
+
+        entry_id = '{}__{}'.format(normalized_database_name,
+                                   normalized_table_name)
+
+        # Then we hash the combined result again to make sure it
+        # does not hit the 64 chars limit.
+        return self._format_id_with_hashing(
+            entry_id,
+            regex_pattern=self.__ENTRY_ID_INVALID_CHARS_REGEX_PATTERN)
 
     @staticmethod
     def __extract_update_time_from_table_metadata(table_metadata):
