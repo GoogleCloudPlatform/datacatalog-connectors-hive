@@ -131,9 +131,9 @@ export APACHE_ATLAS2DC_PASS=my-pass
 ```
 
 ## 3. Sample Sync application entry point
+Executes full scrape process in Apache Atlas and sync Data Catalog metadata creating/updating/deleting Entries and Tags.
 
 ### 3.1. Run the google-datacatalog-apache-atlas-connector sync script
-Executes full scrape process in Apache Atlas and sync Data Catalog metadata creating/updating/deleting Entries and Tags.
 
 - Virtualenv
 
@@ -148,7 +148,6 @@ google-datacatalog-apache-atlas-connector sync \
 ```
 
 ### 3.2. Run Docker entry point
-Executes incremental scrape process in Apache Atlas and sync Data Catalog metadata creating/updating/deleting Entries and Tags. This options listen to event changes on Apache Atlas event bus, which is Kafka.
 
 ```bash
 docker build --rm --tag apache-atlas2datacatalog .
@@ -163,6 +162,7 @@ docker run --rm --tty -v <YOUR-CREDENTIALS_FILES_FOLDER>:/data \
 ```
 
 ## 4. Sample Sync Hook application entry point
+Executes incremental scrape process in Apache Atlas and sync Data Catalog metadata creating/updating/deleting Entries and Tags. This options listen to event changes on Apache Atlas event bus, which is Kafka.
 
 ### 4.1. Run the google-datacatalog-apache-atlas-connector event-hook script
 
