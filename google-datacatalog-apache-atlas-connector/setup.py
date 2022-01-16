@@ -41,7 +41,7 @@ setuptools.setup(
                       'google-datacatalog-connectors-commons>=0.6.0'),
     setup_requires=('pytest-runner',),
     tests_require=('google-datacatalog-connectors-commons-test>=0.6.0',
-                   'numpy==1.19.4', 'pytest-cov==2.10.1'),
+                   'numpy==1.21.0', 'pytest-cov==2.10.1'),
     classifiers=(
         release_status,
         'Programming Language :: Python :: 3.7',
