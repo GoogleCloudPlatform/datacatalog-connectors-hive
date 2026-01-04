@@ -31,15 +31,17 @@ steps:
   id: 'GET_PACKAGE'
   entrypoint: '/bin/bash'
   args: ['-c',
-         'gsutil cp gs://datacatalog-connector-tools/apache-atlas-0.0.1.tar.gz .']
+         'gcloud storage cp gs://datacatalog-connector-tools/apache-atlas-0.0.1.tar.gz .']
 - name: 'gcr.io/cloudshell-images/cloudshell:latest'
   id: 'EXTRACT'
   entrypoint: '/bin/bash'
   args: ['-c',
          'tar -zxvf /workspace/apache-atlas-0.0.1.tar.gz']
-- name: 'gcr.io/cloud-builders/gsutil'
+- name: 'gcr.io/cloud-builders/gcloud'
   id: 'PREPARE_SERVICE_ACCOUNT'
-  args: ['cp',
+  entrypoint: 'gcloud'
+  args: ['storage',
+         'cp',
          'gs://connectors_build_env/apache-atlas2dc-credentials.json',
          '/workspace/apache-atlas/infrastructure/.']
 - name: 'gcr.io/cloudshell-images/cloudshell:latest'

@@ -31,15 +31,17 @@ steps:
   id: 'GET_PACKAGE'
   entrypoint: '/bin/bash'
   args: ['-c',
-         'gsutil cp gs://datacatalog-connector-tools/hive-0.0.2.tar.gz .']
+         'gcloud storage cp gs://datacatalog-connector-tools/hive-0.0.2.tar.gz .']
 - name: 'gcr.io/cloudshell-images/cloudshell:latest'
   id: 'EXTRACT'
   entrypoint: '/bin/bash'
   args: ['-c',
          'tar -zxvf /workspace/hive-0.0.2.tar.gz']
-- name: 'gcr.io/cloud-builders/gsutil'
+- name: 'gcr.io/cloud-builders/gcloud'
   id: 'PREPARE_SERVICE_ACCOUNT'
-  args: ['cp',
+  entrypoint: 'gcloud'
+  args: ['storage',
+         'cp',
          'gs://connectors_build_env/hive2dc-credentials.json',
          '/workspace/hive/infrastructure/.']         
 - name: 'gcr.io/cloudshell-images/cloudshell:latest'
